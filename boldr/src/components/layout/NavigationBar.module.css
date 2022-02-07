@@ -1,0 +1,65 @@
+.header {
+  width: 100%;
+  height: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #e5e5e5;
+  padding: 0 0;
+}
+
+.header nav {
+  padding-right: 5%;
+}
+
+.header ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  float: right;
+}
+
+.header li {
+  margin-left: 2.5rem;
+}
+
+.header a {
+  text-decoration: none;
+  font-size: 1.5rem;
+  color: black;
+}
+
+.header a:hover,
+.header a:active,
+.header a.active {
+  color: white;
+}
+
+.profile {
+  align-content: right;
+  width: 4rem;
+  height: auto;
+
+  background-image: url(https://commons.wikimedia.org/wiki/File:Photo_of_%22Gangster_Jimmy%22_taken_for_his_YouTube_profile_picture.jpg);
+  border: 2px solid #000000;
+  box-sizing: border-box;
+  border-radius: 10rem;
+}
+
+.logo_spacing {
+  padding-left: 5%;
+}
+
+.logo {
+  max-width: 6rem;
+  height: auto;
+}
+
+.badge {
+  background-color: #cc2062;
+  color: white;
+  border-radius: 12px;
+  padding: 0 1rem;
+  margin-left: 0.5rem;
+}
