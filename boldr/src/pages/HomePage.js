@@ -5,7 +5,8 @@ import gymPic from "../assets/gymPic.png";
 function HomePage(props) {
   return (
     <section>
-      <h1>All Problems</h1>
+      <h1 style={{textAlign: "center"}}> Add the searchbar here </h1>
+      <h1>Recent Activity</h1>
       <ProblemList problems={tempProbs} />
     </section>
   );
@@ -15,15 +16,15 @@ const tempProbs = [
   {
     id: 1,
     image: gymPic,
-    title: "This is my Title",
-    gym: "Name of Gym",
+    title: "A Silly Little Problem",
+    gym: "Wooden",
     description: "Go touch rock",
   },
   {
     id: 2,
     image: gymPic,
-    title: "This is my Title2",
-    gym: "Name of other Gym",
+    title: "Something is going up?",
+    gym: "Cliffs of Id",
     description: "Go touch rock but at this gym",
   },
 ];
