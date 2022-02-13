@@ -1,0 +1,89 @@
+/* *{
+  margin: 0 0;
+  padding: 0 0;
+} */
+
+.item {
+  margin: 1rem 0;
+}
+
+.image {
+  width: auto;
+  height: 100%;
+  border-radius: 6px;
+}
+
+.info {
+  margin: 0 2.5%;
+  flex-grow: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  text-align: center;
+}
+
+.title_card {
+  display: flex;
+  margin: 10px 0;
+  text-align: left;
+  justify-content: space-between;
+}
+
+.title_card h2 {
+  font-size: 1.25rem;
+  margin: 0 0;
+  align-self: center;
+  color: #2c292b;
+}
+
+.title_card h3 {
+  font-size: 1em;
+  margin: 0 0;
+  padding-left: 1.2em;
+  color: #2c292b;
+}
+
+.tags {
+  font-size: 0.7em;
+  margin: 0 0;
+  color: #2c292b;
+}
+
+.tags h3 {
+  margin: 0 0;
+}
+
+.rating {
+  font-size: 0.75em;
+  color: #2c292b;
+}
+.rating h2 {
+  margin: 0 0;
+}
+
+.difficulty {
+}
+
+.difficulty h1 {
+  margin: 1rem 2rem;
+}
+
+.actions {
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.actions button {
+  font: inherit;
+  cursor: pointer;
+  color: #77002e;
+  border: 1px solid #77002e;
+  background-color: transparent;
+  padding: 0.5rem 1.5rem;
+  border-radius: 4px;
+}
+
+.actions button:hover,
+.actions button:active {
+  background-color: #ffe2ed;
+}
