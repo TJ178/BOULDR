@@ -2,8 +2,9 @@ import React from "react";
 //import firebase from "../firebase-config.js";
 import ProblemList from "../components/problems/ProblemList";
 import gymPic from "../assets/gymPic.png";
-import { db, app } from "../firebase-config.js";
+import { db, app, storage } from "../firebase-config.js";
 import { collection, getDocs } from 'firebase/firestore';
+import { ref, getDownloadURL } from 'firebase/storage';
 
 
 
@@ -40,11 +41,21 @@ class HomePage extends React.Component {
     console.log(tempProbs);
     getData().then(
       (value) => {
-        this.setState({
-          data: value
+        value.forEach((problem) =>{
+          getDownloadURL(ref(storage, problem['image'])).then(
+            (value2) => {
+              let temp = problem;
+              temp['image'] = value2;
+              this.setState({
+                data: value
+              });
+              console.log("updated!");
+              console.log(this.state.data);
+            }, (error) => {
+              console.error(error);
+            }
+          );
         });
-        console.log("updated!");
-        console.log(this.state.data);
       },
       (error) => {
         console.error(error);
