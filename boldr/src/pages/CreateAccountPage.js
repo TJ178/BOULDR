@@ -1,7 +1,8 @@
 import React from "react";
 
-function CreateAccountPage(props) {
-    return <div>Hello from create account page</div>
-}
+class createAccount extends React.Component
 
+{
+    
+}
 export default CreateAccountPage;
