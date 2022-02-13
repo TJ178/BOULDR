@@ -29,7 +29,7 @@ function ProblemItem(props) {
             {/* https://bestofreactjs.com/repo/prakhar1989-react-tags-react-tag-input */}
             {/* https://www.npmjs.com/package/react-simple-star-rating */}
             <Rating
-              initialValue={3.5}
+              initialValue={props.rating}
               size={30}
               transistion={true}
               // onClick={}

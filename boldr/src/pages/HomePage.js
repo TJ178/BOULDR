@@ -90,6 +90,7 @@ async function getData(){
     temp['isFavorite'] = false;
     temp['gym'] = doc.get('gymname');
     temp['description'] = doc.get('description');
+    temp['rating'] = doc.get('rating');
     tempData = tempData.concat(temp);
     console.log(doc.id, " => ", doc.data());
   });

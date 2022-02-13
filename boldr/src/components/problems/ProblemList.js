@@ -13,6 +13,7 @@ function ProblemList(props) {
           isFavorite={problem.isFavorite}
           gym={problem.gym}
           description={problem.description}
+          rating={problem.rating}
         />
       ))}
     </ul>
