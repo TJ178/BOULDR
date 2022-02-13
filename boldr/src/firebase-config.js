@@ -1,14 +1,18 @@
-import firebase from "firebase/app";
+import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
     apiKey: "AIzaSyD-LrtA3qTeynuuSvyYgcIrcY35lSId0Wg",
     authDomain: "boldr-f2e1c.firebaseapp.com",
+    databaseURL: "https://boldr-f2e1c-default-rtdb.firebaseio.com",
     projectId: "boldr-f2e1c",
     storageBucket: "boldr-f2e1c.appspot.com",
     messagingSenderId: "532041021603",
     appId: "1:532041021603:web:703553aa898eb522cc2716"
-};
+  };
   
-const app = firebase.initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
+const db = getFirestore();
+//enableLogging(true, false);
 
-export default app;
+export { db, app };
