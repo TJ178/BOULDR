@@ -36,7 +36,7 @@ function ProblemItem(props) {
             />
           </div>
           <div className={classes.difficulty}>
-            <h1>V0</h1>
+            <h1>V{props.vrating}</h1>
           </div>
         </div>
       </Card>

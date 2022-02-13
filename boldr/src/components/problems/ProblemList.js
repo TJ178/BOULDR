@@ -14,6 +14,7 @@ function ProblemList(props) {
           gym={problem.gym}
           description={problem.description}
           rating={problem.rating}
+          vrating={problem.vrating}
         />
       ))}
     </ul>

@@ -91,6 +91,7 @@ async function getData(){
     temp['gym'] = doc.get('gymname');
     temp['description'] = doc.get('description');
     temp['rating'] = doc.get('rating');
+    temp['vrating'] = doc.get('vrating');
     tempData = tempData.concat(temp);
     console.log(doc.id, " => ", doc.data());
   });
