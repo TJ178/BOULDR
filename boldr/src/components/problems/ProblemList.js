@@ -10,6 +10,7 @@ function ProblemList(props) {
           id={problem.id}
           image={problem.image}
           title={problem.title}
+          isFavorite={problem.isFavorite}
           gym={problem.gym}
           description={problem.description}
         />

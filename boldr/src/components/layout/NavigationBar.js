@@ -10,7 +10,7 @@ function NavigationBar(props) {
     <header className={classes.header}>
       <div className={ classes.logo_spacing}>
         <Link to="/">
-          <img className={classes.logo} src={logo} alt="MissingLogo" />
+          <img className={classes.logo} src={logo} alt="Logo" />
         </Link>
       </div>
       <nav>
