@@ -1,7 +1,8 @@
-import React from 'react';
+import React from "react";
+import ProblemDetails from "../components/problems/ProblemDetails";
 
 function GymPage(props) {
-    return <div>Hello from Gym Page</div>;
+  return <ProblemDetails prob={props.prob} />;
 }
 
 export default GymPage;

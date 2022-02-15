@@ -32,6 +32,7 @@ function ProblemItem(props) {
               initialValue={3.5}
               size={30}
               transistion={true}
+              readonly={true}
               // onClick={}
             />
           </div>
