@@ -9,7 +9,7 @@ function ProblemItem(props) {
   return (
     <li className={classes.item}>
       <Card>
-        <Link to="/gym-page">
+        <Link to="/problem-details">
           {/* Need to find a way to pass props to the Gympage 
           through the Link component */}
           <img className={classes.image} src={props.image} alt={props.title} />

@@ -2,11 +2,11 @@ import { Route, Routes } from "react-router-dom";
 
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
-import GymPage from "./pages/GymPage";
 import CreateAccountPage from "./pages/CreateAccountPage";
 import ProfilePage from "./pages/ProfilePage";
 import gymPic from "./assets/gymPic.png";
 import Layout from "./components/layout/Layout";
+import ProblemDetailsPage from "./pages/ProblemDetailsPage";
 
 function App() {
   return (
@@ -14,7 +14,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/gym-page" element={<GymPage prob={tempProbs[0]} />} />
+        <Route path="/problem-details" element={<ProblemDetailsPage prob={tempProbs[0]} />} />
         <Route path="/create-account" element={<CreateAccountPage />} />
         <Route path="/profile" element={<ProfilePage />} />
       </Routes>

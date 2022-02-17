@@ -1,23 +1,49 @@
-import React from "react";
+import React, { useState } from "react";
 import classes from "./ProblemDetails.module.css";
 import { Rating } from "react-simple-star-rating";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 
+const dropdownOptions = [
+  "V0",
+  "V1",
+  "V2",
+  "V3",
+  "V4",
+  "V5",
+  "V6",
+  "V7",
+  "V8",
+  "V9",
+  "V10",
+];
+
 function ProblemDetails(props) {
-  function handleStarClick(e) {
-    return console.log(e);
-  }
-
-  function handleDropdownSelect(e) {
-    return console.log(e);
-  }
-
   const initialDifficulty = "V" + String(props.prob.difficulty);
+
+  const [starVal, setStarVal] = useState(props.prob.rating);
+  const [dropdownVal, setDropdownVal] = useState(initialDifficulty);
+  const [subStarVal, setSubStarVal] = useState("");
+
+  const handleStarClick = (e) => {
+    console.log(e + " " + starVal);
+    setStarVal(e);
+  };
+
+  const handleDropdownSelect = (e) => {
+    console.log(e + " " + dropdownVal);
+    setDropdownVal(e);
+  };
+
+  const handleSubmitStar = (e) => {
+    console.log(starVal + " " + e + " " + subStarVal);
+    setSubStarVal(starVal);
+  };
+
   return (
     <>
       <div className={classes.image_content}>
-        <img className={classes.image} src={props.prob.image} />
+        <img className={classes.image} src={props.prob.image} alt="Problem" />
       </div>
       <section className={classes.section}>
         <div className={classes.heading}>
@@ -27,11 +53,13 @@ function ProblemDetails(props) {
           </div>
           <div className={classes.star}>
             <Rating
-              initialValue={props.prob.rating}
+              onClick={handleStarClick}
+              ratingValue={starVal}
+              initialValue={starVal}
               size={25}
-              transition={true}
-              onClick={(e) => handleStarClick(e)}
+              transition={false}
             />
+            <button onClick={handleSubmitStar}>Submit</button>
           </div>
         </div>
         <div className={classes.tags}>
@@ -43,38 +71,27 @@ function ProblemDetails(props) {
           <div className={classes.userDifficulty}>
             <h1>Your rating: </h1>
             <DropdownButton
-            
-            //   className={classes.dropdown}
+              // alignRight
+              className={classes.dropdown}
               id="rating-button"
-              title={initialDifficulty}
-              onSelect={(e) => handleDropdownSelect(e)}
+              title={dropdownVal}
+              onSelect={handleDropdownSelect}
               variant="secondary"
             >
-              <Dropdown.Item eventKey="0">V0</Dropdown.Item>
-              <Dropdown.Item eventKey="1">V1</Dropdown.Item>
-              <Dropdown.Item eventKey="2">V2</Dropdown.Item>
-              <Dropdown.Item eventKey="3">V3</Dropdown.Item>
-              <Dropdown.Item eventKey="4">V4</Dropdown.Item>
-              <Dropdown.Item eventKey="5">V5</Dropdown.Item>
-              <Dropdown.Item eventKey="6">V6</Dropdown.Item>
-              <Dropdown.Item eventKey="7">V7</Dropdown.Item>
-              <Dropdown.Item eventKey="8">V8</Dropdown.Item>
-              <Dropdown.Item eventKey="9">V9</Dropdown.Item>
-              <Dropdown.Item eventKey="10">V10</Dropdown.Item>
+              {dropdownOptions.map((item) => (
+                <Dropdown.Item
+                  key={item}
+                  className={classes.DropdownItem}
+                  eventKey={item}
+                >
+                  {item}
+                </Dropdown.Item>
+              ))}
             </DropdownButton>
           </div>
         </div>
       </section>
-      {/* Add the section below if we choose to implement comments
-        Still needs CSS styling*/}
-      {/* <section className={classes.section}>
-          <h1>
-              Comments:
-          </h1>
-          <h3>
-              This is where the first comment should go in an unordered list
-          </h3>
-      </section> */}
+      
     </>
   );
 }

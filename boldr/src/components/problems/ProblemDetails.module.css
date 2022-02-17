@@ -36,6 +36,10 @@
   align-items: center;
 }
 
+.star button {
+  margin-left: 1rem;
+}
+
 .tags {
   display: inline-flex;
   justify-content: center;
@@ -69,4 +73,16 @@
 
 .userDifficulty p {
   margin: 0 0;
+}
+
+.dropdown {
+  color: blue;
+  display:inline-block;
+  /* justify-content: space-around; */
+}
+
+.dropdownItem {
+  background-color: black;
+  color: blue;
+  border-radius: 6px;
 }
