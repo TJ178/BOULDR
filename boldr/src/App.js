@@ -7,6 +7,7 @@ import ProfilePage from "./pages/ProfilePage";
 import gymPic from "./assets/gymPic.png";
 import Layout from "./components/layout/Layout";
 import ProblemDetailsPage from "./pages/ProblemDetailsPage";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (
