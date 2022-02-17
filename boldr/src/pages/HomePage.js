@@ -5,8 +5,8 @@ import gymPic from "../assets/gymPic.png";
 function HomePage(props) {
   return (
     <section>
-      <h1 style={{textAlign: "center"}}> Add the searchbar here </h1>
-      <h1>Recent Activity</h1>
+      <h2 style={{textAlign: "center"}}> Add the searchbar here </h2>
+      <h2>Recent Activity</h2>
       <ProblemList problems={tempProbs} />
     </section>
   );
