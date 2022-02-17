@@ -1,0 +1,99 @@
+.section {
+  display: flex;
+  background-color: white;
+  flex-direction: column;
+  padding-bottom: 1em;
+  border-bottom-right-radius: 6px;
+  border-bottom-left-radius: 6px;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  border-top-right-radius: 6px;
+  border-top-left-radius: 6px;
+}
+
+.heading {
+  display: flex;
+  justify-content: space-around;
+}
+
+.heading h2 {
+  margin: 0 0;
+  padding-top: 1rem;
+}
+
+.heading h3 {
+  margin: 0 0;
+  color: slategray;
+  padding-left: 1.2 em;
+}
+
+.star {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.star button {
+  margin-left: 1rem;
+}
+
+.tags {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1.5em;
+}
+
+.tags Button {
+  background-color: blue;
+  margin-left: 1em;
+  color: white;
+}
+
+.difficulty {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.ourRating {
+  display: inline-flex;
+  align-items: center;
+}
+
+.ourRating Button {
+  margin-left: 1em;
+  
+}
+
+.userDifficulty {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.userDifficulty h1 {
+  margin: 0 0;
+  margin-right: 0.5em;
+}
+
+.userDifficulty p {
+  margin: 0 0;
+}
+
+.dropdown {
+  color: blue;
+  display:inline-block;
+  padding-left: 1.5em;
+  /* justify-content: space-around; */
+}
+
+.dropdownItem {
+  background-color: black;
+  color: blue;
+  border-radius: 6px;
+}
