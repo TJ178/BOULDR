@@ -3,6 +3,9 @@ import classes from "./ProblemDetails.module.css";
 import { Rating } from "react-simple-star-rating";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
+import Button from 'react-bootstrap/Button';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 const dropdownOptions = [
   "V0",
@@ -42,34 +45,39 @@ function ProblemDetails(props) {
 
   return (
     <>
-      <div className={classes.image_content}>
+      <div>
         <img className={classes.image} src={props.prob.image} alt="Problem" />
       </div>
       <section className={classes.section}>
         <div className={classes.heading}>
           <div>
-            <h1> {props.prob.title}</h1>
-            <h2> {props.prob.gym} </h2>
+            <h2> {props.prob.title}</h2>
+            <h3> {props.prob.gym} </h3>
           </div>
           <div className={classes.star}>
             <Rating
               onClick={handleStarClick}
               ratingValue={starVal}
               initialValue={starVal}
-              size={25}
+              size={30}
               transition={false}
             />
-            <button onClick={handleSubmitStar}>Submit</button>
+            <Button onClick={handleSubmitStar}>Submit</Button>
           </div>
         </div>
         <div className={classes.tags}>
           <p>this is where the tags should go</p>
-          <button>Add tags</button>
+          <Button  size="sm">Add tags</Button>
         </div>
         <div className={classes.difficulty}>
-          <h1> Our Rating: {initialDifficulty}</h1>
+          <div className={classes.ourRating}>
+            <h2> Our Rating:</h2>
+            <Button variant='secondary' disabled
+              >{initialDifficulty}
+            </Button>
+          </div>
           <div className={classes.userDifficulty}>
-            <h1>Your rating: </h1>
+            <h2>Your rating:   </h2>
             <DropdownButton
               // alignRight
               className={classes.dropdown}
