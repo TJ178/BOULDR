@@ -6,17 +6,6 @@ import { db, app, storage } from "../firebase-config.js";
 import { collection, getDocs } from 'firebase/firestore';
 import { ref, getDownloadURL } from 'firebase/storage';
 
-
-function HomePage(props) {
-  return (
-    <section>
-      <h2 style={{textAlign: "center"}}> Add the searchbar here </h2>
-      <h2>Recent Activity</h2>
-      <ProblemList problems={tempProbs} />
-    </section>
-  );
-}
-
 const tempProbs = [
   {
     id: 1,
