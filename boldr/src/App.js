@@ -7,7 +7,7 @@ import CreateAccountPage from "./pages/CreateAccountPage";
 import ProfilePage from "./pages/ProfilePage";
 
 import Layout from "./components/layout/Layout";
-import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (
