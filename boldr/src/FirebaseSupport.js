@@ -1,6 +1,6 @@
 import React from 'react';
 import { db, app, storage } from "./firebase-config.js";
-import { collection, getDocs, getDoc } from 'firebase/firestore';
+import { collection, getDocs, getDoc, doc } from 'firebase/firestore';
 import { ref, getDownloadURL } from 'firebase/storage';
 
 
@@ -47,7 +47,7 @@ export function getProblemFromID(component, id){
         },
         (error) => {
             console.error(error);
-            this.setState({
+            component.setState({
                 data: fallbackProbs
             });
         }
@@ -58,18 +58,18 @@ export function getProblemFromID(component, id){
 
 async function getDocFromID(id){
     const docRef = doc(db, "problems", id)
-    const querySnapshot = getDoc(docRef);
-    const doc = querySnapshot.data();
+    const querySnapshot = await getDoc(docRef);
+    const doc1 = querySnapshot.data();
 
     let temp = {};
-    temp['id'] = doc.id;
-    temp['image'] = doc.get('img');
-    temp['title'] = doc.get('name');
+    temp['id'] = doc1.id;
+    temp['image'] = doc1['img'];
+    temp['title'] = doc1['name'];
     temp['isFavorite'] = false;
-    temp['gym'] = doc.get('gymname');
-    temp['description'] = doc.get('description');
-    temp['rating'] = doc.get('rating');
-    temp['vrating'] = doc.get('vrating');
+    temp['gym'] = doc1['gymname'];
+    temp['description'] = doc1['description'];
+    temp['rating'] = doc1['rating'];
+    temp['vrating'] = doc1['vrating'];
 
     return temp;
 }
