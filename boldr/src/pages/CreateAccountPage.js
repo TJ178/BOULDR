@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './CreateAccountPage.css';
 import { Link } from 'react-router-dom';
 
+
 class CreateAccountPage extends React.Component
 {
 	constructor(props) {
@@ -135,4 +136,7 @@ class CreateAccountPage extends React.Component
 	}
 }
 
+{
+    
+}
 export default CreateAccountPage;
