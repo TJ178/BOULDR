@@ -19,7 +19,7 @@ function NavigationBar(props) {
             <Link to="/gym-page">Gym Page</Link>
           </li>
           <li>
-            <Link to="/login">LoginPage</Link>
+            <Link to="/login">Login Page</Link>
           </li>
           <li>
             <Link to="/profile">
