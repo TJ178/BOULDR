@@ -5,7 +5,7 @@
   align-items: center;
   justify-content: space-between;
   background-color: #e5e5e5;
-  padding: 0 0;
+  padding: 0 5% 0 5%;
 }
 
 .logo_spacing {
@@ -16,4 +16,15 @@
   max-width: 6rem;
   height: auto;
   transform: scale(0.5);
+}
+
+.socials{
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+.flexbox{
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
 }
