@@ -7,7 +7,8 @@ import ProfilePage from "./pages/ProfilePage";
 import gymPic from "./assets/gymPic.png";
 import Layout from "./components/layout/Layout";
 import ProblemDetailsPage from "./pages/ProblemDetailsPage";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import AddProblemPage from "./pages/AddProblemPage";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   return (
@@ -15,9 +16,13 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/problem-details" element={<ProblemDetailsPage prob={tempProbs[0]} />} />
+        <Route
+          path="/problem-details"
+          element={<ProblemDetailsPage prob={tempProbs[0]} />}
+        />
         <Route path="/create-account" element={<CreateAccountPage />} />
         <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/add-problem" element={<AddProblemPage />} />
       </Routes>
     </Layout>
   );
@@ -33,7 +38,7 @@ const tempProbs = [
     isFavorite: false,
     gym: "Wooden",
     description: "Go touch rock",
-    rating:3.5,
+    rating: 3.5,
     difficulty: 1,
   },
   {
