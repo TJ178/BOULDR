@@ -1,0 +1,101 @@
+body
+	{
+		font-family: 'VT323', monospace;
+		background-repeat: no-repeat;
+		background-color: #E2BA86;
+		background-position: center bottom;
+		background-attachment: fixed;
+	}
+
+    .signup-window
+	{
+		background: #424549;
+		border: 2px solid #1e2124;
+		height: 400px;
+		width: 400px;
+		margin-right: 50px;
+		margin-top: 100px;
+		border-radius: 20px;
+		position: absolute;
+		right: 0;
+		z-index: 2;
+        box-shadow: 5px 10px black;
+	}
+    
+	.signin-newAccount
+	{
+		font-size: 12px;
+		color: black;
+		margin-left: 30px;
+		text-decoration: none;
+	}
+
+	.signin-header
+	{
+		font-size: 30px;
+		color: black;
+		text-align: center;
+		margin-top: 30px;
+	}
+	
+	.signin-label
+	{
+		font-family: "Lucida Console", "Courier New", monospace;
+		font-size: 15.5px;
+		color: Black;
+		margin-left: 30px;
+		margin-top: 20px;
+	}
+	
+	input[type=password], input[type=form_control]
+	{
+		width: 50%;
+		padding: 5px 10px;
+		margin-left: 28px;
+		border: 2px solid white;
+		border-radius: 20px;
+		outline:none;
+	}	
+	
+	a:link[type=submit_i]
+	{
+		text-decoration: none;
+		text-align: center;
+		padding: 5px 10px;
+		width: 25%;
+		background-color: white;
+		border-color: black;
+		margin-top: -20px;
+		margin-right: 20px;
+		color: #424549;
+		float: right;
+		border-radius: 20px;
+		cursor: pointer;
+		outline:none;
+		position: relative;
+	}
+	
+	a:hover 
+	{
+		background-color: #E2BA86;
+	}
+	
+	
+	h5 {
+		color: white;
+		background-color: #1e2124;
+		padding: 10px;
+		box-shadow: 5px 10px black;
+		border-radius: 15px;
+		visibility: hidden;
+		text-align: center;
+
+	}
+
+
+h6 {
+	background-color: black;
+	color: white;
+	padding-left: 2em;
+	border-radius: 10px;
+}

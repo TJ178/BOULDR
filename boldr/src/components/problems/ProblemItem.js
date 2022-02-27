@@ -13,9 +13,7 @@ function ProblemItem(props) {
         <Container fluid className={classes.noPadding}>
           <Row className={classes.noPadding}>
             <Col className={classes.noPadding}>
-              <Link to="/problem-details">
-                {/* Need to find a way to pass props to the Gympage 
-                through the Link component */}
+              <Link to={"/problem-details/" + props.id}>
                 <img className={classes.image} src={props.image} alt={props.title} />
               </Link>
             </Col>
@@ -35,7 +33,7 @@ function ProblemItem(props) {
                   {/* https://bestofreactjs.com/repo/prakhar1989-react-tags-react-tag-input */}
                   {/* https://www.npmjs.com/package/react-simple-star-rating */}
                   <Rating
-                    initialValue={3.5}
+                    initialValue={props.rating}
                     size={30}
                     transistion={true}
                     readonly={true}
@@ -43,7 +41,7 @@ function ProblemItem(props) {
                   />
                 </div>
                 <div className={classes.difficulty}>
-                  <h1>V0</h1>
+                  <h1>V{props.rating}</h1>
                 </div>
               </div>
             </Col>
