@@ -3,6 +3,7 @@ import Card from "../components/ui/Card";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import gymPic from "../assets/gymPic.png";
+import classes from "./AddProblemPage.module.css";
 
 // Should create a globals file for this
 const dropdownOptions = [
@@ -44,20 +45,20 @@ function AddProblemPage(props) {
   };
   return (
     <Card>
-      <div>
-        <img className={"" /*classes.imag*/} src={gymPic} alt="Gym Problem" />
-      </div>
-      <div>
-        <div>
-          <form onSubmit={handleSubmit}>
+      <section className={classes.image}>
+        <div className={classes.imageContainer}>
+          <img className={classes.image} src={gymPic} alt="Gym Problem" />
+          <button className={classes.imgButton}>Add Image</button>
+        </div>
+        <form className={classes.formContainer} onSubmit={handleSubmit}>
+          <div>
             <input
               type="text"
               placeholder={problemName}
               onChange={(e) => setProblemName(e.target.value)}
             />
-            <div>
+            <div className={classes.innerRight}>
               <DropdownButton
-                // alignRight
                 // className={classes.dropdown}
                 id="rating-button"
                 title={dropdownVal}
@@ -84,14 +85,16 @@ function AddProblemPage(props) {
                 />
               </label>
             </div>
+          </div>
+          <div className={classes.formleft}>
             <textarea
               placeholder={description}
               onChange={(e) => setDesicription(e.target.value)}
             />
             <input type="submit" />
-          </form>
-        </div>
-      </div>
+          </div>
+        </form>
+      </section>
     </Card>
   );
 }
