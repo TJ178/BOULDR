@@ -2,8 +2,8 @@ import React from 'react';
 import { Route, Routes } from "react-router-dom";
 
 import HomePage from "./pages/HomePage";
-import LoginPage from "./pages/LoginPage";
-import CreateAccountPage from "./pages/CreateAccountPage";
+import LoginPage from "./pages/LoginPage.js";
+import CreateAccountPage from "./pages/CreateAccountPage.js";
 import ProfilePage from "./pages/ProfilePage";
 import gymPic from "./assets/gymPic.png";
 import Layout from "./components/layout/Layout";
@@ -15,9 +15,10 @@ function App() {
     <Layout>
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/create-account" element={<CreateAccountPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/problem-details" element={<ProblemDetailsPage prob={tempProbs[0]} />} />
-        <Route path="/create-account" element={<CreateAccountPage />} />
+        
         <Route path="/profile" element={<ProfilePage />} />
       </Routes>
     </Layout>

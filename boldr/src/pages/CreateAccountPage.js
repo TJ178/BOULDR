@@ -1,8 +1,7 @@
 import React from "react";
 import ReactDOM from 'react-dom';
-import './CreateAccountPage.css';
 import { Link } from 'react-router-dom';
-
+import './CreateAccountPage.css';
 
 class CreateAccountPage extends React.Component
 {
@@ -89,7 +88,7 @@ class CreateAccountPage extends React.Component
 				//console.log(this.state.password, this.state.password2);
 				this.state.password = '';
 				this.state.password2 = '';
-				
+					
             } 
 	}
 
@@ -102,6 +101,13 @@ class CreateAccountPage extends React.Component
 				
 				<div class = "signup-window"> 
 					<h1 class = "signup-header"> New Account </h1>	
+
+					<form>
+						<h2 class = "signup-label"> GYM OWNER: </h2> 
+						<div class = "gymowner">
+						<input type="form_control" value={this.state.authority} onChange={this.handleChange}/>
+						</div>
+					</form>
 						
 					<form>
 						<h2 class = "signup-label"> USERNAME </h2>
@@ -125,7 +131,7 @@ class CreateAccountPage extends React.Component
 					</form>
 					
 					<Link type="submit_i" onClick={() => this.checkPassword()} style={{color: '#282b30'}}> Submit </Link>
-					<Link type="submit_j" to = {"/signin"} style={{color: '#282b30'}}> Go back </Link>
+					<Link type="submit_j" to = {"/login"} style={{color: '#282b30'}}> Go back </Link>
                     
 
 				</div>
@@ -136,7 +142,4 @@ class CreateAccountPage extends React.Component
 	}
 }
 
-{
-    
-}
 export default CreateAccountPage;

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import './LoginPage.css';
 
 class LoginPage extends React.Component
-{
+{	
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -49,7 +49,7 @@ class LoginPage extends React.Component
 		// 
 
 		// only call this if passwords match
-		fetch("http://localhost:3001/self", {
+		fetch("http://localhost:3000/self", {
 			method: 'POST',
 			mode: 'cors',
 			headers: {
@@ -126,9 +126,7 @@ class LoginPage extends React.Component
 		var page = this.checkOnClick();
 		return (
 				<body>
-					<div class = "signin-shadow"> </div>
-					
-					<div class = "signin-window"> 
+					<div> 
 						<h1 class = "signin-header"> User Login </h1>	
 					<h6> Any warning for login</h6>
 						<form>
@@ -145,7 +143,7 @@ class LoginPage extends React.Component
 							</div>
 						</form>
 						
-						<Link className="signin-newAccount" to={"/CreateAccountPage"} > Register an account </Link>
+						<Link className="signin-newAccount" to={"/create-account"} > Register an account </Link>
                         
 						<Link type="submit_i" to = {page} onClick={() => this.click()} style={{color: '#282b30'}}> Submit </Link>
 
