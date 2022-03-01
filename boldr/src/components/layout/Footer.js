@@ -13,7 +13,7 @@ function Footer(props) {
   return (
     <footer className={classes.footer}>
       <div>
-        <Link to="/">
+        <Link to="/" className={classes.logo_link}>
           <img className={classes.logo} src={logo} alt="Logo" />
         </Link>
       </div>
