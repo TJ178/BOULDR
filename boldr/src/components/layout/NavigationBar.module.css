@@ -52,8 +52,12 @@
 }
 
 .logo {
-  max-width: 6rem;
   height: auto;
+}
+
+.logo_link:hover {
+  background-color: #e5e5e5;
+  opacity: 0.75;
 }
 
 .badge {
