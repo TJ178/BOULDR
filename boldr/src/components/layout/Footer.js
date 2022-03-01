@@ -7,7 +7,7 @@ import { faTwitter } from "@fortawesome/free-brands-svg-icons";
 import { faFacebook } from "@fortawesome/free-brands-svg-icons";
 
 import classes from "./Footer.module.css";
-import logo from "../../assets/logo.png";
+import logo from "../../assets/BOULDR_Logo.png";
 
 function Footer(props) {
   return (

@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import classes from "./NavigationBar.module.css";
-import logo from "../../assets/logo.png";
+import logo from "../../assets/BOULDR_Logo.png";
 import usr from "../../assets/usr.png";
 
 function NavigationBar(props) {
