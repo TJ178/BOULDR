@@ -4,7 +4,8 @@ import { Rating } from "react-simple-star-rating";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import Button from 'react-bootstrap/Button';
-
+import {db} from '../../firebase-config';
+import { doc, updateDoc, increment} from 'firebase/firestore';
 
 const dropdownOptions = [
   "V0",
@@ -27,8 +28,28 @@ function ProblemDetails(props) {
   const [dropdownVal, setDropdownVal] = useState(initialDifficulty);
   const [subStarVal, setSubStarVal] = useState("");
 
+  /*const starCollectionRef = collection(db, 'subStarVal');
+
+  const createStar = async () => {
+      await addDoc(starCollectionRef, {rating: subStarVal});
+  };*/
+
+  const updateStarRating = async (id, starVal) => {
+    console.log("updateStarRating");
+    const problemDoc = doc(db, "problems", id);
+    starVal = starVal/20;
+    switch (starVal) {
+      case 1: await updateDoc(problemDoc, {"allstars.1": increment(1)}); break;
+      case 2: await updateDoc(problemDoc, {"allstars.2": increment(1)}); break;
+      case 3: await updateDoc(problemDoc, {"allstars.3": increment(1)}); break;
+      case 4: await updateDoc(problemDoc, {"allstars.4": increment(1)}); break;
+      case 5: await updateDoc(problemDoc, {"allstars.5": increment(1)}); break;
+      default: break;
+    }
+  };
+
   const handleStarClick = (e) => {
-    console.log(e + " " + starVal);
+    console.log("handleStarClick");
     setStarVal(e);
   };
 
@@ -61,7 +82,7 @@ function ProblemDetails(props) {
               size={30}
               transition={false}
             />
-            <Button onClick={handleSubmitStar}>Submit</Button>
+            <Button onClick={() => updateStarRating("B2LKX291ngI6oxgmjkT8", starVal)}>Submit</Button>
           </div>
         </div>
         <div className={classes.tags}>
@@ -82,7 +103,7 @@ function ProblemDetails(props) {
               className={classes.dropdown}
               id="rating-button"
               title={dropdownVal}
-              onSelect={handleDropdownSelect}
+              onSelect= {handleDropdownSelect}
               variant="secondary"
             >
               {dropdownOptions.map((item) => (
