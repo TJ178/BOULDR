@@ -3,7 +3,7 @@ import { Form, Button, Card, Alert } from "react-bootstrap";
 import ReactDOM from 'react-dom';
 import { Link } from 'react-router-dom';
 import classes from "./CreateAccountPage.module.css";
-import { useAuth } from '../source/AuthContext.js'
+import { useAuth } from '../contexts/AuthContext.js'
 
 export default function CreateAccountPage() {
 	const staffRef = useRef()

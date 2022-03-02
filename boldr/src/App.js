@@ -9,7 +9,7 @@ import gymPic from "./assets/gymPic.png";
 import Layout from "./components/layout/Layout";
 import ProblemDetailsPage from "./pages/ProblemDetailsPage";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { AuthProvider } from './source/AuthContext';
+import { AuthProvider } from './contexts/AuthContext';
 
 function App() {
   return (
