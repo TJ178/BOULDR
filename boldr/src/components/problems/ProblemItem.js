@@ -13,9 +13,7 @@ function ProblemItem(props) {
         <Container fluid className={classes.noPadding}>
           <Row className={classes.noPadding}>
             <Col className={classes.noPadding}>
-              <Link to="/problem-details">
-                {/* Need to find a way to pass props to the Gympage 
-                through the Link component */}
+              <Link to={"/problem-details/" + props.id}>
                 <img className={classes.image} src={props.image} alt={props.title} />
               </Link>
             </Col>

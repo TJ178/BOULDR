@@ -17,9 +17,11 @@ function App() {
      <Layout>
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/create-account" element={<CreateAccountPage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/problem-details" element={<ProblemDetailsPage prob={tempProbs[0]} />} />
+        <Route path="/problem-details" element={<ProblemDetailsPage prob={tempProbs[0]} />}>
+          <Route path=":problemId" element={<ProblemDetailsPage data={tempProbs[0]}/>} />
+        </Route>
+        <Route path="/create-account" element={<CreateAccountPage />} />
         <Route path="/profile" element={<ProfilePage />} />
       </Routes>
     </Layout>

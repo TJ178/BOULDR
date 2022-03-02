@@ -1,4 +1,5 @@
 import NavigationBar from "./NavigationBar";
+import Footer from "./Footer";
 import classes from "./Layout.module.css";
 
 function Layout(props) {
@@ -8,7 +9,7 @@ function Layout(props) {
       <div >
         <main className={classes.main}>{props.children}</main>
       </div>
-      <footer> Hey add a footer that looks pretty here</footer>
+      <Footer />
     </div>
   );
 }
