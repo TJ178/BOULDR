@@ -1,7 +1,8 @@
 import React from "react";
 import ReactDOM from 'react-dom';
 import { Link } from 'react-router-dom';
-import './LoginPage.css';
+import logo from '../assets/BOULDR_Logo.png'
+import classes from './LoginPage.module.css';
 
 class LoginPage extends React.Component
 {	
@@ -79,9 +80,9 @@ class LoginPage extends React.Component
 	
 	checkOnClick()
 	{
-		if ((this.state.user == this.state.username) && this.state.user != "") 
+		if ((this.state.user === this.state.username) && this.state.user !== "") 
 		{
-			if (this.state.pw == this.state.password)
+			if (this.state.pw === this.state.password)
 			{
                 this.warning = false;
 				this.handleSubmit()
@@ -121,36 +122,36 @@ class LoginPage extends React.Component
 	{
 		console.log(this.state.warning, "w");
 		console.log(this.state.clicked, "c");
-		const vis_style = (this.state.warning && this.state.clicked == true) ? 'visible' : 'hidden';
+		const vis_style = (this.state.warning && this.state.clicked === true) ? 'visible' : 'hidden';
 		const message = this.state.case1 ? 'Invalid password. Please try again!' : 'This account does not exist. Please register a new account!';
 		var page = this.checkOnClick();
 		return (
-				<body>
+				<>
+					<img className = {classes.signin_logo} src = {logo} alt ="boldr"/>
 					<div> 
-						<h1 class = "signin-header"> User Login </h1>	
+						<h1 className = {classes.signin_header}> User Login </h1>	
 					<h6> Any warning for login</h6>
 						<form>
-							<h2 class = "signin-label"> USERNAME </h2>
-							<div class = "username">
-							<input type="form_control" value={this.state.username} onChange={this.handleChange} onkeydown={() => this.reset_click}/>
+							<h2 className = {classes.signin_label}> USERNAME </h2>
+							<div className = {classes.username}>
+							<input type="form_control" placeholder="Username" value={this.state.username} onChange={this.handleChange} onKeyDown={() => this.reset_click}/>
 							</div>
 						</form>
 
 						<form>
-							<h3 class ="signin-label"> PASSWORD </h3>
-							<div class = "username">
-							<input type="password" value={this.state.password} onChange={this.handleChangeP} onkeydown={() => this.reset_click}/>
+							<h3 className = {classes.signin_label}> PASSWORD </h3>
+							<div className = {classes.username}>
+							<input type="password" placeholder="Password" value={this.state.password} onChange={this.handleChangeP} onKeyDown={() => this.reset_click}/>
 							</div>
 						</form>
 						
-						<Link className="signin-newAccount" to={"/create-account"} > Register an account </Link>
+						<Link className={classes.signin_newAccount} to={"/create-account"} > Need an Account? </Link>
                         
-						<Link type="submit_i" to = {page} onClick={() => this.click()} style={{color: '#282b30'}}> Submit </Link>
+						<Link type="submit_i" to = {page} onClick={() => this.click()} style={{color: '#282b30'}}> Log In </Link>
 
 					</div>
-					
 					<h5 id="warning" style={{visibility: vis_style}}> {message} </h5>
-				</body>
+				</>
 		);
 	}
 }

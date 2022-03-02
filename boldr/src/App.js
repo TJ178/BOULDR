@@ -9,19 +9,22 @@ import gymPic from "./assets/gymPic.png";
 import Layout from "./components/layout/Layout";
 import ProblemDetailsPage from "./pages/ProblemDetailsPage";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { AuthProvider } from './pages/AuthContext';
 
 function App() {
   return (
-    <Layout>
+    <AuthProvider>
+     <Layout>
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/create-account" element={<CreateAccountPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/problem-details" element={<ProblemDetailsPage prob={tempProbs[0]} />} />
-        
         <Route path="/profile" element={<ProfilePage />} />
       </Routes>
     </Layout>
+    </AuthProvider>
+    
   );
 }
 

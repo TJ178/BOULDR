@@ -1,4 +1,4 @@
-	.signup-header
+	.signup_header
 	{
 		font-size: 30px;
 		color: black;
@@ -7,20 +7,19 @@
 		
 	}
 	
-	.signup-label
+	.signup_label
 	{
 		font-size: 11.5px;
 		color: black;
 		margin-top: 20px;
 	}
 	
-	.signup-container
+	.signup_container
 	{
 		margin: -2% 0 0 -33%;/* top right bottom left */
 		position: relative;
 		text-align: center;
 	}
-	
 	
 	input[type=form_control], input[type=password]
 	{
@@ -31,7 +30,7 @@
 		border-radius: 20px;
 		outline:none;
 	}		
-	
+
 	#ending {
 		margin-bottom:50px;
 	}
