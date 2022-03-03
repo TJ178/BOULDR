@@ -1,34 +1,22 @@
 import React from "react";
-//import firebase from "../firebase-config.js";
 import ProblemList from "../components/problems/ProblemList";
-import gymPic from "../assets/gymPic.png";
-//import { db, app, storage } from "../firebase-config.js";
-//import { collection, getDocs } from 'firebase/firestore';
-//import { ref, getDownloadURL } from 'firebase/storage';
-import {getAllProblems, fallbackProbs} from '../FirebaseSupport.js';
+import { db } from "../firebase-config.js";
+import { collection } from 'firebase/firestore';
+import { convertCollectionToProblems } from '../FirebaseSupport.js';
+import { useCollectionOnce } from 'react-firebase-hooks/firestore'
 
-class HomePage extends React.Component {
-  constructor(props) {
-    super(props);
+function HomePage() {
+  const [data, loading, error] = useCollectionOnce(collection(db, 'problems'));
 
-    this.state = {
-      data: fallbackProbs
-    };
-  }
-
-  componentDidMount(){
-    getAllProblems(this);
-  }
-
-  render(){
-    return (
-      <section>
-        <h1 style={{textAlign: "center"}}> Add the searchbar here </h1>
-        <h1>Recent Activity</h1>
-        <ProblemList problems={this.state.data} />
-      </section>
-    );
-  }
+  return (
+    <section>
+      <h1 style={{textAlign: "center"}}> Add the searchbar here </h1>
+      <h1>Recent Activity</h1>
+      {error && <p><strong>Error Loading Problems: {JSON.stringify(error)}</strong></p>}
+      {loading && <p><span>Loading...</span></p>}
+      {data && <ProblemList problems={convertCollectionToProblems(data)} />}
+    </section>
+  );
 }
 
 export default HomePage;
