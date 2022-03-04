@@ -5,7 +5,6 @@ import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import CreateAccountPage from "./pages/CreateAccountPage";
 import ProfilePage from "./pages/ProfilePage";
-import gymPic from "./assets/gymPic.png";
 import Layout from "./components/layout/Layout";
 import ProblemDetailsPage from "./pages/ProblemDetailsPage";
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -16,8 +15,8 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/problem-details" element={<ProblemDetailsPage prob={tempProbs[0]} />}>
-          <Route path=":problemId" element={<ProblemDetailsPage data={tempProbs[0]}/>} />
+        <Route path="/problem-details" element={<ProblemDetailsPage/>}>
+          <Route path=":problemId" element={<ProblemDetailsPage/>} />
         </Route>
         <Route path="/create-account" element={<CreateAccountPage />} />
         <Route path="/profile" element={<ProfilePage />} />
@@ -28,7 +27,7 @@ function App() {
 
 export default App;
 
-const tempProbs = [
+/*const tempProbs = [
   {
     id: 1,
     image: gymPic,
@@ -47,4 +46,4 @@ const tempProbs = [
     gym: "Cliffs of Id",
     description: "Go touch rock but at this gym",
   },
-];
+];*/

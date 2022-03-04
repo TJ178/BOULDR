@@ -7,7 +7,8 @@ import Button from 'react-bootstrap/Button';
 
 import { useDownloadURL } from 'react-firebase-hooks/storage';
 import { ref } from 'firebase/storage';
-import { storage } from '../../firebase-config.js'
+import { storage } from '../../firebase-config.js';
+import loadingImg from '../../assets/loading.png'
 
 
 const dropdownOptions = [
@@ -51,7 +52,8 @@ function ProblemDetails(props) {
   return (
     <>
       <div>
-        <img className={classes.image} src={image} alt="Problem" />
+        {loading && <img className={classes.image} src={loadingImg} alt={props.prob.title} />}
+        {image && <img className={classes.image} src={image} alt={props.prob.title} />}
       </div>
       <section className={classes.section}>
         <div className={classes.heading}>

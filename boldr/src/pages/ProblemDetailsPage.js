@@ -1,7 +1,6 @@
 import React from "react";
 import ProblemDetails from "../components/problems/ProblemDetails";
 import { useParams } from 'react-router-dom';
-import {getAllProblems, fallbackProbs, getProblemFromID, convertToProblem} from '../FirebaseSupport.js';
 import { db } from "../firebase-config.js";
 import { doc } from 'firebase/firestore';
 import { useDocumentOnce } from 'react-firebase-hooks/firestore'
