@@ -106,6 +106,9 @@ function ProblemDetails(props) {
             </DropdownButton>
           </div>
         </div>
+        <div class={classes.description}>
+          {props.prob.description}
+        </div>
       </section>
       
     </>
