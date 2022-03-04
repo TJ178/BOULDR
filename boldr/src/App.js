@@ -2,17 +2,19 @@ import React from 'react';
 import { Route, Routes } from "react-router-dom";
 
 import HomePage from "./pages/HomePage";
-import LoginPage from "./pages/LoginPage";
-import CreateAccountPage from "./pages/CreateAccountPage";
+import LoginPage from "./pages/LoginPage.js";
+import CreateAccountPage from "./pages/CreateAccountPage.js";
 import ProfilePage from "./pages/ProfilePage";
 import gymPic from "./assets/gymPic.png";
 import Layout from "./components/layout/Layout";
 import ProblemDetailsPage from "./pages/ProblemDetailsPage";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { AuthProvider } from './contexts/AuthContext';
 
 function App() {
   return (
-    <Layout>
+    <AuthProvider>
+     <Layout>
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
@@ -23,6 +25,8 @@ function App() {
         <Route path="/profile" element={<ProfilePage />} />
       </Routes>
     </Layout>
+    </AuthProvider>
+    
   );
 }
 
