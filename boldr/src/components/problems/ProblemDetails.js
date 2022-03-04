@@ -5,8 +5,14 @@ import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import Button from 'react-bootstrap/Button';
 
+import { useDownloadURL } from 'react-firebase-hooks/storage';
+import { ref } from 'firebase/storage';
+import { storage } from '../../firebase-config.js';
+import loadingImg from '../../assets/loading.png'
+
 
 const dropdownOptions = [
+  "V-",
   "V0",
   "V1",
   "V2",
@@ -21,7 +27,9 @@ const dropdownOptions = [
 ];
 
 function ProblemDetails(props) {
-  const initialDifficulty = "V" + String(props.prob.difficulty);
+  const [image, loading, error] = useDownloadURL(ref(storage, props.prob.image));
+
+  const initialDifficulty = "V" + JSON.stringify(props.prob.vrating);
 
   const [starVal, setStarVal] = useState(props.prob.rating);
   const [dropdownVal, setDropdownVal] = useState(initialDifficulty);
@@ -45,7 +53,8 @@ function ProblemDetails(props) {
   return (
     <>
       <div>
-        <img className={classes.image} src={props.prob.image} alt="Problem" />
+        {loading && <img className={classes.image} src={loadingImg} alt={props.prob.title} />}
+        {image && <img className={classes.image} src={image} alt={props.prob.title} />}
       </div>
       <section className={classes.section}>
         <div className={classes.heading}>
@@ -96,6 +105,9 @@ function ProblemDetails(props) {
               ))}
             </DropdownButton>
           </div>
+        </div>
+        <div class={classes.description}>
+          {props.prob.description}
         </div>
       </section>
       

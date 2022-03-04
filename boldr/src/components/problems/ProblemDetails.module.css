@@ -97,3 +97,7 @@
   color: blue;
   border-radius: 6px;
 }
+
+.description {
+  padding: 1.5em 2em; 
+}
