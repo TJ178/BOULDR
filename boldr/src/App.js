@@ -26,24 +26,3 @@ function App() {
 }
 
 export default App;
-
-/*const tempProbs = [
-  {
-    id: 1,
-    image: gymPic,
-    title: "A Silly Little Problem",
-    isFavorite: false,
-    gym: "Wooden",
-    description: "Go touch rock",
-    rating:3.5,
-    difficulty: 1,
-  },
-  {
-    id: 2,
-    image: gymPic,
-    title: "Something is going up?",
-    isFavorite: false,
-    gym: "Cliffs of Id",
-    description: "Go touch rock but at this gym",
-  },
-];*/
