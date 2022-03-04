@@ -1,4 +1,5 @@
-body
+@import url('');
+	body
 	{
 		font-family: 'VT323', monospace;
 		background-repeat: no-repeat;
@@ -6,23 +7,14 @@ body
 		background-position: center bottom;
 		background-attachment: fixed;
 	}
-
-    .signup-window
+    .signin_logo
 	{
-		background: #424549;
-		border: 2px solid #1e2124;
-		height: 400px;
-		width: 400px;
-		margin-right: 50px;
-		margin-top: 100px;
-		border-radius: 20px;
-		position: absolute;
-		right: 0;
-		z-index: 2;
-        box-shadow: 5px 10px black;
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+		width: 50%;
 	}
-    
-	.signin-newAccount
+	.signin_newAccount
 	{
 		font-size: 12px;
 		color: black;
@@ -30,7 +22,7 @@ body
 		text-decoration: none;
 	}
 
-	.signin-header
+	.signin_header
 	{
 		font-size: 30px;
 		color: black;
@@ -38,7 +30,7 @@ body
 		margin-top: 30px;
 	}
 	
-	.signin-label
+	.signin_label
 	{
 		font-family: "Lucida Console", "Courier New", monospace;
 		font-size: 15.5px;
@@ -52,7 +44,7 @@ body
 		width: 50%;
 		padding: 5px 10px;
 		margin-left: 28px;
-		border: 2px solid white;
+		border: 2px solid black;
 		border-radius: 20px;
 		outline:none;
 	}	
@@ -64,7 +56,8 @@ body
 		padding: 5px 10px;
 		width: 25%;
 		background-color: white;
-		border-color: black;
+		border-color: #424549;
+        border: 2px solid black;
 		margin-top: -20px;
 		margin-right: 20px;
 		color: #424549;
@@ -93,9 +86,9 @@ body
 	}
 
 
-h6 {
-	background-color: black;
-	color: white;
-	padding-left: 2em;
-	border-radius: 10px;
-}
+	h6 {
+		background-color: black;
+		color: white;
+		padding-left: 2em;
+		border-radius: 10px;
+	}
