@@ -12,6 +12,7 @@ import loadingImg from '../../assets/loading.png'
 
 
 const dropdownOptions = [
+  "V-",
   "V0",
   "V1",
   "V2",
@@ -28,7 +29,7 @@ const dropdownOptions = [
 function ProblemDetails(props) {
   const [image, loading, error] = useDownloadURL(ref(storage, props.prob.image));
 
-  const initialDifficulty = "V" + String(props.prob.difficulty);
+  const initialDifficulty = "V" + JSON.stringify(props.prob.vrating);
 
   const [starVal, setStarVal] = useState(props.prob.rating);
   const [dropdownVal, setDropdownVal] = useState(initialDifficulty);
