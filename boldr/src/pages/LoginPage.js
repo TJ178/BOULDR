@@ -30,7 +30,7 @@ export default function CreateAccountPage() {
 		<>
 			<Card>
 				<Card.Body>
-				     <h1 className = {classes.signup_header}> Log In </h1>
+				     <h1 className = {classes.signin_header}> Log In </h1>
 					 {currentUser && currentUser.email}
 					 {error && <Alert variant = "danger"> {error} </Alert>}
 					<Form onSubmit={handleSubmit}>

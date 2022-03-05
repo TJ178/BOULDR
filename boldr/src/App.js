@@ -9,7 +9,7 @@ import Layout from "./components/layout/Layout";
 import ProblemDetailsPage from "./pages/ProblemDetailsPage";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { AuthProvider } from './contexts/AuthContext';
-import PrivateRoute from './pages/PrivateRoute';
+import PrivateRoute from './contexts/PrivateRoute';
 
 
 function App() {
