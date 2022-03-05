@@ -23,7 +23,7 @@ class ProblemDetailsPageComponent extends React.Component{
 
     return (
       <>
-        <ProblemDetails prob={this.state.data} />
+        <ProblemDetails prob={this.state.data} id={this.state.problemId} />
         {/* Add the section below if we choose to implement comments
           Still needs CSS styling*/}
         {/* <section className={classes.section}>

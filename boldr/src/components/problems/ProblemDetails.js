@@ -22,21 +22,18 @@ const dropdownOptions = [
 ];
 
 function ProblemDetails(props) {
-  const initialDifficulty = "V" + String(props.prob.difficulty);
+  const initialDifficulty = "V" + String(props.prob.vrating);
 
   const [starVal, setStarVal] = useState(props.prob.rating);
   const [dropdownVal, setDropdownVal] = useState(initialDifficulty);
-  const [subStarVal, setSubStarVal] = useState("");
+  const [disableSubmit, setDisableSubmit] = useState(false);
+  const [disableDropdown, setDisableDropdown] = useState(false);
 
-  /*const starCollectionRef = collection(db, 'subStarVal');
-
-  const createStar = async () => {
-      await addDoc(starCollectionRef, {rating: subStarVal});
-  };*/
+  const problemId = props.id;
+  const problemDoc = doc(db, "problems", problemId);
 
   const updateStarRating = async (id, starVal) => {
-    console.log("updateStarRating");
-    const problemDoc = doc(db, "problems", id);
+    //console.log("updateStarRating");
     starVal = starVal/20;
     switch (starVal) {
       case 1: await updateDoc(problemDoc, {"allstars.1": increment(1)}); break;
@@ -46,21 +43,31 @@ function ProblemDetails(props) {
       case 5: await updateDoc(problemDoc, {"allstars.5": increment(1)}); break;
       default: break;
     }
+    setDisableSubmit(true);
   };
+
+  const updateVRating = async (e) => {
+    setDropdownVal(e);
+    switch (e) {
+      case "V0": await updateDoc(problemDoc, {"allvratings.V0": increment(1)}); break;
+      case "V1": await updateDoc(problemDoc, {"allvratings.V1": increment(1)}); break;
+      case "V2": await updateDoc(problemDoc, {"allvratings.V2": increment(1)}); break;
+      case "V3": await updateDoc(problemDoc, {"allvratings.V3": increment(1)}); break;
+      case "V4": await updateDoc(problemDoc, {"allvratings.V4": increment(1)}); break;
+      case "V5": await updateDoc(problemDoc, {"allvratings.V5": increment(1)}); break;
+      case "V6": await updateDoc(problemDoc, {"allvratings.V6": increment(1)}); break;
+      case "V7": await updateDoc(problemDoc, {"allvratings.V7": increment(1)}); break;
+      case "V8": await updateDoc(problemDoc, {"allvratings.V8": increment(1)}); break;
+      case "V9": await updateDoc(problemDoc, {"allvratings.V9": increment(1)}); break;
+      case "V10": await updateDoc(problemDoc, {"allvratings.V10": increment(1)}); break;
+      default: console.log("default case"); break;
+    }
+    setDisableDropdown(true);
+  }
 
   const handleStarClick = (e) => {
-    console.log("handleStarClick");
+    //console.log("handleStarClick");
     setStarVal(e);
-  };
-
-  const handleDropdownSelect = (e) => {
-    console.log(e + " " + dropdownVal);
-    setDropdownVal(e);
-  };
-
-  const handleSubmitStar = (e) => {
-    console.log(starVal + " " + e + " " + subStarVal);
-    setSubStarVal(starVal);
   };
 
   return (
@@ -82,7 +89,7 @@ function ProblemDetails(props) {
               size={30}
               transition={false}
             />
-            <Button onClick={() => updateStarRating("B2LKX291ngI6oxgmjkT8", starVal)}>Submit</Button>
+            <Button disabled = {disableSubmit} onClick={() => updateStarRating(problemId, starVal)}>Submit</Button>
           </div>
         </div>
         <div className={classes.tags}>
@@ -103,7 +110,7 @@ function ProblemDetails(props) {
               className={classes.dropdown}
               id="rating-button"
               title={dropdownVal}
-              onSelect= {handleDropdownSelect}
+              onSelect= {updateVRating}
               variant="secondary"
             >
               {dropdownOptions.map((item) => (
@@ -111,6 +118,7 @@ function ProblemDetails(props) {
                   key={item}
                   className={classes.DropdownItem}
                   eventKey={item}
+                  disabled = {disableDropdown}
                 >
                   {item}
                 </Dropdown.Item>
