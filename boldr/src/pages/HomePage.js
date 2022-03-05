@@ -1,5 +1,6 @@
 import React from "react";
 import ProblemList from "../components/problems/ProblemList";
+import classes from "./HomePage.module.css"
 import { db } from "../firebase-config.js";
 import { collection } from 'firebase/firestore';
 import { convertCollectionToProblems, searchProblems } from '../FirebaseSupport.js';
@@ -26,8 +27,12 @@ function HomePage() {
 
   return (
     <section>
-      <Form onSubmit={handleSubmit}>
+      {/* <Form onSubmit={handleSubmit}>
         <Form.Control type='text' placeholder={'Search...'} size='lg' name='search' 
+                      defaultValue={searchParams ? searchParams.get('keyword') : ""} onChange={handleChange}/>
+      </Form> */}
+      <Form onSubmit={handleSubmit} style={{display: "flex",justifyContent: "center"}} >
+        <Form.Control className={classes.form_label} bsPrefix="form_label" type='text' placeholder={'Search...'} size='lg' name='search' 
                       defaultValue={searchParams ? searchParams.get('keyword') : ""} onChange={handleChange}/>
       </Form>
       {error && <p><strong>Error Loading Problems: {JSON.stringify(error)}</strong></p>}
