@@ -2,6 +2,7 @@ import React from "react";
 import classes from "./ProblemItem.module.css";
 import Card from "../ui/Card";
 import Bookmark from "../ui/Bookmark";
+import Button from 'react-bootstrap/Button';
 import { Rating } from "react-simple-star-rating";
 import { Link } from "react-router-dom";
 import { Row, Col, Container } from "react-bootstrap";
@@ -59,7 +60,10 @@ function ProblemItem(props) {
                   />
                 </div>
                 <div className={classes.difficulty}>
-                  <h1>V{props.vrating}</h1>
+                  <h3>V-Rating:</h3>
+                  <Button variant='secondary' disabled>
+                    V{props.vrating}
+                  </Button>
                 </div>
               </div>
             </Col>

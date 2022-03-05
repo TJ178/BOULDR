@@ -45,8 +45,14 @@
   margin: 0 0;
 }
 
-.difficulty h1 {
-  margin: 1rem 2rem;
+.difficulty{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.difficulty h3 {
+  margin: 0rem 1rem;
 }
 
 .actions {
