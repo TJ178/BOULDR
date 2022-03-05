@@ -3,8 +3,10 @@ import Card from "../components/ui/Card";
 import classes from "./AddProblemPage.module.css";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/button";
-import { storage } from '../firebase-config.js'
+import { db, storage } from "../firebase-config.js";
 import { ref, uploadBytes } from "firebase/storage";
+import { useDownloadURL } from "react-firebase-hooks/storage";
+import { collection, addDoc } from "firebase/firestore";
 
 // Should create a globals file for this
 const dropdownOptions = [
@@ -22,42 +24,48 @@ const dropdownOptions = [
 ];
 
 function AddProblemPage(props) {
-  const [fileUrl, setFileUrl] = useState(null);
   const [fileRef, setFileRef] = useState("");
+  const [fileName, setFileName] = useState("chumBucket.jpg");
+  const [image, loading, error] = useDownloadURL(
+    ref(storage, "media/" + fileName)
+  );
   const [imageUploaded, setImageUploaded] = useState(false);
+  const [isAvailable, setAvailable] = useState(false);
 
+  const changeAvailable = () => {
+    setAvailable(!isAvailable);
+  }
   const onFileChange = async (e) => {
     const file = e.target.files[0];
-    console.log(file);
-    const storageRef = ref(storage, 'media/' + file.name);
+    const storageRef = ref(storage, "media/" + file.name);
     setFileRef(storageRef);
+    setFileName(file.name);
     uploadBytes(storageRef, file).then((snapshot) => {
-      console.log('Uploaded a blob or file!');
       setImageUploaded(true);
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const submitObj = {
       problemName: e.target.formProblemName.value,
       gym: e.target.formProblemGym.value,
-      image: fileRef,
-      available: e.target.formProblemAvailable.value,
+      image: fileRef.toString(),
+      available: isAvailable,
       difficulty: e.target.formProblemDifficulty.value,
       description: e.target.formProblemDescription.value,
     };
-
-    // Instead of logging this is where we can send to the database
-    console.log(submitObj);
+    console.log(submitObj)
+    // Add a new document with a generated id.
+    await addDoc(collection(db, "problems"), submitObj);
   };
 
   return (
     <Card>
       <section className={classes.image}>
         <Form onSubmit={handleSubmit}>
-          {imageUploaded && (
-            <img className={classes.image} src={fileUrl} alt="Gym Problem" />
+          {imageUploaded && !loading && (
+            <img className={classes.image} src={image} alt="Gym Problem" />
           )}
 
           <Form.Group controlId="formFile" className="mb-3">
@@ -73,7 +81,7 @@ function AddProblemPage(props) {
           </Form.Group>
 
           <Form.Group controlId="formProblemAvailable">
-            <Form.Check type="checkbox" label="Is Available" />
+            <Form.Check type="checkbox" onChange={changeAvailable} label="Available" />
           </Form.Group>
 
           <Form.Group controlId="formProblemDifficulty">
