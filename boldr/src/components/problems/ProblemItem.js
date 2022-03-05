@@ -52,7 +52,7 @@ function ProblemItem(props) {
                   {/* https://bestofreactjs.com/repo/prakhar1989-react-tags-react-tag-input */}
                   <Rating
                     initialValue={props.rating}
-                    size={30}
+                    size={40}
                     transistion={true}
                     readonly={true}
                     // onClick={}
