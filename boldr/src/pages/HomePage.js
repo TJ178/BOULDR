@@ -10,9 +10,6 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 function HomePage() {
   const [data, loading, error] = useCollectionOnce(collection(db, 'problems'));
   let [searchParams, setSearchParams] = useSearchParams();
-  /*let [query, setQuery] = React.useState(
-    searchParams.get("keyword")
-  );*/
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -20,14 +17,18 @@ function HomePage() {
   }
 
   async function handleChange(event){
-    setSearchParams({keyword: event.target.value});
+    if(event.target.value == ""){
+      setSearchParams({});
+    }else{
+      setSearchParams({keyword: event.target.value});
+    }
   }
 
   return (
     <section>
       <Form onSubmit={handleSubmit}>
-        <Form.Control type='text' placeholder='Search...' size='lg' name='search' 
-                      /*defaultValue={searchParams.get('keyword')}*/ onChange={handleChange}/>
+        <Form.Control type='text' placeholder={'Search...'} size='lg' name='search' 
+                      defaultValue={searchParams ? searchParams.get('keyword') : ""} onChange={handleChange}/>
       </Form>
       <h1>Recent Activity</h1>
       {error && <p><strong>Error Loading Problems: {JSON.stringify(error)}</strong></p>}
