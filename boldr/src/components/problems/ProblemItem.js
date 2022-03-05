@@ -6,7 +6,15 @@ import { Rating } from 'react-simple-star-rating'
 import { Link } from "react-router-dom";
 import { Row, Col, Container } from 'react-bootstrap';
 
+import { useDownloadURL } from 'react-firebase-hooks/storage';
+import { ref } from 'firebase/storage';
+import { storage } from '../../firebase-config.js'
+
+import loadingImg from '../../assets/loading.png'
+
 function ProblemItem(props) {
+  const [image, loading, error] = useDownloadURL(ref(storage, props.image));
+
   return (
     <li className={classes.item}>
       <Card>
@@ -14,7 +22,8 @@ function ProblemItem(props) {
           <Row className={classes.noPadding}>
             <Col className={classes.noPadding}>
               <Link to={"/problem-details/" + props.id}>
-                <img className={classes.image} src={props.image} alt={props.title} />
+                {loading && <img className={classes.image} src={loadingImg} alt={props.title} />}
+                {image && <img className={classes.image} src={image} alt={props.title} />}
               </Link>
             </Col>
             <Col xs={5}>
@@ -41,7 +50,7 @@ function ProblemItem(props) {
                   />
                 </div>
                 <div className={classes.difficulty}>
-                  <h1>V{props.rating}</h1>
+                  <h1>V{props.vrating}</h1>
                 </div>
               </div>
             </Col>
