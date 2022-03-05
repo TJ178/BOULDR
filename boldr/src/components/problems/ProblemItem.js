@@ -2,15 +2,15 @@ import React from "react";
 import classes from "./ProblemItem.module.css";
 import Card from "../ui/Card";
 import Bookmark from "../ui/Bookmark";
-import { Rating } from 'react-simple-star-rating'
+import { Rating } from "react-simple-star-rating";
 import { Link } from "react-router-dom";
-import { Row, Col, Container } from 'react-bootstrap';
+import { Row, Col, Container } from "react-bootstrap";
 
-import { useDownloadURL } from 'react-firebase-hooks/storage';
-import { ref } from 'firebase/storage';
-import { storage } from '../../firebase-config.js'
+import { useDownloadURL } from "react-firebase-hooks/storage";
+import { ref } from "firebase/storage";
+import { storage } from "../../firebase-config.js";
 
-import loadingImg from '../../assets/loading.png'
+import loadingImg from "../../assets/loading.png";
 
 function ProblemItem(props) {
   const [image, loading, error] = useDownloadURL(ref(storage, props.image));
@@ -22,8 +22,20 @@ function ProblemItem(props) {
           <Row className={classes.noPadding}>
             <Col className={classes.noPadding}>
               <Link to={"/problem-details/" + props.id}>
-                {loading && <img className={classes.image} src={loadingImg} alt={props.title} />}
-                {image && <img className={classes.image} src={image} alt={props.title} />}
+                {loading && (
+                  <img
+                    className={classes.image}
+                    src={loadingImg}
+                    alt={props.title}
+                  />
+                )}
+                {image && (
+                  <img
+                    className={classes.image}
+                    src={image}
+                    alt={props.title}
+                  />
+                )}
               </Link>
             </Col>
             <Col xs={5}>
