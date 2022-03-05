@@ -38,21 +38,18 @@ function ProblemItem(props) {
                 )}
               </Link>
             </Col>
-            <Col xs={5}>
+            <Col xs={5} style={{paddingLeft: 0}}>
               <div className={classes.info}>
-                <div className={classes.title_card}>
-                  <div>
-                    <h2>{props.title}</h2>
-                    <h3>{props.gym}</h3>
+                <div>
+                  <div className={classes.topflex}>
+                    <div className={classes.empty}/>
+                    <Bookmark isFavorite={props.isFavorite}/>
                   </div>
-                  <Bookmark isFavorite={props.isFavorite} />
-                </div>
-                <div className={classes.tags}>
-                  <h3>This is where the tags should go</h3>
+                  <h1>{props.title}</h1>
+                  <h3 className={classes.gym_name}>{props.gym}</h3>
                 </div>
                 <div className={classes.rating}>
                   {/* https://bestofreactjs.com/repo/prakhar1989-react-tags-react-tag-input */}
-                  {/* https://www.npmjs.com/package/react-simple-star-rating */}
                   <Rating
                     initialValue={props.rating}
                     size={30}
