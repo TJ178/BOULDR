@@ -2,7 +2,7 @@ import { useState } from "react";
 import Card from "../components/ui/Card";
 import classes from "./AddProblemPage.module.css";
 import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/button";
+import Button from "react-bootstrap/Button";
 import { db, storage } from "../firebase-config.js";
 import { ref, uploadBytes } from "firebase/storage";
 import { useDownloadURL } from "react-firebase-hooks/storage";
