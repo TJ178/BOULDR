@@ -4,15 +4,25 @@ import { Link, useNavigate } from 'react-router-dom';
 import classes from "./CreateAccountPage.module.css";
 import { useAuth } from '../contexts/AuthContext.js';
 
+import { useDownloadURL } from 'react-firebase-hooks/storage';
+import { ref } from 'firebase/storage';
+import { storage } from '../firebase-config.js'
+
+import { updateProfile } from "firebase/auth";
+import usr from '../assets/usr.png';
+
 export default function CreateAccountPage() {
 	const staffRef = useRef()
 	const emailRef = useRef()
 	const passwordRef = useRef()
 	const passwordConfirmRef = useRef()
+	const nameRef = useRef()
 	const { signup, currentUser } = useAuth()
 	const [error, setError] = useState("")
 	const [loading, setLoading] = useState(false)
 	const navigate = useNavigate();
+
+	const [image, loadingImage, imageError] = [null, null, null]; //useDownloadURL(ref(storage, null));
 
 	async function handleSubmit(e) {
 		e.preventDefault()
@@ -22,10 +32,18 @@ export default function CreateAccountPage() {
 		try {
 			setError('')
 			setLoading(true)
-			await signup(emailRef.current.value, passwordRef.current.value)
+			await signup(emailRef.current.value, passwordRef.current.value).then((userCredential) =>{
+				const user = userCredential.user;
+				console.log(user.uid);
+				updateProfile(user, {
+					displayName: nameRef,
+					image: ""
+				});
+			});
 			navigate("/");
-		} catch {
-			setError('Failed to create an account')
+		} catch (error){
+			setError('Failed to create an account: ' + error.message)
+			console.error(error)
 		}
 		setLoading(false)
 	}
@@ -38,13 +56,18 @@ export default function CreateAccountPage() {
 		<>
 			<Card>
 				<Card.Body>
-				     <h1 className = {classes.signup_header}> New Account </h1>
-					 {JSON.stringify(currentUser)}
-					 {error && <Alert variant = "danger"> {error} </Alert>}
+					<h1 className = {classes.signup_header}> New Account </h1>
+					{image && <img className={classes.profile} src={image} alt="MissingUsr" />}
+					{!image && <img className={classes.profile} src={usr} alt="MissingUsr" />}
+					{error && <Alert variant = "danger"> {error} </Alert>}
 					<Form onSubmit={handleSubmit}>
-						<Form.Group id = "staff">
-							<Form.Label>Staff Account: </Form.Label>
-							<Form.Check type = "checkbox" ref= {staffRef} />
+						<Form.Group controlId="formFile" className="mb-3">
+							<Form.Label>Profile Picture</Form.Label>
+							<Form.Control type="file" />
+						</Form.Group>
+						<Form.Group id = "name">
+							<Form.Label>Name</Form.Label>
+							<Form.Control type="text" ref={nameRef} required />
 						</Form.Group>
 						<Form.Group id = "email">
 							<Form.Label>Username (Email)</Form.Label>
@@ -52,13 +75,17 @@ export default function CreateAccountPage() {
 						</Form.Group>
 						<Form.Group id = "password">
 							<Form.Label>Password</Form.Label>
-							<Form.Control type = "password" ref = {passwordRef} required />
+							<Form.Control type="password" ref = {passwordRef} required />
 						</Form.Group>
 						<Form.Group id = "password-confirm">
 							<Form.Label>Password Confirmation</Form.Label>
-							<Form.Control type = "password" ref = {passwordConfirmRef} required />
+							<Form.Control type="password" ref = {passwordConfirmRef} required />
 						</Form.Group>
-						<Button disabled={loading} type="submit">
+						<Form.Group id = "staff">
+							<Form.Label>Check this box if you're a gym staff member: </Form.Label>
+							<Form.Check type = "checkbox" ref= {staffRef} />
+						</Form.Group>
+						<Button disabled={loading} type="submit" style={{justfiySelf: "center", marginTop: "10px"}}>
 							Sign Up
 						</Button>
 					</Form>

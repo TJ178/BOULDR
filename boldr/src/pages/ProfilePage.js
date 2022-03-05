@@ -26,6 +26,8 @@ export default function ProfilePage() {
           <h2 className="text-center mb-4">Profile</h2>
           {error && <Alert variant="danger">{error}</Alert>}
           <strong>Email:</strong> {currentUser.email}
+          <br/>
+          <strong>Name: </strong> {currentUser.displayName}
         </Card.Body>
       </Card>
       <div className="w-100 text-center mt-2">
