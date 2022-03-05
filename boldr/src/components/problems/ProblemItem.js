@@ -18,9 +18,9 @@ function ProblemItem(props) {
   return (
     <li className={classes.item}>
       <Card>
-        <Container fluid className={classes.noPadding}>
-          <Row className={classes.noPadding}>
-            <Col className={classes.noPadding}>
+        <Container fluid style={{ paddingLeft: 0, paddingRight: 0}}>
+          <Row>
+            <Col>
               <Link to={"/problem-details/" + props.id}>
                 {loading && (
                   <img
