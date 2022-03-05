@@ -1,6 +1,5 @@
 import React from 'react';
 import { Route, Routes } from "react-router-dom";
-
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage.js";
 import CreateAccountPage from "./pages/CreateAccountPage.js";
@@ -10,6 +9,8 @@ import Layout from "./components/layout/Layout";
 import ProblemDetailsPage from "./pages/ProblemDetailsPage";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { AuthProvider } from './contexts/AuthContext';
+import PrivateRoute from './pages/PrivateRoute';
+
 
 function App() {
   return (
@@ -22,11 +23,11 @@ function App() {
           <Route path=":problemId" element={<ProblemDetailsPage data={tempProbs[0]}/>} />
         </Route>
         <Route path="/create-account" element={<CreateAccountPage />} />
-        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/profile" element={<PrivateRoute> <ProfilePage /> </PrivateRoute>}
+          ></Route>
       </Routes>
     </Layout>
     </AuthProvider>
-    
   );
 }
 
