@@ -11,6 +11,8 @@ import { storage } from '../firebase-config.js'
 import { updateProfile } from "firebase/auth";
 import usr from '../assets/usr.png';
 
+import { Navigate } from 'react-router-dom';
+
 export default function CreateAccountPage() {
 	const staffRef = useRef()
 	const emailRef = useRef()
@@ -54,6 +56,7 @@ export default function CreateAccountPage() {
 
 	return (
 		<>
+			{currentUser ? <Navigate to="/"/> : null}
 			<Card>
 				<Card.Body>
 					<h1 className = {classes.signup_header}> New Account </h1>

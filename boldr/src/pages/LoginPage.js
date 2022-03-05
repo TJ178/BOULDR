@@ -1,6 +1,6 @@
 import React, {useRef, useState} from "react";
 import { Form, Button, Card, Alert } from "react-bootstrap";
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, Navigate } from 'react-router-dom';
 import classes from "./CreateAccountPage.module.css";
 import { useAuth } from '../contexts/AuthContext.js';
 
@@ -28,6 +28,7 @@ export default function CreateAccountPage() {
 
 	return (
 		<>
+			{currentUser ? <Navigate to="/"/> : null}
 			<Card>
 				<Card.Body>
 				     <h1 className = {classes.signin_header}> Log In </h1>
