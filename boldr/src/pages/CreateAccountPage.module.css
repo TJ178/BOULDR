@@ -1,13 +1,4 @@
-body
-	{
-		font-family: 'VT323', monospace;
-		background-repeat: no-repeat;
-		background-color: #E2BA86;
-		background-position: center bottom;
-		background-attachment: fixed;
-	}
-
-	.signup-header
+	.signup_header
 	{
 		font-size: 30px;
 		color: black;
@@ -16,36 +7,19 @@ body
 		
 	}
 	
-	.signup-label
+	.signup_label
 	{
 		font-size: 11.5px;
 		color: black;
 		margin-top: 20px;
 	}
 	
-	.signup-container
+	.signup_container
 	{
 		margin: -2% 0 0 -33%;/* top right bottom left */
 		position: relative;
 		text-align: center;
 	}
-	
-	.signup-window
-	{
-		background: #424549;
-		border: 2px solid #1e2124;
-		height: 400px;
-		width: 400px;
-		margin-right: 50px;
-		margin-top: 100px;
-		border-radius: 20px;
-		position: absolute;
-		right: 0;
-		z-index: 2;
-        box-shadow: 5px 10px black;
-	}
-	
-	
 	
 	input[type=form_control], input[type=password]
 	{
@@ -80,10 +54,7 @@ body
 		position: relative;
 	}
 	
-	a:hover 
-	{
-		background-color: #E2BA86;
-	}
+
 	
 	a:link[type=submit_j]
 	{

@@ -1,4 +1,13 @@
 .bookmark {
-    margin: 10px 10px;
+    margin: 5px 5px;
+    margin-bottom: 0px;
     align-self:center;
+}
+
+.notfavorite{
+    opacity: 40%;
+}
+
+.notfavorite:hover{
+    opacity: 100%;
 }
