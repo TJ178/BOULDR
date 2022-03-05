@@ -2,3 +2,11 @@
     margin: 10px 10px;
     align-self:center;
 }
+
+.notfavorite{
+    opacity: 40%;
+}
+
+.notfavorite:hover{
+    opacity: 100%;
+}
