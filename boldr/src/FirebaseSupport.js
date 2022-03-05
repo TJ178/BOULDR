@@ -31,3 +31,25 @@ export function convertDocumentToProblem(querySnapshot){
 
   return temp;
 }
+
+
+//search = string to search for
+//searchLoc = property of problems to search in
+//problems = input problems to search
+
+export function searchProblems(search, searchLoc, problems){
+  if(search && searchLoc && problems){
+    search = search.toLowerCase();
+    let foundItems = [];
+    problems.forEach((p) =>{
+      for(let s of searchLoc){
+        if(p[s] && p[s].toLowerCase().includes(search)){
+          foundItems = foundItems.concat([p]);
+          break;
+        }
+      }
+    });
+    return foundItems;
+  }
+  return problems;
+}
