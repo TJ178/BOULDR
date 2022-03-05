@@ -1,9 +1,10 @@
-import { React, useState } from "react";
+import { useState } from "react";
 import Card from "../components/ui/Card";
-import Dropdown from "react-bootstrap/Dropdown";
-import DropdownButton from "react-bootstrap/DropdownButton";
-import gymPic from "../assets/gymPic.png";
 import classes from "./AddProblemPage.module.css";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/button";
+import { storage } from '../firebase-config.js'
+import { ref, uploadBytes } from "firebase/storage";
 
 // Should create a globals file for this
 const dropdownOptions = [
@@ -21,79 +22,81 @@ const dropdownOptions = [
 ];
 
 function AddProblemPage(props) {
-  const [problemName, setProblemName] = useState("Name");
-  const [dropdownVal, setDropdownVal] = useState("V0");
-  const [available, setAvailable] = useState(false);
-  const [description, setDesicription] = useState("Description");
+  const [fileUrl, setFileUrl] = useState(null);
+  const [fileRef, setFileRef] = useState("");
+  const [imageUploaded, setImageUploaded] = useState(false);
 
-  const onAvailableChange = () => {
-    setAvailable(!available);
-    console.log("Available: " + available);
+  const onFileChange = async (e) => {
+    const file = e.target.files[0];
+    console.log(file);
+    const storageRef = ref(storage, 'media/' + file.name);
+    setFileRef(storageRef);
+    uploadBytes(storageRef, file).then((snapshot) => {
+      console.log('Uploaded a blob or file!');
+      setImageUploaded(true);
+    });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const submitObj = {
-      problemName: problemName,
-      difficulty: dropdownVal,
-      available: available,
-      description: description,
+      problemName: e.target.formProblemName.value,
+      gym: e.target.formProblemGym.value,
+      image: fileRef,
+      available: e.target.formProblemAvailable.value,
+      difficulty: e.target.formProblemDifficulty.value,
+      description: e.target.formProblemDescription.value,
     };
 
-    // Instead of loggin this is where we can send to the database
+    // Instead of logging this is where we can send to the database
     console.log(submitObj);
   };
+
   return (
     <Card>
       <section className={classes.image}>
-        <div className={classes.imageContainer}>
-          <img className={classes.image} src={gymPic} alt="Gym Problem" />
-          <button className={classes.imgButton}>Add Image</button>
-        </div>
-        <form className={classes.formContainer} onSubmit={handleSubmit}>
-          <div>
-            <input
-              type="text"
-              placeholder={problemName}
-              onChange={(e) => setProblemName(e.target.value)}
-            />
-            <div className={classes.innerRight}>
-              <DropdownButton
-                // className={classes.dropdown}
-                id="rating-button"
-                title={dropdownVal}
-                onSelect={(e) => setDropdownVal(e)}
-                variant="secondary"
-              >
-                {dropdownOptions.map((item) => (
-                  <Dropdown.Item
-                    key={item}
-                    // className={classes.DropdownItem}
-                    eventKey={item}
-                  >
-                    {item}
-                  </Dropdown.Item>
-                ))}
-              </DropdownButton>
-              <label>
-                Currently Available:
-                <input
-                  type="checkbox"
-                  name="available"
-                  checked={available}
-                  onChange={onAvailableChange}
-                />
-              </label>
-            </div>
-          </div>
-          <div className={classes.formleft}>
-            <textarea
-              placeholder={description}
-              onChange={(e) => setDesicription(e.target.value)}
-            />
-            <input type="submit" />
-          </div>
-        </form>
+        <Form onSubmit={handleSubmit}>
+          {imageUploaded && (
+            <img className={classes.image} src={fileUrl} alt="Gym Problem" />
+          )}
+
+          <Form.Group controlId="formFile" className="mb-3">
+            <Form.Control type="file" size="sm" onChange={onFileChange} />
+          </Form.Group>
+
+          <Form.Group controlId="formProblemName">
+            <Form.Control type="text" placeholder="Problem Name" />
+          </Form.Group>
+
+          <Form.Group controlId="formProblemGym">
+            <Form.Control type="text" placeholder="Gym" />
+          </Form.Group>
+
+          <Form.Group controlId="formProblemAvailable">
+            <Form.Check type="checkbox" label="Is Available" />
+          </Form.Group>
+
+          <Form.Group controlId="formProblemDifficulty">
+            <Form.Select defaultValue={"V0"}>
+              {dropdownOptions.map((item) => (
+                <option key={item}>{item}</option>
+              ))}
+            </Form.Select>
+          </Form.Group>
+
+          <Form.Group className="mb-3" controlId="formProblemDescription">
+            <Form.Label>Problem Description</Form.Label>
+            <Form.Control as="textarea" rows={3} />
+          </Form.Group>
+
+          <Button
+            className="justify-content-center"
+            variant="primary"
+            type="submit"
+          >
+            Submit
+          </Button>
+        </Form>
       </section>
     </Card>
   );
