@@ -7,8 +7,10 @@ import CreateAccountPage from "./pages/CreateAccountPage.js";
 import ProfilePage from "./pages/ProfilePage";
 import Layout from "./components/layout/Layout";
 import ProblemDetailsPage from "./pages/ProblemDetailsPage";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import AddProblemPage from "./pages/AddProblemPage";
+import "bootstrap/dist/css/bootstrap.min.css";
 import { AuthProvider } from './contexts/AuthContext';
+
 
 function App() {
   return (
@@ -22,6 +24,7 @@ function App() {
         </Route>
         <Route path="/create-account" element={<CreateAccountPage />} />
         <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/add-problem" element={<AddProblemPage />} />
       </Routes>
     </Layout>
     </AuthProvider>
