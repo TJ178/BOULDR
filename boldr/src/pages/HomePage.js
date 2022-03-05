@@ -33,7 +33,8 @@ function HomePage() {
       {error && <p><strong>Error Loading Problems: {JSON.stringify(error)}</strong></p>}
       {loading && <p><span>Loading...</span></p>}
       {data && !searchParams && <ProblemList problems={convertCollectionToProblems(data)} />}
-      {data && searchParams && <ProblemList problems={searchProblems(searchParams.get('keyword'), 'title', convertCollectionToProblems(data))} />}
+      {data && searchParams && <ProblemList problems={searchProblems(searchParams.get('keyword'), 
+                                                      ['title', 'gym'], convertCollectionToProblems(data))} />}
     </section>
   );
 }

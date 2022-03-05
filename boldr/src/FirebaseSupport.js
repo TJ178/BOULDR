@@ -42,8 +42,11 @@ export function searchProblems(search, searchLoc, problems){
     search = search.toLowerCase();
     let foundItems = [];
     problems.forEach((p) =>{
-      if(p[searchLoc].toLowerCase().includes(search)){
-        foundItems = foundItems.concat([p]);
+      for(let s of searchLoc){
+        if(p[s] && p[s].toLowerCase().includes(search)){
+          foundItems = foundItems.concat([p]);
+          break;
+        }
       }
     });
     return foundItems;
