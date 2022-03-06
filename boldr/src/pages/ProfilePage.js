@@ -4,13 +4,16 @@ import { useAuth } from "../contexts/AuthContext"
 import { useNavigate } from "react-router-dom"
 import { useDownloadURL } from 'react-firebase-hooks/storage';
 import { ref } from 'firebase/storage';
-import { storage } from '../firebase-config.js'
+import { db, storage } from '../firebase-config.js'
+import { doc, collection } from 'firebase/firestore'
 import classes from "./ProfilePage.module.css";
 
 export default function ProfilePage() {
   const [error, setError] = useState("")
   const { currentUser, logout } = useAuth()
   const navigate = useNavigate()
+  const usersCollectionRef = doc(collection(db, "users"), currentUser.uid);
+
 
   let photoRef;
   if(currentUser){
@@ -46,6 +49,10 @@ export default function ProfilePage() {
           <strong>Email:</strong> {currentUser.email}
           <br/>
           <strong>Name: </strong> {currentUser.displayName}
+          {/* <br/>
+          <strong>Staff: </strong> {usersCollectionRef.isStaff}
+          <br/>
+          <strong>Home Gym: </strong> {usersCollectionRef.homeGym} */}
         </Card.Body>
       </Card>
       <div className="w-100 text-center mt-2">

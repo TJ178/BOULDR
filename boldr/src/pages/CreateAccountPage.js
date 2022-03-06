@@ -15,12 +15,11 @@ import usr from '../assets/usr.png';
 import { Navigate } from 'react-router-dom';
 
 export default function CreateAccountPage() {
-	const staffRef = useRef()
 	const emailRef = useRef()
 	const passwordRef = useRef()
 	const passwordConfirmRef = useRef()
 	const nameRef = useRef()
-
+	
 	const [fileRef, setFileRef] = useState("");
 	const [fileName, setFileName] = useState("chumBucket.jpg");
 	const [image, loadingImage, imageError] = useDownloadURL(
@@ -28,10 +27,11 @@ export default function CreateAccountPage() {
 	);
 	const [imageUploaded, setImageUploaded] = useState(false);
 
-
 	const { signup, currentUser } = useAuth()
 	const [error, setError] = useState("")
 	const [loading, setLoading] = useState(false)
+	const [staff, setStaff] = useState(false);
+	const [gym, setGym] = useState(""); 
 	const navigate = useNavigate();
 
 	const onFileChange = async (e) => {
@@ -43,6 +43,11 @@ export default function CreateAccountPage() {
 		  setImageUploaded(true);
 		});
 	};
+
+	const updateStaff = (e) => {
+		console.log(e.target.checked);
+		setStaff(e.target.checked);
+	  };
 
 	async function handleSubmit(e) {
 		e.preventDefault()
@@ -65,7 +70,9 @@ export default function CreateAccountPage() {
 			
 			await setDoc(doc(collection(db, "users"), user.uid), {
 				favorites: [],
-				ratedProblems: {}
+				ratedProblems: {},
+				isStaff: Boolean(staff),
+				homeGym: String(gym)
 			});
 			navigate("/");
 		} catch (error){
@@ -109,9 +116,26 @@ export default function CreateAccountPage() {
 							<Form.Label>Password Confirmation</Form.Label>
 							<Form.Control type="password" ref = {passwordConfirmRef} required />
 						</Form.Group>
+						<Form.Group id = "home-gym">
+							<Form.Label>Home gym</Form.Label>
+							<Form.Control
+								as="select"
+								value={gym}
+								onChange={e => {
+									console.log("e.target.value", e.target.value);
+									setGym(e.target.value);
+								}}
+								>
+								<option>Choose from the following gyms</option>
+								<option value="Gym 1">Gym 1</option>
+								<option value="Gym 2">Gym 2</option>
+								<option value="Gym 3">Gym 3</option>
+							</Form.Control>
+						</Form.Group>
 						<Form.Group id = "staff">
 							<Form.Label>Check this box if you're a gym staff member: </Form.Label>
-							<Form.Check type = "checkbox" ref= {staffRef} />
+							<Form.Check type = "checkbox" name="staff" id="staff" onChange={updateStaff} value={staff}
+							/>
 						</Form.Group>
 						<Button disabled={loading} type="submit" style={{justfiySelf: "center", marginTop: "10px"}}>
 							Sign Up
