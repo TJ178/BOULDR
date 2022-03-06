@@ -7,8 +7,9 @@ import Button from 'react-bootstrap/Button';
 
 import { useDownloadURL } from 'react-firebase-hooks/storage';
 import { ref } from 'firebase/storage';
-import { storage } from '../../firebase-config.js';
+import { storage, db } from '../../firebase-config.js';
 import loadingImg from '../../assets/loading.png'
+import { doc, updateDoc, increment} from 'firebase/firestore';
 
 
 const dropdownOptions = [

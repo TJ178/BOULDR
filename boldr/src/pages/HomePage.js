@@ -1,115 +1,47 @@
-import React, {useState, useEffect} from "react";
-//import firebase from "../firebase-config.js";
+import React from "react";
 import ProblemList from "../components/problems/ProblemList";
-import gymPic from "../assets/gymPic.png";
-import { db, app, storage } from "../firebase-config.js";
-import { collection, getDocs, addDoc} from 'firebase/firestore';
-import { ref, getDownloadURL } from 'firebase/storage';
+import classes from "./HomePage.module.css"
+import { db } from "../firebase-config.js";
+import { collection } from 'firebase/firestore';
+import { convertCollectionToProblems, searchProblems } from '../FirebaseSupport.js';
+import { useCollectionOnce } from 'react-firebase-hooks/firestore'
+import { Form } from "react-bootstrap";
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
-const tempProbs = [
-  {
-    id: 1,
-    image: gymPic,
-    title: "A Silly Little Problem",
-    isFavorite: false,
-    gym: "Wooden",
-    description: "Go touch rock",
-  },
-  {
-    id: 2,
-    image: gymPic,
-    title: "Something is going up?",
-    isFavorite: false,
-    gym: "Cliffs of Id",
-    description: "Go touch rock but at this gym",
-  },
-];
+function HomePage() {
+  const [data, loading, error] = useCollectionOnce(collection(db, 'problems'));
+  let [searchParams, setSearchParams] = useSearchParams();
 
-class HomePage extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      data: tempProbs
-    };
+  async function handleSubmit(event) {
+    event.preventDefault();
+    setSearchParams({keyword: event.target.search.value});
   }
 
-  componentDidMount(){
-    console.log('tempProbs:');
-    console.log(tempProbs);
-    getData().then(
-      (value) => {
-        value.forEach((problem) =>{
-          getDownloadURL(ref(storage, problem['image'])).then(
-            (value2) => {
-              let temp = problem;
-              temp['image'] = value2;
-              this.setState({
-                data: value
-              });
-              console.log("updated!");
-              console.log(this.state.data);
-            }, (error) => {
-              console.error(error);
-            }
-          );
-        });
-      },
-      (error) => {
-        console.error(error);
-        this.setState({
-          data: tempProbs
-        });
-      }).finally((info) =>{
-        console.log("done?")
-      });
+  async function handleChange(event){
+    if(event.target.value == ""){
+      setSearchParams({});
+    }else{
+      setSearchParams({keyword: event.target.value});
+    }
   }
 
-  render(){
-    return (
-      <section>
-        <h1 style={{textAlign: "center"}}> Add the searchbar here </h1>
-        <h1>Recent Activity</h1>
-        <ProblemList problems={this.state.data} />
-      </section>
-    );
-  }
-}
-
-
-async function getData(){
-  let tempData = [];
-  const querySnapshot = await getDocs(collection(db, "problems"));
-  querySnapshot.forEach((doc) => {
-    let temp = {};
-    temp['id'] = doc.id;
-    temp['image'] = doc.get('img');
-    temp['title'] = doc.get('name');
-    temp['isFavorite'] = false;
-    temp['gym'] = doc.get('gymname');
-    temp['description'] = doc.get('description');
-    temp['rating'] = doc.get('rating');
-    temp['vrating'] = doc.get('vrating');
-    tempData = tempData.concat(temp);
-    console.log(doc.id, " => ", doc.data());
-  });
-
-  console.log('data:');
-  console.log(tempData);
-  return tempData;
-}
-
-function updateData(){
-  getData().then(
-    (value) => {
-      return value;
-    },
-    (error) => {
-      console.error(error);
-    }).finally((info) =>{
-      console.log("done?")
-    });
-    return tempProbs;
+  return (
+    <section>
+      {/* <Form onSubmit={handleSubmit}>
+        <Form.Control type='text' placeholder={'Search...'} size='lg' name='search' 
+                      defaultValue={searchParams ? searchParams.get('keyword') : ""} onChange={handleChange}/>
+      </Form> */}
+      <Form onSubmit={handleSubmit} style={{display: "flex",justifyContent: "center"}} >
+        <Form.Control className={classes.form_label} bsPrefix="form_label" type='text' placeholder={'Search...'} size='lg' name='search' 
+                      defaultValue={searchParams ? searchParams.get('keyword') : ""} onChange={handleChange}/>
+      </Form>
+      {error && <p><strong>Error Loading Problems: {JSON.stringify(error)}</strong></p>}
+      {loading && <p><span>Loading...</span></p>}
+      {data && !searchParams && <ProblemList problems={convertCollectionToProblems(data)} />}
+      {data && searchParams && <ProblemList problems={searchProblems(searchParams.get('keyword'), 
+                                                      ['title', 'gym'], convertCollectionToProblems(data))} />}
+    </section>
+  );
 }
 
 export default HomePage;
