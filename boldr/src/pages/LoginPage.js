@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { Form, Button, Card, Alert } from "react-bootstrap";
+import { Form, FloatingLabel, Button, Card, Alert } from "react-bootstrap";
 import { Link, useNavigate, Navigate } from "react-router-dom";
 import classes from "./LoginPage.module.css";
 import { useAuth } from "../contexts/AuthContext.js";
@@ -36,14 +36,12 @@ export default function CreateAccountPage() {
             {error && <Alert variant="danger"> {error} </Alert>}
             <div className={classes.flexbox}>
               <Form onSubmit={handleSubmit} style={{ width: "60%" }}>
-                <Form.Group id="email">
-                  <Form.Label>Username (Email)</Form.Label>
-                  <Form.Control type="email" ref={emailRef} required />
-                </Form.Group>
-                <Form.Group id="password">
-                  <Form.Label>Password</Form.Label>
-                  <Form.Control type="password" ref={passwordRef} required />
-                </Form.Group>
+                <FloatingLabel label="Email Address" id="email">
+                  <Form.Control type="email" placeholder="Email Address" ref={emailRef} required />
+                </FloatingLabel>
+                <FloatingLabel label="Password" id="password">
+                  <Form.Control type="password" placeholder="Password" ref={passwordRef} required />
+                </FloatingLabel>
                 <Button disabled={loading} type="submit">
                   Log In
                 </Button>
