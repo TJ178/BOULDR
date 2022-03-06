@@ -2,6 +2,7 @@ import { useState } from "react";
 import Card from "../components/ui/Card";
 import classes from "./AddProblemPage.module.css";
 import Form from "react-bootstrap/Form";
+import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Button from "react-bootstrap/Button";
 import { db, storage } from "../firebase-config.js";
 import { ref, uploadBytes } from "firebase/storage";
@@ -71,7 +72,10 @@ function AddProblemPage(props) {
               alt="Gym Problem Picture"
             />
           )}
-          {!imageUploaded && <h3>Upload Problem Image:</h3>}
+          {!imageUploaded && (
+            <h3>Upload Problem Image:</h3>
+          )}
+
           <Form.Group controlId="formFile" className="mb-3">
             <Form.Control type="file" size="sm" onChange={onFileChange} />
           </Form.Group>
@@ -80,10 +84,10 @@ function AddProblemPage(props) {
 
               <Form.Group controlId="formProblemName">
                 <Form.Control type="text" placeholder="Problem Name" />
-              </Form.Group>  
+              </Form.Group>
 
               <Form.Group controlId="formProblemGym">
-                <Form.Control type="text" placeholder="Gym" />
+                <Form.Control type="text" placeholder="Gym Name" />
               </Form.Group>
               <div className={classes.flexbox}>
                 <Form.Group controlId="formProblemDifficulty">
@@ -106,10 +110,9 @@ function AddProblemPage(props) {
             </div>
 
             <div className={classes.descbox}>
-              <Form.Group className="mb-3" controlId="formProblemDescription">
-                <Form.Label>Problem Description</Form.Label>
+              <FloatingLabel className="mb-3" label="Problem Description" controlId="formProblemDescription">
                 <Form.Control as="textarea" rows={3} />
-              </Form.Group>
+              </FloatingLabel>
             </div>
 
           </section>
