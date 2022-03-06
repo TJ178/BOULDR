@@ -32,6 +32,7 @@ export function convertCollectionToProblems(querySnapshot){
     temp['gym'] = doc.get('gymname');
     temp['description'] = doc.get('description');
     temp['rating'] = averageRating(allstars, 5);
+    console.log(temp['rating']);
     temp['vrating'] = averageRating(allvratings, 11) ? averageRating(allvratings, 11).toPrecision(1) : doc.get('vrating');
     tempData = tempData.concat(temp);
   });
@@ -59,7 +60,10 @@ function averageRating(allratings, len){
   let sum = 0;
   let count = 0;
   for (let i = 0; i < len; i++){
-    sum = sum + i*allratings[i];
+    let k = i;
+    if (len == 5)
+      k = i + 1;
+    sum = sum + k*allratings[i];
     count = count + allratings[i];
   }
   if (count !== 0)
