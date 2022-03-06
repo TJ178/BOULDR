@@ -4,10 +4,10 @@ import { Rating } from "react-simple-star-rating";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import Button from 'react-bootstrap/Button';
-
+import { useParams } from 'react-router-dom';
 import { useDownloadURL } from 'react-firebase-hooks/storage';
 import { ref } from 'firebase/storage';
-import { storage, db } from '../../firebase-config.js';
+import {storage, db} from '../../firebase-config.js';
 import loadingImg from '../../assets/loading.png'
 import { doc, updateDoc, increment} from 'firebase/firestore';
 
@@ -37,11 +37,11 @@ function ProblemDetails(props) {
   const [disableSubmit, setDisableSubmit] = useState(false);
   const [disableDropdown, setDisableDropdown] = useState(false);
 
-  const problemId = props.prob.id;
+  let params = useParams();
+  const problemId = params.problemId;
   const problemDoc = doc(db, "problems", problemId);
 
-  const updateStarRating = async (id, starVal) => {
-    //console.log("updateStarRating");
+  const updateStarRating = async (starVal) => {
     starVal = starVal/20;
     switch (starVal) {
       case 1: await updateDoc(problemDoc, {"allstars.1": increment(1)}); break;
@@ -98,7 +98,7 @@ function ProblemDetails(props) {
               size={30}
               transition={false}
             />
-            <Button disabled = {disableSubmit} onClick={() => updateStarRating(problemId, starVal)}>Submit</Button>
+            <Button disabled = {disableSubmit} onClick={() => updateStarRating(starVal)}>Submit</Button>
           </div>
         </div>
         <div className={classes.tags}>
