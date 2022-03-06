@@ -2,7 +2,7 @@ import { useState } from "react";
 import Card from "../components/ui/Card";
 import classes from "./AddProblemPage.module.css";
 import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/button";
+import Button from "react-bootstrap/Button";
 import { db, storage } from "../firebase-config.js";
 import { ref, uploadBytes } from "firebase/storage";
 import { useDownloadURL } from "react-firebase-hooks/storage";
@@ -48,11 +48,11 @@ function AddProblemPage(props) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const submitObj = {
-      problemName: e.target.formProblemName.value,
-      gym: e.target.formProblemGym.value,
-      image: fileRef.toString(),
+      name: e.target.formProblemName.value,
+      gymname: e.target.formProblemGym.value,
+      img: fileRef.toString(),
       available: isAvailable,
-      difficulty: e.target.formProblemDifficulty.value,
+      vrating: parseInt(e.target.formProblemDifficulty.value.substring(1)),
       description: e.target.formProblemDescription.value,
     };
     console.log(submitObj)

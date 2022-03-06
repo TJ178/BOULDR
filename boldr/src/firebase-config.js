@@ -18,5 +18,5 @@ const db = getFirestore();
 const storage = getStorage();
 const auth = getAuth(app);
 //enableLogging(true, false);
-
+ 
 export { db, app, storage, auth };
