@@ -4,13 +4,13 @@ import { Rating } from "react-simple-star-rating";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import Button from 'react-bootstrap/Button';
+import Alert from 'react-bootstrap/Alert';
 import { useParams } from 'react-router-dom';
 import { useDownloadURL } from 'react-firebase-hooks/storage';
 import { ref } from 'firebase/storage';
 import {storage, db} from '../../firebase-config.js';
 import loadingImg from '../../assets/loading.png'
 import { doc, updateDoc, increment} from 'firebase/firestore';
-
 
 const dropdownOptions = [
   "V-",
@@ -52,6 +52,7 @@ function ProblemDetails(props) {
       default: break;
     }
     setDisableSubmit(true);
+
   };
 
   const updateVRating = async (e) => {
@@ -81,6 +82,8 @@ function ProblemDetails(props) {
   return (
     <>
       <div>
+        {disableSubmit ? <Alert variant='success'>Successfully submitted star rating</Alert> : ""}
+        {disableDropdown ? <Alert variant='success'>Successfully submitted V rating</Alert> : ""}
         {loading && <img className={classes.image} src={loadingImg} alt={props.prob.title} />}
         {image && <img className={classes.image} src={image} alt={props.prob.title} />}
       </div>
