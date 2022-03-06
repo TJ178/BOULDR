@@ -8,6 +8,7 @@ import { db, storage } from "../firebase-config.js";
 import { ref, uploadBytes } from "firebase/storage";
 import { useDownloadURL } from "react-firebase-hooks/storage";
 import { collection, addDoc } from "firebase/firestore";
+import placeholder from "../assets/placeholder_image.png";
 
 // Should create a globals file for this
 const dropdownOptions = [
@@ -63,7 +64,7 @@ function AddProblemPage(props) {
 
   return (
     <Card>
-      <div className={classes.card}>
+      <div className={classes.image}>
         <Form onSubmit={handleSubmit}>
           {imageUploaded && !loading && (
             <img
@@ -73,12 +74,19 @@ function AddProblemPage(props) {
             />
           )}
           {!imageUploaded && (
-            <h3>Upload Problem Image:</h3>
+            <img
+              className={classes.image}
+              src={placeholder}
+              alt="Gym Problem Picture"
+            />
           )}
-
           <Form.Group controlId="formFile" className="mb-3">
             <Form.Control type="file" size="sm" onChange={onFileChange} />
           </Form.Group>
+        </Form>
+      </div>
+      <div className={classes.card}>
+        <Form onSubmit={handleSubmit}>
           <section className={classes.flexbox}>
             <div className={classes.otherbox}>
 
@@ -111,7 +119,7 @@ function AddProblemPage(props) {
 
             <div className={classes.descbox}>
               <FloatingLabel className="mb-3" label="Problem Description" controlId="formProblemDescription">
-                <Form.Control as="textarea" rows={3} />
+                <Form.Control as="textarea" style={{height: "8em"}} />
               </FloatingLabel>
             </div>
 
