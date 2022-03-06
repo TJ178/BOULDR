@@ -3,13 +3,26 @@ export function convertCollectionToProblems(querySnapshot){
   let tempData = [];
   querySnapshot.forEach((doc) => {
     let temp = {};
-    let allstars = [doc.get('allstars.1'), doc.get('allstars.2'), doc.get('allstars.3'), doc.get('allstars.4'), doc.get('allstars.5')];
+    
+    let allstars = [];
+    for (let i = 0; i < 5; i++){
+      let field = 'allstars.' + String(i+1);
+      let tempvalue = doc.get(field);
+      if (tempvalue != null){
+        allstars[i] = tempvalue;
+      } else {
+        allstars[i] = 0;
+      }
+      console.log(allstars);
+    }
+    //let allstars = [doc.get('allstars.1'), doc.get('allstars.2'), doc.get('allstars.3'), doc.get('allstars.4'), doc.get('allstars.5')];
+    
     let allvratings = [];
     for (let i = 0; i < 11; i++){
       let field = 'allvratings.V' + String(i);
-      let temp = doc.get(field);
-      if (temp != null){
-        allvratings[i] = temp;
+      let tempvalue = doc.get(field);
+      if (tempvalue != null){
+        allvratings[i] = tempvalue;
       } else {
         allvratings[i] = 0;
       }
