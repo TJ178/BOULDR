@@ -6,7 +6,8 @@ import { useAuth } from '../contexts/AuthContext.js';
 
 import { useDownloadURL } from 'react-firebase-hooks/storage';
 import { ref, uploadBytes } from 'firebase/storage';
-import { storage } from '../firebase-config.js'
+import { setDoc, doc, collection } from 'firebase/firestore';
+import { storage, db } from '../firebase-config.js'
 
 import { updateProfile } from "firebase/auth";
 import usr from '../assets/usr.png';
@@ -51,14 +52,20 @@ export default function CreateAccountPage() {
 		try {
 			setError('')
 			setLoading(true)
+			let user;
 			await signup(emailRef.current.value, passwordRef.current.value).then((userCredential) =>{
-				const user = userCredential.user;
+				user = userCredential.user;
 				const photo = fileRef ? fileRef.toString() : "gs://boldr-f2e1c.appspot.com/media/usr.png";
 				console.log(photo);
 				updateProfile(user, {
 					displayName: e.target[1].value,
 					photoURL: photo
 				});
+			});
+			
+			await setDoc(doc(collection(db, "users"), user.uid), {
+				favorites: [],
+				ratedProblems: {}
 			});
 			navigate("/");
 		} catch (error){
