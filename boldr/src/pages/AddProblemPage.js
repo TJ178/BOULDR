@@ -34,7 +34,7 @@ function AddProblemPage(props) {
 
   const changeAvailable = () => {
     setAvailable(!isAvailable);
-  }
+  };
   const onFileChange = async (e) => {
     const file = e.target.files[0];
     const storageRef = ref(storage, "media/" + file.name);
@@ -55,57 +55,76 @@ function AddProblemPage(props) {
       difficulty: e.target.formProblemDifficulty.value,
       description: e.target.formProblemDescription.value,
     };
-    console.log(submitObj)
+    console.log(submitObj);
     // Add a new document with a generated id.
     await addDoc(collection(db, "problems"), submitObj);
   };
 
   return (
     <Card>
-      <section className={classes.image}>
+      <div className={classes.card}>
         <Form onSubmit={handleSubmit}>
           {imageUploaded && !loading && (
-            <img className={classes.image} src={image} alt="Gym Problem" />
+            <img
+              className={classes.image}
+              src={image}
+              alt="Gym Problem Picture"
+            />
           )}
-
+          {!imageUploaded && <h3>Upload Problem Image:</h3>}
           <Form.Group controlId="formFile" className="mb-3">
             <Form.Control type="file" size="sm" onChange={onFileChange} />
           </Form.Group>
+          <section className={classes.flexbox}>
+            <div className={classes.otherbox}>
 
-          <Form.Group controlId="formProblemName">
-            <Form.Control type="text" placeholder="Problem Name" />
-          </Form.Group>
+              <Form.Group controlId="formProblemName">
+                <Form.Control type="text" placeholder="Problem Name" />
+              </Form.Group>  
 
-          <Form.Group controlId="formProblemGym">
-            <Form.Control type="text" placeholder="Gym" />
-          </Form.Group>
+              <Form.Group controlId="formProblemGym">
+                <Form.Control type="text" placeholder="Gym" />
+              </Form.Group>
+              <div className={classes.flexbox}>
+                <Form.Group controlId="formProblemDifficulty">
+                  <Form.Select defaultValue={"V0"}>
+                    {dropdownOptions.map((item) => (
+                      <option key={item}>{item}</option>
+                    ))}
+                  </Form.Select>
+                </Form.Group>  
 
-          <Form.Group controlId="formProblemAvailable">
-            <Form.Check type="checkbox" onChange={changeAvailable} label="Available" />
-          </Form.Group>
+                <Form.Group controlId="formProblemAvailable">
+                  <Form.Check
+                    type="checkbox"
+                    onChange={changeAvailable}
+                    label="Available"
+                  />
+                </Form.Group>
+              </div>
 
-          <Form.Group controlId="formProblemDifficulty">
-            <Form.Select defaultValue={"V0"}>
-              {dropdownOptions.map((item) => (
-                <option key={item}>{item}</option>
-              ))}
-            </Form.Select>
-          </Form.Group>
+            </div>
 
-          <Form.Group className="mb-3" controlId="formProblemDescription">
-            <Form.Label>Problem Description</Form.Label>
-            <Form.Control as="textarea" rows={3} />
-          </Form.Group>
+            <div className={classes.descbox}>
+              <Form.Group className="mb-3" controlId="formProblemDescription">
+                <Form.Label>Problem Description</Form.Label>
+                <Form.Control as="textarea" rows={3} />
+              </Form.Group>
+            </div>
 
-          <Button
-            className="justify-content-center"
-            variant="primary"
-            type="submit"
-          >
-            Submit
-          </Button>
+          </section>
+
+          <div className={classes.flexbox}>
+            <Button
+              className="justify-content-center"
+              variant="primary"
+              type="submit"
+            >
+              Submit
+            </Button>
+          </div>
         </Form>
-      </section>
+      </div>
     </Card>
   );
 }
