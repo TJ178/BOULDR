@@ -1,5 +1,6 @@
 import { db } from "../firebase-config.js";
 import { collection, doc } from "firebase/firestore";
+import { Link } from "react-router-dom";
 import {
   useCollectionOnce,
   useDocumentOnce,
@@ -18,7 +19,6 @@ function FavoriteProblemsPage(props) {
 
   let userDoc;
   if (currentUser) {
-    // console.log(currentUser);
     if (currentUser.uid) {
       userDoc = doc(db, "users", currentUser.uid);
     } else {
@@ -44,19 +44,20 @@ function FavoriteProblemsPage(props) {
             <span>Loading...</span>
           </p>
         )}
-        {problems && (
+        {problems && usr && (
           <>
+            <h1>Favorites:</h1>
             <ProblemList
               problems={convertCollectionToProblems(problems).filter((prob) => {
-                console.log("USERS");
-                console.log(usr);
-                if (usr) {
-                  return usr["favorites"].indexOf(prob.id) !== -1;
-                } else {
-                  return;
-                }
+                return usr["favorites"].indexOf(prob.id) !== -1;
               })}
             />
+          </>
+        )}
+        {usr && usr["favorites"].length == 0 && (
+          <>
+            <h1>There are no favorites</h1>
+            <h3>Add some in the <Link to="/">HomePage</Link></h3>
           </>
         )}
       </section>
