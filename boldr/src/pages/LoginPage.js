@@ -29,20 +29,20 @@ export default function CreateAccountPage() {
     <>
       {currentUser ? <Navigate to="/" /> : null}
       <div className={classes.flexbox}>
-        <Card className="text-center" style={{ width: "80%" }}>
+        <Card className="text-center" style={{ width: "65%" }}>
           <Card.Body>
             <Card.Title>Log In</Card.Title>
             {currentUser && currentUser.email}
             {error && <Alert variant="danger"> {error} </Alert>}
             <div className={classes.flexbox}>
-              <Form onSubmit={handleSubmit} style={{ width: "60%" }}>
+              <Form onSubmit={handleSubmit} style={{ width: "90%" }}>
                 <FloatingLabel label="Email Address" id="email">
                   <Form.Control type="email" placeholder="Email Address" ref={emailRef} required />
                 </FloatingLabel>
                 <FloatingLabel label="Password" id="password">
                   <Form.Control type="password" placeholder="Password" ref={passwordRef} required />
                 </FloatingLabel>
-                <Button disabled={loading} type="submit">
+                <Button disabled={loading} type="submit" style={{width: "100%"}}>
                   Log In
                 </Button>
               </Form>
