@@ -16,18 +16,16 @@ import PrivateRoute from './contexts/PrivateRoute';
 function App() {
   return (
     <AuthProvider>
-     <Layout>
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route path="/" element={<Layout><HomePage /></Layout>} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/problem-details" element={<ProblemDetailsPage/>}>
-          <Route path=":problemId" element={<ProblemDetailsPage/>} />
+        <Route path="/problem-details" element={<Layout><ProblemDetailsPage/></Layout>}>
+          <Route path=":problemId" element={<Layout><ProblemDetailsPage/></Layout>} />
         </Route>
-        <Route path="/create-account" element={<CreateAccountPage />} />
-        <Route path="/profile" element={<PrivateRoute> <ProfilePage /> </PrivateRoute>} />
-        <Route path="/add-problem" element={<AddProblemPage />} />
+        <Route path="/create-account" element={<Layout><CreateAccountPage /></Layout>} />
+        <Route path="/profile" element={<Layout><PrivateRoute> <ProfilePage /> </PrivateRoute></Layout>} />
+        <Route path="/add-problem" element={<Layout><AddProblemPage /></Layout>} />
       </Routes>
-    </Layout>
     </AuthProvider>
   );
 }
