@@ -5,6 +5,7 @@ import LoginPage from "./pages/LoginPage.js";
 import CreateAccountPage from "./pages/CreateAccountPage.js";
 import ProfilePage from "./pages/ProfilePage";
 import Layout from "./components/layout/Layout";
+import FavoriteProblemsPage from "./pages/FavoriteProblemsPage";
 import ProblemDetailsPage from "./pages/ProblemDetailsPage";
 import AddProblemPage from "./pages/AddProblemPage";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -20,6 +21,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/favorites" element={<FavoriteProblemsPage/>}/>
         <Route path="/problem-details" element={<ProblemDetailsPage/>}>
           <Route path=":problemId" element={<ProblemDetailsPage/>} />
         </Route>

@@ -18,7 +18,7 @@ function HomePage() {
   }
 
   async function handleChange(event){
-    if(event.target.value == ""){
+    if(event.target.value === ""){
       setSearchParams({});
     }else{
       setSearchParams({keyword: event.target.value});
