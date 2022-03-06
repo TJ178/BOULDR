@@ -30,7 +30,8 @@ export default function CreateAccountPage() {
 	const { signup, currentUser } = useAuth()
 	const [error, setError] = useState("")
 	const [loading, setLoading] = useState(false)
-	const [staff, setStaff] = useState(false); 
+	const [staff, setStaff] = useState(false);
+	const [gym, setGym] = useState(""); 
 	const navigate = useNavigate();
 
 	const onFileChange = async (e) => {
@@ -70,7 +71,8 @@ export default function CreateAccountPage() {
 			await setDoc(doc(collection(db, "users"), user.uid), {
 				favorites: [],
 				ratedProblems: {},
-				isStaff: Boolean(staff)
+				isStaff: Boolean(staff),
+				homeGym: String(gym)
 			});
 			navigate("/");
 		} catch (error){
@@ -113,6 +115,22 @@ export default function CreateAccountPage() {
 						<Form.Group id = "password-confirm">
 							<Form.Label>Password Confirmation</Form.Label>
 							<Form.Control type="password" ref = {passwordConfirmRef} required />
+						</Form.Group>
+						<Form.Group id = "home-gym">
+							<Form.Label>Home gym</Form.Label>
+							<Form.Control
+								as="select"
+								value={gym}
+								onChange={e => {
+									console.log("e.target.value", e.target.value);
+									setGym(e.target.value);
+								}}
+								>
+								<option>Choose from the following gyms</option>
+								<option value="Gym 1">Gym 1</option>
+								<option value="Gym 2">Gym 2</option>
+								<option value="Gym 3">Gym 3</option>
+							</Form.Control>
 						</Form.Group>
 						<Form.Group id = "staff">
 							<Form.Label>Check this box if you're a gym staff member: </Form.Label>
