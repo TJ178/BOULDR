@@ -1,15 +1,9 @@
-.section {
-  display: flex;
+.card{
   background-color: white;
+  border-radius: 6px;
+  padding: 2em;
+  display: flex;
   flex-direction: column;
-  padding-bottom: 1em;
-  border-bottom-right-radius: 6px;
-  border-bottom-left-radius: 6px;
-}
-
-.imageContainer {
-  position: relative;
-  width: 50%;
 }
 
 .image {
@@ -19,38 +13,19 @@
   border-top-left-radius: 6px;
 }
 
-.imgButton {
-  position: absolute;
-  top: 85%;
-  left: 85%;
-  transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  background-color: #555;
-  color: white;
-  font-size: 12px;
-  padding: 10px 20px;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;
+.flexbox {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
 }
 
-.container .btn:hover {
-  background-color: black;
+.otherbox{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }
 
-.formContainer {
-    display: flex;
-    margin: 1rem;
-    justify-content: space-around;
+.descbox{
+  width: 40%;
 }
 
-.innerRight {
-    display: flex;
-    margin: 1rem;
-}
-
-.formleft {
-    display: flex;
-    flex-direction: column;
-    align-content: space-between;
-}
