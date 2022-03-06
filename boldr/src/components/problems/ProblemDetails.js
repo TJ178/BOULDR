@@ -4,11 +4,12 @@ import { Rating } from "react-simple-star-rating";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import Button from 'react-bootstrap/Button';
-
+import { useParams } from 'react-router-dom';
 import { useDownloadURL } from 'react-firebase-hooks/storage';
 import { ref } from 'firebase/storage';
-import { storage } from '../../firebase-config.js';
+import {storage, db} from '../../firebase-config.js';
 import loadingImg from '../../assets/loading.png'
+import { doc, updateDoc, increment} from 'firebase/firestore';
 
 
 const dropdownOptions = [
@@ -33,21 +34,48 @@ function ProblemDetails(props) {
 
   const [starVal, setStarVal] = useState(props.prob.rating);
   const [dropdownVal, setDropdownVal] = useState(initialDifficulty);
-  const [subStarVal, setSubStarVal] = useState("");
+  const [disableSubmit, setDisableSubmit] = useState(false);
+  const [disableDropdown, setDisableDropdown] = useState(false);
+
+  let params = useParams();
+  const problemId = params.problemId;
+  const problemDoc = doc(db, "problems", problemId);
+
+  const updateStarRating = async (starVal) => {
+    starVal = starVal/20;
+    switch (starVal) {
+      case 1: await updateDoc(problemDoc, {"allstars.1": increment(1)}); break;
+      case 2: await updateDoc(problemDoc, {"allstars.2": increment(1)}); break;
+      case 3: await updateDoc(problemDoc, {"allstars.3": increment(1)}); break;
+      case 4: await updateDoc(problemDoc, {"allstars.4": increment(1)}); break;
+      case 5: await updateDoc(problemDoc, {"allstars.5": increment(1)}); break;
+      default: break;
+    }
+    setDisableSubmit(true);
+  };
+
+  const updateVRating = async (e) => {
+    setDropdownVal(e);
+    switch (e) {
+      case "V0": await updateDoc(problemDoc, {"allvratings.V0": increment(1)}); break;
+      case "V1": await updateDoc(problemDoc, {"allvratings.V1": increment(1)}); break;
+      case "V2": await updateDoc(problemDoc, {"allvratings.V2": increment(1)}); break;
+      case "V3": await updateDoc(problemDoc, {"allvratings.V3": increment(1)}); break;
+      case "V4": await updateDoc(problemDoc, {"allvratings.V4": increment(1)}); break;
+      case "V5": await updateDoc(problemDoc, {"allvratings.V5": increment(1)}); break;
+      case "V6": await updateDoc(problemDoc, {"allvratings.V6": increment(1)}); break;
+      case "V7": await updateDoc(problemDoc, {"allvratings.V7": increment(1)}); break;
+      case "V8": await updateDoc(problemDoc, {"allvratings.V8": increment(1)}); break;
+      case "V9": await updateDoc(problemDoc, {"allvratings.V9": increment(1)}); break;
+      case "V10": await updateDoc(problemDoc, {"allvratings.V10": increment(1)}); break;
+      default: console.log("default case"); break;
+    }
+    setDisableDropdown(true);
+  }
 
   const handleStarClick = (e) => {
-    console.log(e + " " + starVal);
+    //console.log("handleStarClick");
     setStarVal(e);
-  };
-
-  const handleDropdownSelect = (e) => {
-    console.log(e + " " + dropdownVal);
-    setDropdownVal(e);
-  };
-
-  const handleSubmitStar = (e) => {
-    console.log(starVal + " " + e + " " + subStarVal);
-    setSubStarVal(starVal);
   };
 
   return (
@@ -70,7 +98,7 @@ function ProblemDetails(props) {
               size={30}
               transition={false}
             />
-            <Button onClick={handleSubmitStar}>Submit</Button>
+            <Button disabled = {disableSubmit} onClick={() => updateStarRating(starVal)}>Submit</Button>
           </div>
         </div>
         <div className={classes.tags}>
@@ -91,7 +119,7 @@ function ProblemDetails(props) {
               className={classes.dropdown}
               id="rating-button"
               title={dropdownVal}
-              onSelect={handleDropdownSelect}
+              onSelect= {updateVRating}
               variant="secondary"
             >
               {dropdownOptions.map((item) => (
@@ -99,6 +127,7 @@ function ProblemDetails(props) {
                   key={item}
                   className={classes.DropdownItem}
                   eventKey={item}
+                  disabled = {disableDropdown}
                 >
                   {item}
                 </Dropdown.Item>
