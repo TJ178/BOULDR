@@ -13,9 +13,7 @@ export function convertCollectionToProblems(querySnapshot){
       } else {
         allstars[i] = 0;
       }
-      console.log(allstars);
     }
-    //let allstars = [doc.get('allstars.1'), doc.get('allstars.2'), doc.get('allstars.3'), doc.get('allstars.4'), doc.get('allstars.5')];
     
     let allvratings = [];
     for (let i = 0; i < 11; i++){
@@ -34,7 +32,7 @@ export function convertCollectionToProblems(querySnapshot){
     temp['gym'] = doc.get('gymname');
     temp['description'] = doc.get('description');
     temp['rating'] = averageRating(allstars, 5);
-    temp['vrating'] = averageRating(allvratings, 11).toPrecision(1);
+    temp['vrating'] = averageRating(allvratings, 11) ? averageRating(allvratings, 11).toPrecision(1) : doc.get('vrating');
     tempData = tempData.concat(temp);
   });
   
@@ -64,7 +62,8 @@ function averageRating(allratings, len){
     sum = sum + i*allratings[i];
     count = count + allratings[i];
   }
-  return(sum/count);
+  if (count !== 0)
+    return(sum/count);
 }
 
 //search = string to search for
