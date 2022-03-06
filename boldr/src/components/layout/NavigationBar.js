@@ -4,8 +4,29 @@ import { Link } from "react-router-dom";
 import classes from "./NavigationBar.module.css";
 import logo from "../../assets/BOULDR_Logo.png";
 import usr from "../../assets/usr.png";
+import { Button } from "react-bootstrap";
+
+import { useAuth } from '../../contexts/AuthContext.js';
+
+import { useDownloadURL } from 'react-firebase-hooks/storage';
+import { ref } from 'firebase/storage';
+import { storage } from '../../firebase-config.js'
 
 function NavigationBar(props) {
+  const { currentUser } = useAuth();
+
+  let photoRef;
+  if(currentUser){
+    if(currentUser.photoURL){
+      photoRef = ref(storage, currentUser.photoURL)
+    }else{
+      photoRef = ref(storage, "gs://boldr-f2e1c.appspot.com/media/usr.png")
+    }
+  }else{
+    photoRef = ref(storage, "gs://boldr-f2e1c.appspot.com/media/usr.png")
+  }
+  const [image, loading, error] = useDownloadURL(photoRef);
+
   return (
     <header className={classes.header}>
       <div className={ classes.logo_spacing}>
@@ -15,17 +36,17 @@ function NavigationBar(props) {
       </div>
       <nav>
         <ul>
-          <li>
-            <Link to="/gym-page">Gym Page</Link>
-          </li>
-          <li>
-            <Link to="/login">Login Page</Link>
-          </li>
-          <li>
-            <Link to="/profile">
-              <img className={classes.profile} src={usr} alt="MissingUsr" />
-            </Link>
-          </li>
+          {currentUser ? (
+            <li>
+              <Link to="/profile">
+                {<img className={classes.profile} src={image} />}
+              </Link>
+            </li>
+          ) : (
+            <li>
+              <Link to="/login"><Button vaiant="primary">Log In</Button></Link>
+            </li>
+          )}
         </ul>
       </nav>
     </header>
