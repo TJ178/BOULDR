@@ -7,7 +7,12 @@ export function convertCollectionToProblems(querySnapshot){
     let allvratings = [];
     for (let i = 0; i < 11; i++){
       let field = 'allvratings.V' + String(i);
-      allvratings[i] = doc.get(field);
+      let temp = doc.get(field);
+      if (temp != null){
+        allvratings[i] = temp;
+      } else {
+        allvratings[i] = 0;
+      }
     }
     temp['id'] = doc.id;
     temp['image'] = doc.get('img');
@@ -26,12 +31,7 @@ export function convertCollectionToProblems(querySnapshot){
 export function convertDocumentToProblem(querySnapshot){
   const doc1 = querySnapshot.data();
   let temp = {};
-  /*let allstars = [doc1['allstars.1'], doc1['allstars.2'], doc1['allstars.3'], doc1['allstars.4'], doc1['allstars.5']];
-  let allvratings = [];
-  for (let i = 0; i < 11; i++){
-    let field = 'allvratings.V' + JSON.stringify(i);
-    allvratings[i] = doc1[field];
-  }*/
+
   temp['id'] = doc1.id;
   temp['image'] = doc1['img'];
   temp['title'] = doc1['name'];
