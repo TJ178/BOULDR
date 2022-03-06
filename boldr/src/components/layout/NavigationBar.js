@@ -8,9 +8,24 @@ import { Button } from "react-bootstrap";
 
 import { useAuth } from '../../contexts/AuthContext.js';
 
+import { useDownloadURL } from 'react-firebase-hooks/storage';
+import { ref } from 'firebase/storage';
+import { storage } from '../../firebase-config.js'
+
 function NavigationBar(props) {
   const { currentUser } = useAuth();
 
+  let photoRef;
+  if(currentUser){
+    if(currentUser.photoURL){
+      photoRef = ref(storage, currentUser.photoURL)
+    }else{
+      photoRef = ref(storage, "gs://boldr-f2e1c.appspot.com/media/usr.png")
+    }
+  }else{
+    photoRef = ref(storage, "gs://boldr-f2e1c.appspot.com/media/usr.png")
+  }
+  const [image, loading, error] = useDownloadURL(photoRef);
 
   return (
     <header className={classes.header}>
@@ -24,7 +39,7 @@ function NavigationBar(props) {
           {currentUser ? (
             <li>
               <Link to="/profile">
-                <img className={classes.profile} src={usr} alt="MissingUsr" />
+                {<img className={classes.profile} src={image} />}
               </Link>
             </li>
           ) : (

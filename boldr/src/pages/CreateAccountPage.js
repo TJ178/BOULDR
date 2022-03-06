@@ -5,7 +5,7 @@ import classes from "./CreateAccountPage.module.css";
 import { useAuth } from '../contexts/AuthContext.js';
 
 import { useDownloadURL } from 'react-firebase-hooks/storage';
-import { ref } from 'firebase/storage';
+import { ref, uploadBytes } from 'firebase/storage';
 import { storage } from '../firebase-config.js'
 
 import { updateProfile } from "firebase/auth";
@@ -19,12 +19,29 @@ export default function CreateAccountPage() {
 	const passwordRef = useRef()
 	const passwordConfirmRef = useRef()
 	const nameRef = useRef()
+
+	const [fileRef, setFileRef] = useState("");
+	const [fileName, setFileName] = useState("chumBucket.jpg");
+	const [image, loadingImage, imageError] = useDownloadURL(
+	  ref(storage, "media/" + fileName)
+	);
+	const [imageUploaded, setImageUploaded] = useState(false);
+
+
 	const { signup, currentUser } = useAuth()
 	const [error, setError] = useState("")
 	const [loading, setLoading] = useState(false)
 	const navigate = useNavigate();
 
-	const [image, loadingImage, imageError] = [null, null, null]; //useDownloadURL(ref(storage, null));
+	const onFileChange = async (e) => {
+		const file = e.target.files[0];
+		const storageRef = ref(storage, "media/" + file.name);
+		setFileRef(storageRef);
+		setFileName(file.name);
+		uploadBytes(storageRef, file).then((snapshot) => {
+		  setImageUploaded(true);
+		});
+	};
 
 	async function handleSubmit(e) {
 		e.preventDefault()
@@ -36,10 +53,11 @@ export default function CreateAccountPage() {
 			setLoading(true)
 			await signup(emailRef.current.value, passwordRef.current.value).then((userCredential) =>{
 				const user = userCredential.user;
-				console.log(user.uid);
+				const photo = fileRef ? fileRef.toString() : "gs://boldr-f2e1c.appspot.com/media/usr.png";
+				console.log(photo);
 				updateProfile(user, {
-					displayName: nameRef,
-					image: ""
+					displayName: e.target[1].value,
+					photoURL: photo
 				});
 			});
 			navigate("/");
@@ -60,17 +78,17 @@ export default function CreateAccountPage() {
 			<Card>
 				<Card.Body>
 					<h1 className = {classes.signup_header}> New Account </h1>
-					{image && <img className={classes.profile} src={image} alt="MissingUsr" />}
-					{!image && <img className={classes.profile} src={usr} alt="MissingUsr" />}
+					{imageUploaded && !loadingImage && (<img className={classes.profile} src={image} alt="" />)}
+					{(!imageUploaded || loadingImage) && (<img className={classes.profile} src={usr} alt="" />)}
 					{error && <Alert variant = "danger"> {error} </Alert>}
 					<Form onSubmit={handleSubmit}>
 						<Form.Group controlId="formFile" className="mb-3">
 							<Form.Label>Profile Picture</Form.Label>
-							<Form.Control type="file" />
+							<Form.Control type="file" onChange={onFileChange}/>
 						</Form.Group>
 						<Form.Group id = "name">
 							<Form.Label>Name</Form.Label>
-							<Form.Control type="text" ref={nameRef} required />
+							<Form.Control ref = {nameRef} required />
 						</Form.Group>
 						<Form.Group id = "email">
 							<Form.Label>Username (Email)</Form.Label>
