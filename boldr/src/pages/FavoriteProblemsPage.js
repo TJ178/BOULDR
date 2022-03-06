@@ -3,6 +3,7 @@ import { collection, doc } from "firebase/firestore";
 import {
   useCollectionOnce,
   useDocumentOnce,
+  useDocumentDataOnce,
 } from "react-firebase-hooks/firestore";
 import { convertCollectionToProblems } from "../FirebaseSupport.js";
 import { useAuth } from "../contexts/AuthContext.js";
@@ -17,8 +18,9 @@ function FavoriteProblemsPage(props) {
 
   let userDoc;
   if (currentUser) {
-    if (currentUser.user.uid) {
-      userDoc = doc(db, "users", currentUser.user.uid);
+    // console.log(currentUser);
+    if (currentUser.uid) {
+      userDoc = doc(db, "users", currentUser.uid);
     } else {
       userDoc = doc(db, "users", "dummy");
     }
@@ -26,12 +28,11 @@ function FavoriteProblemsPage(props) {
     userDoc = doc(db, "users", "dummy");
   }
 
-  const [usr, loading, error] = useDocumentOnce(userDoc);
-
+  const [usr, loading, error] = useDocumentDataOnce(userDoc);
 
   return (
     <>
-      {currentUser ? <Navigate to="/" /> : null}
+      {currentUser ? null : <Navigate to="/" />}
       <section>
         {error && (
           <p>
@@ -47,7 +48,13 @@ function FavoriteProblemsPage(props) {
           <>
             <ProblemList
               problems={convertCollectionToProblems(problems).filter((prob) => {
-                return usr.indexOf(prob.id) !== -1;
+                console.log("USERS");
+                console.log(usr);
+                if (usr) {
+                  return usr["favorites"].indexOf(prob.id) !== -1;
+                } else {
+                  return;
+                }
               })}
             />
           </>
