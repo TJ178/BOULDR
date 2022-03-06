@@ -119,7 +119,7 @@ function AddProblemPage(props) {
 
             <div className={classes.descbox}>
               <FloatingLabel className="mb-3" label="Problem Description" controlId="formProblemDescription">
-                <Form.Control as="textarea" style={{height: "8em"}} />
+                <Form.Control as="textarea" style={{height: "8em",resize: "none"}} />
               </FloatingLabel>
             </div>
 
