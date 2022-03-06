@@ -48,11 +48,11 @@ function AddProblemPage(props) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const submitObj = {
-      problemName: e.target.formProblemName.value,
-      gym: e.target.formProblemGym.value,
-      image: fileRef.toString(),
+      name: e.target.formProblemName.value,
+      gymname: e.target.formProblemGym.value,
+      img: fileRef.toString(),
       available: isAvailable,
-      difficulty: e.target.formProblemDifficulty.value,
+      vrating: parseInt(e.target.formProblemDifficulty.value.substring(1)),
       description: e.target.formProblemDescription.value,
     };
     console.log(submitObj)
