@@ -13,8 +13,12 @@ import { storage } from "../../firebase-config.js";
 
 import loadingImg from "../../assets/loading.png";
 
+import { useAuth } from "../../contexts/AuthContext";
+import { checkFavorites } from "../../FirebaseSupport";
+
 function ProblemItem(props) {
   const [image, loading, error] = useDownloadURL(ref(storage, props.image));
+  const { currentUser, userData } = useAuth();
 
   return (
     <li className={classes.item}>
@@ -44,7 +48,7 @@ function ProblemItem(props) {
                 <div>
                   <div className={classes.topflex}>
                     <div className={classes.empty}/>
-                    <Bookmark isFavorite={props.isFavorite}/>
+                    {currentUser && <Bookmark problemId={props.id} initial={userData.favorites.includes(props.id)}/>}
                   </div>
                   <h1>{props.title}</h1>
                   <h3 className={classes.gym_name}>{props.gym}</h3>
