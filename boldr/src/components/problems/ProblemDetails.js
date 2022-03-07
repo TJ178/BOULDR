@@ -6,7 +6,7 @@ import DropdownButton from "react-bootstrap/DropdownButton";
 import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
 
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { useDownloadURL } from 'react-firebase-hooks/storage';
 import { ref } from 'firebase/storage';
 import {storage, db} from '../../firebase-config.js';
@@ -151,6 +151,10 @@ function ProblemDetails(props) {
         <div class={classes.description}>
           {props.prob.description}
         </div>
+       {!currentUser ? <div class = {classes.login}>
+        <Link to = '/login'> Login </Link>
+        <p> &nbsp; to rate this problem </p>
+       </div> : null}
       </section>
     </>
   );

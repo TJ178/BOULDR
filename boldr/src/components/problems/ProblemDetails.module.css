@@ -40,6 +40,12 @@
   margin-left: 1rem;
 }
 
+.login {
+  display: inline-flex;
+  justify-content: center;
+  margin-top: 1.5em;
+}
+
 .tags {
   display: inline-flex;
   justify-content: center;
