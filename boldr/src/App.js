@@ -19,20 +19,18 @@ import StaffRoute from './contexts/StaffRoute';
 function App() {
   return (
     <AuthProvider>
-     <Layout>
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route path="/" element={<Layout><HomePage /></Layout>} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/favorites" element={<FavoriteProblemsPage/>}/>
-        <Route path="/problem-details" element={<ProblemDetailsPage/>}>
-          <Route path=":problemId" element={<ProblemDetailsPage/>} />
+        <Route path="/favorites" element={<Layout><FavoriteProblemsPage/></Layout>}/>
+        <Route path="/problem-details" element={<Layout><ProblemDetailsPage/></Layout>}>
+          <Route path=":problemId" element={<Layout><ProblemDetailsPage/></Layout>} />
         </Route>
-        <Route path="/create-account" element={<CreateAccountPage />} />
-        <Route path="/profile" element={<PrivateRoute> <ProfilePage /> </PrivateRoute>} />
-        <Route path="/add-problem" element={<StaffRoute><AddProblemPage /></StaffRoute>} />
-        <Route path='*' element={<ErrorPage/>} />
+        <Route path="/create-account" element={<Layout><CreateAccountPage /></Layout>} />
+        <Route path="/profile" element={<PrivateRoute><Layout> <ProfilePage /> </Layout></PrivateRoute>} />
+        <Route path="/add-problem" element={<StaffRoute><Layout><AddProblemPage /></Layout></StaffRoute>} />
+        <Route path='*' element={<Layout><ErrorPage/></Layout>} />
       </Routes>
-    </Layout>
     </AuthProvider>
   );
 }
