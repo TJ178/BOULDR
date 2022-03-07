@@ -13,6 +13,7 @@ import { convertDocumentToProblem } from "../FirebaseSupport.js";
 import { useDocumentOnce } from "react-firebase-hooks/firestore";
 import { useAuth } from "../contexts/AuthContext.js";
 import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 // Should create a globals file for this
 const dropdownOptions = [
@@ -37,8 +38,11 @@ function EditProblemPage(props) {
   );
   const [imageUploading, setImageUploading] = useState(false);
   const [imageUploaded, setImageUploaded] = useState(false);
+  const [imageChanged, setImageChanged] = useState(false);
   const [isAvailable, setAvailable] = useState(false);
   const [isChecked, setChecked] = useState(false);
+
+  const navigate = useNavigate();
 
   let params = useParams();
   const [data, prob_loading, _error] = useDocumentOnce(
@@ -65,6 +69,7 @@ function EditProblemPage(props) {
     const storageRef = ref(storage, "media/" + file.name);
     setFileRef(storageRef);
     setFileName(file.name);
+    setImageChanged(true);
     uploadBytes(storageRef, file).then((snapshot) => {
       setImageUploaded(true);
     });
@@ -72,10 +77,11 @@ function EditProblemPage(props) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const img = imageChanged ? fileRef.toString() : convertDocumentToProblem(data).img
     const submitObj = {
       name: e.target.formProblemName.value,
       gymname: e.target.formProblemGym.value,
-      img: fileRef.toString(),
+      img: img,
       available: isAvailable,
       vrating: parseInt(e.target.formProblemDifficulty.value.substring(1)),
       description: e.target.formProblemDescription.value,
@@ -83,6 +89,7 @@ function EditProblemPage(props) {
     // console.log(submitObj);
     // Add a new document with a generated id.
     await updateDoc(doc(db, "problems", params.problemId), submitObj);
+    navigate("/")
   };
 
   return (
