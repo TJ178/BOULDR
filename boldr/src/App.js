@@ -30,8 +30,8 @@ function App() {
         <Route path="/create-account" element={<CreateAccountPage />}/>
         <Route path="/profile" element={<PrivateRoute><Layout> <ProfilePage /> </Layout></PrivateRoute>} />
         <Route path="/add-problem" element={<StaffRoute><Layout><AddProblemPage /></Layout></StaffRoute>} />
-        <Route path="/edit-problem" element={<EditProblemPage />}>
-          <Route path=":problemId" element={<EditProblemPage />} />
+        <Route path="/edit-problem" element={<StaffRoute><Layout><EditProblemPage /></Layout></StaffRoute>}>
+          <Route path=":problemId" element={<StaffRoute><Layout><EditProblemPage /></Layout></StaffRoute>} />
         </Route>
         <Route path='*' element={<Layout><ErrorPage/></Layout>} />
       </Routes>
