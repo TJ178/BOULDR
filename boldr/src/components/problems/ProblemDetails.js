@@ -5,12 +5,15 @@ import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
+
 import { useParams } from 'react-router-dom';
 import { useDownloadURL } from 'react-firebase-hooks/storage';
 import { ref } from 'firebase/storage';
 import {storage, db} from '../../firebase-config.js';
 import loadingImg from '../../assets/loading.png'
 import { doc, updateDoc, increment} from 'firebase/firestore';
+import { useAuth } from '../../contexts/AuthContext.js';
+
 
 const dropdownOptions = [
   "V-",
@@ -36,6 +39,8 @@ function ProblemDetails(props) {
   const [dropdownVal, setDropdownVal] = useState(initialDifficulty);
   const [disableSubmit, setDisableSubmit] = useState(false);
   const [disableDropdown, setDisableDropdown] = useState(false);
+
+  const { signup, currentUser } = useAuth()
 
   let params = useParams();
   const problemId = params.problemId;
@@ -94,14 +99,19 @@ function ProblemDetails(props) {
             <h3> {props.prob.gym} </h3>
           </div>
           <div className={classes.star}>
-            <Rating
+            {currentUser ? <Rating
               onClick={handleStarClick}
               ratingValue={starVal}
               initialValue={starVal}
               size={30}
               transition={false}
-            />
-            <Button disabled = {disableSubmit} onClick={() => updateStarRating(starVal)}>Submit</Button>
+            /> : <Rating
+            initialValue={props.prob.rating}
+            size={40}
+            transistion={true}
+            readonly={true}
+            />}
+            {currentUser ? <Button disabled = {disableSubmit} onClick={() => updateStarRating(starVal)}>Submit</Button> : null}
           </div>
         </div>
         <div className={classes.tags}>
@@ -115,7 +125,7 @@ function ProblemDetails(props) {
               >{initialDifficulty}
             </Button>
           </div>
-          <div className={classes.userDifficulty}>
+          {currentUser ? <div className={classes.userDifficulty}>
             <h2>Your rating:   </h2>
             <DropdownButton
               // alignRight
@@ -136,13 +146,12 @@ function ProblemDetails(props) {
                 </Dropdown.Item>
               ))}
             </DropdownButton>
-          </div>
+          </div> : null}
         </div>
         <div class={classes.description}>
           {props.prob.description}
         </div>
       </section>
-      
     </>
   );
 }
