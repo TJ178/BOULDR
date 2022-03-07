@@ -3,7 +3,7 @@ import { Form, FloatingLabel, Button, Card, Alert } from "react-bootstrap";
 import { Link, useNavigate, Navigate } from "react-router-dom";
 import classes from "./LoginPage.module.css";
 import background from "../assets/climbing_background.jpg";
-import logo from "../assets/BOULDR_Logo.png";
+import logo from "../assets/BOULDR_Logo_Lg.png";
 import { useAuth } from "../contexts/AuthContext.js";
 
 export default function CreateAccountPage() {
@@ -36,7 +36,7 @@ export default function CreateAccountPage() {
       >
         <div className={classes.gradient}>
           <div className={classes.logincontents}>
-            <img src={logo} alt="BOULDR" style={{paddingBottom: "10%"}}/>
+            <img src={logo} alt="BOULDR" style={{paddingBottom: "10%", paddingRight: "2%"}}/>
             <h4 style={{paddingBottom: "1.25%"}}>Ready to climb?</h4>
 			{currentUser && currentUser.email}
 			{error && <Alert variant="danger"> {error} </Alert>}
