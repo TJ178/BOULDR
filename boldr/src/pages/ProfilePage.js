@@ -49,8 +49,11 @@ export default function ProfilePage() {
           <strong>Email:</strong> {currentUser.email}
           <br/>
           <strong>Name: </strong> {currentUser.displayName}
+          <br/>
+          <strong>User Type: </strong>
+          {currentUser && !userData.isStaff && "Member"}
           {currentUser && userData.isStaff && (
-            <><br /><strong>You are a Staff Member</strong><br /><strong>Home Gym: </strong>{userData.homeGym}</>
+            <>Staff<br /><strong>Home Gym: </strong>{userData.homeGym}</>
           )}
         </Card.Body>
       </Card>

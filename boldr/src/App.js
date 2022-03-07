@@ -11,6 +11,7 @@ import AddProblemPage from "./pages/AddProblemPage";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { AuthProvider } from './contexts/AuthContext';
 import PrivateRoute from './contexts/PrivateRoute';
+import StaffRoute from './contexts/StaffRoute';
 
 
 
@@ -27,7 +28,7 @@ function App() {
         </Route>
         <Route path="/create-account" element={<CreateAccountPage />} />
         <Route path="/profile" element={<PrivateRoute> <ProfilePage /> </PrivateRoute>} />
-        <Route path="/add-problem" element={<AddProblemPage />} />
+        <Route path="/add-problem" element={<StaffRoute><AddProblemPage /></StaffRoute>} />
       </Routes>
     </Layout>
     </AuthProvider>

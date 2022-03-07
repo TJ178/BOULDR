@@ -57,7 +57,6 @@ function AddProblemPage(props) {
       vrating: parseInt(e.target.formProblemDifficulty.value.substring(1)),
       description: e.target.formProblemDescription.value,
     };
-    console.log(submitObj);
     // Add a new document with a generated id.
     await addDoc(collection(db, "problems"), submitObj);
   };
