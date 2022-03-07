@@ -52,7 +52,7 @@ export function convertDocumentToProblem(querySnapshot){
   temp['description'] = doc1['description'];
   temp['rating'] = doc1['rating'];
   temp['vrating'] = doc1['vrating'];
-
+  temp['available'] = doc1['available'];
   return temp;
 }
 
