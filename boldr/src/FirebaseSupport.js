@@ -1,3 +1,5 @@
+import { doc } from "firebase/firestore";
+
 //convert snapshot of problems collection to problems
 export function convertCollectionToProblems(querySnapshot){
   let tempData = [];
@@ -32,7 +34,6 @@ export function convertCollectionToProblems(querySnapshot){
     temp['gym'] = doc.get('gymname');
     temp['description'] = doc.get('description');
     temp['rating'] = averageRating(allstars, 5);
-    console.log(temp['rating']);
     temp['vrating'] = averageRating(allvratings, 11) ? averageRating(allvratings, 11).toPrecision(1) : doc.get('vrating');
     tempData = tempData.concat(temp);
   });
@@ -44,15 +45,40 @@ export function convertDocumentToProblem(querySnapshot){
   const doc1 = querySnapshot.data();
   let temp = {};
 
+  const tempStars = doc1['allstars'];
+  let allstars = [];
+  for (let i = 0; i < 5; i++){
+    if (tempStars[i+1] != null){
+      allstars[i] = tempStars[i+1];
+    } else {
+      allstars[i] = 0;
+    }
+  }
+  
+  const tempVratings = doc1['allvratings']
+  let vratingExists;
+  let allvratings = [];
+  if (tempVratings != null) {
+    vratingExists = true;
+    for (let i = 0; i < 11; i++) {
+      let index = "V" + String(i);
+      if (tempVratings[index] != null) {
+        allvratings[i] = tempVratings[index];
+      } else {
+        allvratings[i] = 0;
+      }
+    }
+  } else vratingExists = false;
+  
   temp['id'] = doc1.id;
   temp['image'] = doc1['img'];
   temp['title'] = doc1['name'];
   temp['isFavorite'] = false;
   temp['gym'] = doc1['gymname'];
   temp['description'] = doc1['description'];
-  temp['rating'] = doc1['rating'];
-  temp['vrating'] = doc1['vrating'];
-
+  temp['rating'] = averageRating(allstars, 5);
+  temp['vrating'] = vratingExists ? Number(averageRating(allvratings, 11).toPrecision(1)) : doc1['vrating'];
+  
   return temp;
 }
 
