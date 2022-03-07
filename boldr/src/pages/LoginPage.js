@@ -2,6 +2,8 @@ import React, { useRef, useState } from "react";
 import { Form, FloatingLabel, Button, Card, Alert } from "react-bootstrap";
 import { Link, useNavigate, Navigate } from "react-router-dom";
 import classes from "./LoginPage.module.css";
+import background from "../assets/climbing_background.jpg";
+import logo from "../assets/BOULDR_Logo.png";
 import { useAuth } from "../contexts/AuthContext.js";
 
 export default function CreateAccountPage() {
@@ -28,12 +30,16 @@ export default function CreateAccountPage() {
   return (
     <>
       {currentUser ? <Navigate to="/" /> : null}
-      <div className={classes.flexbox}>
-        <Card className="text-center" style={{ width: "65%" }}>
-          <Card.Body>
-            <Card.Title className="mb-3">Log In</Card.Title>
-            {currentUser && currentUser.email}
-            {error && <Alert variant="danger"> {error} </Alert>}
+      <div
+        className={classes.background}
+        style={{ backgroundImage: `url(${background})` }}
+      >
+        <div className={classes.gradient}>
+          <div className={classes.logincontents}>
+            <img src={logo} alt="BOULDR" style={{paddingBottom: "10%"}}/>
+            <h4 style={{paddingBottom: "1.25%"}}>Ready to climb?</h4>
+			{currentUser && currentUser.email}
+			{error && <Alert variant="danger"> {error} </Alert>}
             <div className={classes.flexbox}>
               <Form onSubmit={handleSubmit} style={{ width: "90%" }}>
                 <FloatingLabel
@@ -68,8 +74,8 @@ export default function CreateAccountPage() {
             <div className="w-100 text-center mt-2">
               Need an account? <Link to="/create-account">Sign Up</Link>
             </div>
-          </Card.Body>
-        </Card>
+          </div>
+        </div>
       </div>
     </>
   );
