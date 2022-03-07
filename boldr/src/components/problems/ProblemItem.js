@@ -46,13 +46,13 @@ function ProblemItem(props) {
               </Link>
             </Col>
             <Col xs={5} style={{paddingLeft: 0}}>
+              <div className={classes.topflex}>
+                <div className={classes.empty}/>
+                {currentUser && !userData.isStaff && <Bookmark problemId={props.id} initial={userData.favorites.includes(props.id)}/>}
+                {currentUser && userData.isStaff && <Link to={'/edit-problem/' + props.id}><Button><FontAwesomeIcon icon={faPenToSquare} /></Button></Link>}
+              </div>
               <div className={classes.info}>
                 <div>
-                  <div className={classes.topflex}>
-                    <div className={classes.empty}/>
-                    {currentUser && !userData.isStaff && <Bookmark problemId={props.id} initial={userData.favorites.includes(props.id)}/>}
-                    {currentUser && userData.isStaff && <Link to={'/edit-problem/' + props.id}><Button><FontAwesomeIcon icon={faPenToSquare} /></Button></Link>}
-                  </div>
                   <h1>{props.title}</h1>
                   <h3 className={classes.gym_name}>{props.gym}</h3>
                 </div>
