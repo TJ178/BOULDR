@@ -8,6 +8,7 @@ import Layout from "./components/layout/Layout";
 import FavoriteProblemsPage from "./pages/FavoriteProblemsPage";
 import ProblemDetailsPage from "./pages/ProblemDetailsPage";
 import AddProblemPage from "./pages/AddProblemPage";
+import ErrorPage from "./pages/ErrorPage";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { AuthProvider } from './contexts/AuthContext';
 import PrivateRoute from './contexts/PrivateRoute';
@@ -29,6 +30,7 @@ function App() {
         <Route path="/create-account" element={<CreateAccountPage />} />
         <Route path="/profile" element={<PrivateRoute> <ProfilePage /> </PrivateRoute>} />
         <Route path="/add-problem" element={<StaffRoute><AddProblemPage /></StaffRoute>} />
+        <Route path='*' element={<ErrorPage/>} />
       </Routes>
     </Layout>
     </AuthProvider>
