@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import ClimbingBackground from "../components/background/ClimbingBackground";
-import { Form, Button, Card, Alert } from "react-bootstrap";
+import { Form, FloatingLabel, Button, Alert } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import classes from "./CreateAccountPage.module.css";
 import { useAuth } from "../contexts/AuthContext.js";
@@ -109,24 +109,19 @@ export default function CreateAccountPage() {
               <Form.Label>Profile Picture</Form.Label>
               <Form.Control type="file" onChange={onFileChange} />
             </Form.Group>
-            <Form.Group id="name">
-              <Form.Label>Name</Form.Label>
-              <Form.Control ref={nameRef} required />
-            </Form.Group>
-            <Form.Group id="email">
-              <Form.Label>Username (Email)</Form.Label>
-              <Form.Control type="email" ref={emailRef} required />
-            </Form.Group>
-            <Form.Group id="password">
-              <Form.Label>Password</Form.Label>
-              <Form.Control type="password" ref={passwordRef} required />
-            </Form.Group>
-            <Form.Group id="password-confirm">
-              <Form.Label>Password Confirmation</Form.Label>
-              <Form.Control type="password" ref={passwordConfirmRef} required />
-            </Form.Group>
+            <FloatingLabel label="Name" id="name">
+              <Form.Control placeholder="Name" ref={nameRef} required />
+            </FloatingLabel>
+            <FloatingLabel label="Email" id="email">
+              <Form.Control placeholder = "Email" type="email" ref={emailRef} required />
+            </FloatingLabel>
+            <FloatingLabel label="Password" id="password">
+              <Form.Control placeholder="Password" type="password" ref={passwordRef} required />
+            </FloatingLabel>
+            <FloatingLabel label="Confirm Password" id="password-confirm">
+              <Form.Control placeholder="Confirm Password" type="password" ref={passwordConfirmRef} required />
+            </FloatingLabel>
             <Form.Group id="home-gym">
-              <Form.Label>Home gym</Form.Label>
               <Form.Control
                 as="select"
                 value={gym}
@@ -135,7 +130,7 @@ export default function CreateAccountPage() {
                   setGym(e.target.value);
                 }}
               >
-                <option>Choose from the following gyms</option>
+                <option>Choose from the following gyms to be your home gym:</option>
                 <option value="Gym 1">Gym 1</option>
                 <option value="Gym 2">Gym 2</option>
                 <option value="Gym 3">Gym 3</option>
