@@ -53,11 +53,6 @@ function ProblemItem(props) {
               </div>
               <div className={classes.info}>
                 <div>
-                  <div className={classes.topflex}>
-                    <div className={classes.empty}/>
-                    {currentUser && !userData.isStaff && <Bookmark problemId={props.id} initial={userData.favorites.includes(props.id)}/>}
-                    {currentUser && userData.isStaff && <Link to={'/edit-problem/' + props.id}><Button><FontAwesomeIcon icon={faPenToSquare} /></Button></Link>}
-                  </div>
                   <Link to={"/problem-details/" + props.id}>
                     <h1>{props.title}</h1>
                     <h3 className={classes.gym_name}>{props.gym}</h3>
