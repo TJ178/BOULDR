@@ -158,9 +158,9 @@ export default function CreateAccountPage() {
                 }}
               >
                 <option>Choose your home gym:</option>
-                <option value="Gym 1">Gym 1</option>
-                <option value="Gym 2">Gym 2</option>
-                <option value="Gym 3">Gym 3</option>
+                <option value="Cliffs of Id">Gym 1</option>
+                <option value="Wooden">Gym 2</option>
+                <option value="Rockcreation">Gym 3</option>
               </Form.Control>
             </Form.Group>
             <Form.Group id="staff">
