@@ -14,7 +14,9 @@ import { storage } from "../../firebase-config.js";
 import loadingImg from "../../assets/loading.png";
 
 import { useAuth } from "../../contexts/AuthContext";
-import { checkFavorites } from "../../FirebaseSupport";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 
 function ProblemItem(props) {
   const [image, loading, error] = useDownloadURL(ref(storage, props.image));
@@ -48,7 +50,8 @@ function ProblemItem(props) {
                 <div>
                   <div className={classes.topflex}>
                     <div className={classes.empty}/>
-                    {currentUser && <Bookmark problemId={props.id} initial={userData.favorites.includes(props.id)}/>}
+                    {currentUser && !userData.isStaff && <Bookmark problemId={props.id} initial={userData.favorites.includes(props.id)}/>}
+                    {currentUser && userData.isStaff && <Link to={'/edit-problem/' + props.id}><Button><FontAwesomeIcon icon={faPenToSquare} /></Button></Link>}
                   </div>
                   <h1>{props.title}</h1>
                   <h3 className={classes.gym_name}>{props.gym}</h3>
