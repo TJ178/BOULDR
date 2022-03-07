@@ -26,7 +26,7 @@ function App() {
         <Route path="/problem-details" element={<Layout><ProblemDetailsPage/></Layout>}>
           <Route path=":problemId" element={<Layout><ProblemDetailsPage/></Layout>} />
         </Route>
-        <Route path="/create-account" element={<Layout><CreateAccountPage /></Layout>} />
+        <Route path="/create-account" element={<CreateAccountPage />}/>
         <Route path="/profile" element={<PrivateRoute><Layout> <ProfilePage /> </Layout></PrivateRoute>} />
         <Route path="/add-problem" element={<StaffRoute><Layout><AddProblemPage /></Layout></StaffRoute>} />
         <Route path='*' element={<Layout><ErrorPage/></Layout>} />

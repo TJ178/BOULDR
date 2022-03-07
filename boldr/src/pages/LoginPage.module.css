@@ -10,3 +10,11 @@
   padding: 15%;
   opacity: 100%;
 }
+
+.logo{
+	padding-right: 2%;
+  padding-bottom: 10%;
+}
+.logo_link:hover {
+	opacity: 0.75;
+}
