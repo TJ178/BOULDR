@@ -97,11 +97,13 @@ export default function CreateAccountPage() {
       {currentUser ? <Navigate to="/" /> : null}
       <ClimbingBackground>
         <div className={classes.contents}>
-          <img
+		<Link to="/" className={classes.logo_link}>
+		  <img
             src={logo}
             alt="BOULDR"
-            style={{paddingRight: "2%" }}
+			className={classes.logo}
           />
+		</Link>
           <h4> Join a community of climbers! </h4>
           {imageUploaded && !loadingImage && (
             <img className={classes.profile} src={image} alt="" />
