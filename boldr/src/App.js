@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import { Route, Routes } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage.js";
@@ -8,6 +8,7 @@ import Layout from "./components/layout/Layout";
 import FavoriteProblemsPage from "./pages/FavoriteProblemsPage";
 import ProblemDetailsPage from "./pages/ProblemDetailsPage";
 import AddProblemPage from "./pages/AddProblemPage";
+import EditProblemPage from "./pages/EditProblemPage";
 import ErrorPage from "./pages/ErrorPage";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { AuthProvider } from './contexts/AuthContext';
@@ -29,6 +30,9 @@ function App() {
         <Route path="/create-account" element={<CreateAccountPage />}/>
         <Route path="/profile" element={<PrivateRoute><Layout> <ProfilePage /> </Layout></PrivateRoute>} />
         <Route path="/add-problem" element={<StaffRoute><Layout><AddProblemPage /></Layout></StaffRoute>} />
+        <Route path="/edit-problem" element={<StaffRoute><Layout><EditProblemPage /></Layout></StaffRoute>}>
+          <Route path=":problemId" element={<StaffRoute><Layout><EditProblemPage /></Layout></StaffRoute>} />
+        </Route>
         <Route path='*' element={<Layout><ErrorPage/></Layout>} />
       </Routes>
     </AuthProvider>

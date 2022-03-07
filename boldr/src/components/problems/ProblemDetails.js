@@ -148,7 +148,7 @@ function ProblemDetails(props) {
             </DropdownButton>
           </div> : null}
         </div>
-        <div class={classes.description}>
+        <div className={classes.description}>
           {props.prob.description}
         </div>
        {!currentUser ? <div class = {classes.login}>

@@ -78,7 +78,8 @@ export function convertDocumentToProblem(querySnapshot){
   temp['description'] = doc1['description'];
   temp['rating'] = averageRating(allstars, 5);
   temp['vrating'] = vratingExists ? Number(averageRating(allvratings, 11).toPrecision(1)) : doc1['vrating'];
-  
+  temp['available'] = doc1['available'];
+
   return temp;
 }
 
