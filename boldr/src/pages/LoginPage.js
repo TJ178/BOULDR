@@ -43,7 +43,7 @@ export default function CreateAccountPage() {
             <div className={classes.flexbox}>
               <Form onSubmit={handleSubmit} style={{ width: "90%" }}>
                 <FloatingLabel
-                  label="Email Address"
+                  label="Email"
                   id="email"
                   className="mb-3"
                 >
@@ -71,7 +71,7 @@ export default function CreateAccountPage() {
                 </Button>
               </Form>
             </div>
-            <div className="w-100 text-center mt-2">
+            <div className="fs-5 mt-2">
               Need an account? <Link to="/create-account">Sign Up</Link>
             </div>
           </div>
