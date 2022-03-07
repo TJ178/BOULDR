@@ -105,23 +105,23 @@ export default function CreateAccountPage() {
           )}
           {error && <Alert variant="danger"> {error} </Alert>}
           <Form onSubmit={handleSubmit}>
-            <Form.Group controlId="formFile" className="mb-3">
+            <Form.Group controlId="formFile" className="mb-2">
               <Form.Label>Profile Picture</Form.Label>
               <Form.Control type="file" onChange={onFileChange} />
             </Form.Group>
-            <FloatingLabel label="Name" id="name">
+            <FloatingLabel label="Name" id="name" className="mb-2">
               <Form.Control placeholder="Name" ref={nameRef} required />
             </FloatingLabel>
-            <FloatingLabel label="Email" id="email">
+            <FloatingLabel label="Email" id="email" className="mb-2">
               <Form.Control placeholder = "Email" type="email" ref={emailRef} required />
             </FloatingLabel>
-            <FloatingLabel label="Password" id="password">
+            <FloatingLabel label="Password" id="password" className="mb-2">
               <Form.Control placeholder="Password" type="password" ref={passwordRef} required />
             </FloatingLabel>
-            <FloatingLabel label="Confirm Password" id="password-confirm">
+            <FloatingLabel label="Confirm Password" id="password-confirm" className="mb-2">
               <Form.Control placeholder="Confirm Password" type="password" ref={passwordConfirmRef} required />
             </FloatingLabel>
-            <Form.Group id="home-gym">
+            <Form.Group id="home-gym" className="mb-3">
               <Form.Control
                 as="select"
                 value={gym}
