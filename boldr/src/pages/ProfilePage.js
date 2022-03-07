@@ -10,7 +10,7 @@ import classes from "./ProfilePage.module.css";
 
 export default function ProfilePage() {
   const [error, setError] = useState("")
-  const { currentUser, logout } = useAuth()
+  const { currentUser, userData, logout } = useAuth()
   const navigate = useNavigate()
   const usersCollectionRef = doc(collection(db, "users"), currentUser.uid);
 
@@ -49,10 +49,12 @@ export default function ProfilePage() {
           <strong>Email:</strong> {currentUser.email}
           <br/>
           <strong>Name: </strong> {currentUser.displayName}
-          {/* <br/>
-          <strong>Staff: </strong> {usersCollectionRef.isStaff}
           <br/>
-          <strong>Home Gym: </strong> {usersCollectionRef.homeGym} */}
+          <strong>User Type: </strong>
+          {currentUser && !userData.isStaff && "Member"}
+          {currentUser && userData.isStaff && (
+            <>Staff<br /><strong>Home Gym: </strong>{userData.homeGym}</>
+          )}
         </Card.Body>
       </Card>
       <div className="w-100 text-center mt-2">

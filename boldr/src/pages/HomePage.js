@@ -59,7 +59,7 @@ function HomePage() {
           onChange={handleChange}
         />
       </Form>
-      {currentUser && userData.isStaff && <Alert variant="info">Signed in as Staff: Only showing editable problems</Alert>}
+      {currentUser && userData.isStaff && <Alert variant="info">Signed in as Staff: Only showing problems from {userData.homeGym}</Alert>}
       {error && (
         <p>
           <strong>Error Loading Problems: {JSON.stringify(error)}</strong>
