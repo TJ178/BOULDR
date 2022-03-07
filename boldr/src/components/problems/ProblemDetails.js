@@ -34,7 +34,6 @@ function ProblemDetails(props) {
   const [image, loading, error] = useDownloadURL(ref(storage, props.prob.image));
 
   const initialDifficulty = "V" + JSON.stringify(props.prob.vrating);
-
   const [starVal, setStarVal] = useState(props.prob.rating);
   const [dropdownVal, setDropdownVal] = useState(initialDifficulty);
   const [disableSubmit, setDisableSubmit] = useState(false);
@@ -101,10 +100,10 @@ function ProblemDetails(props) {
           <div className={classes.star}>
             {currentUser ? <Rating
               onClick={handleStarClick}
-              ratingValue={starVal}
               initialValue={starVal}
               size={30}
               transition={false}
+              allowHover={true}
             /> : <Rating
             initialValue={props.prob.rating}
             size={40}
