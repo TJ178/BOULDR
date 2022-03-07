@@ -113,10 +113,10 @@ function ProblemDetails(props) {
             {currentUser ? <Button disabled = {disableSubmit} onClick={() => updateStarRating(starVal)}>Submit</Button> : null}
           </div>
         </div>
-        <div className={classes.tags}>
+        {/*<div className={classes.tags}>
           <p>this is where the tags should go</p>
           <Button  size="sm">Add tags</Button>
-        </div>
+            </div>*/}
         <div className={classes.difficulty}>
           <div className={classes.ourRating}>
             <h2> Our Rating:</h2>

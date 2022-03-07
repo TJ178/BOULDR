@@ -53,8 +53,10 @@ function ProblemItem(props) {
                     {currentUser && !userData.isStaff && <Bookmark problemId={props.id} initial={userData.favorites.includes(props.id)}/>}
                     {currentUser && userData.isStaff && <Link to={'/edit-problem/' + props.id}><Button><FontAwesomeIcon icon={faPenToSquare} /></Button></Link>}
                   </div>
-                  <h1>{props.title}</h1>
-                  <h3 className={classes.gym_name}>{props.gym}</h3>
+                  <Link to={"/problem-details/" + props.id}>
+                    <h1>{props.title}</h1>
+                    <h3 className={classes.gym_name}>{props.gym}</h3>
+                  </Link>
                 </div>
                 <div className={classes.rating}>
                   {/* https://bestofreactjs.com/repo/prakhar1989-react-tags-react-tag-input */}
