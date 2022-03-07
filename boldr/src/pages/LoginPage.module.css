@@ -3,24 +3,10 @@
   justify-content: center;
 }
 
-.background{
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: top left;
-  height: 100%;
-}
-
 .logincontents{
   margin: auto;
   width: 80%;
   text-align: center;
   padding: 15%;
   opacity: 100%;
-}
-
-.gradient{
-  background-color: rgba(255,255,255,0.7);
-  height: 100%;
-  width: 60%;
-  margin: auto;
 }
