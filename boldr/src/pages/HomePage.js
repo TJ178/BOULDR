@@ -44,23 +44,34 @@ function HomePage() {
         <Form.Control type='text' placeholder={'Search...'} size='lg' name='search' 
                       defaultValue={searchParams ? searchParams.get('keyword') : ""} onChange={handleChange}/>
       </Form> */}
-      <Form
-        onSubmit={handleSubmit}
-        style={{ display: "flex", justifyContent: "center" }}
-      >
-        <Form.Control
-          className={classes.form_label}
-          bsPrefix="form_label"
-          type="text"
-          placeholder={"Search..."}
-          size="lg"
-          name="search"
-          defaultValue={searchParams ? searchParams.get("keyword") : ""}
-          onChange={handleChange}
-        />
-      </Form>
-      {currentUser && !userData.isStaff && <Link to="/favorites"><Button>Favorites</Button></Link>}
-      {currentUser && userData.isStaff && <Alert variant="info">Signed in as Staff: Only showing problems from {userData.homeGym}</Alert>}
+      <div className={classes.flexbox}>
+        <Form
+          onSubmit={handleSubmit}
+          style={{ display: "flex", justifyContent: "center", width: "80%", marginLeft: "0px", marginRight: "0px" }}
+        >
+          <Form.Control
+            className={classes.form_label}
+            bsPrefix="form_label"
+            type="text"
+            placeholder={"Search..."}
+            size="lg"
+            name="search"
+            defaultValue={searchParams ? searchParams.get("keyword") : ""}
+            onChange={handleChange}
+            style={{marginLeft:"0%",marginRight:"0%"}}
+          />
+        </Form>
+        {currentUser && !userData.isStaff && (
+          <Link to="/favorites">
+            <Button>Favorites</Button>
+          </Link>
+        )}
+      </div>
+      {currentUser && userData.isStaff && (
+        <Alert variant="info">
+          Signed in as Staff: Only showing problems from {userData.homeGym}
+        </Alert>
+      )}
       {error && (
         <p>
           <strong>Error Loading Problems: {JSON.stringify(error)}</strong>
