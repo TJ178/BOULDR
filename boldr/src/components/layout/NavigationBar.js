@@ -13,7 +13,7 @@ import { ref } from 'firebase/storage';
 import { storage } from '../../firebase-config.js'
 
 function NavigationBar(props) {
-  const { currentUser } = useAuth();
+  const { currentUser, userData } = useAuth();
 
   let photoRef;
   if(currentUser){
@@ -35,7 +35,14 @@ function NavigationBar(props) {
         </Link>
       </div>
       <nav>
-        <ul>
+        <ul style={{marginBottom: "0px"}}>
+          {currentUser && userData.isStaff && (
+            <li>
+            <Link to="/add-problem">
+              <Button>Add Problem</Button>
+            </Link>
+          </li>
+          )}
           {currentUser ? (
             <li>
               <Link to="/profile">

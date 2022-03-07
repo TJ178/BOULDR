@@ -9,37 +9,32 @@ import FavoriteProblemsPage from "./pages/FavoriteProblemsPage";
 import ProblemDetailsPage from "./pages/ProblemDetailsPage";
 import AddProblemPage from "./pages/AddProblemPage";
 import EditProblemPage from "./pages/EditProblemPage";
+import ErrorPage from "./pages/ErrorPage";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { AuthProvider } from "./contexts/AuthContext";
-import PrivateRoute from "./contexts/PrivateRoute";
+import { AuthProvider } from './contexts/AuthContext';
+import PrivateRoute from './contexts/PrivateRoute';
+import StaffRoute from './contexts/StaffRoute';
+
+
 
 function App() {
   return (
     <AuthProvider>
-      <Layout>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/favorites" element={<FavoriteProblemsPage />} />
-          <Route path="/problem-details" element={<ProblemDetailsPage />}>
-            <Route path=":problemId" element={<ProblemDetailsPage />} />
-          </Route>
-          <Route path="/create-account" element={<CreateAccountPage />} />
-          <Route
-            path="/profile"
-            element={
-              <PrivateRoute>
-                {" "}
-                <ProfilePage />{" "}
-              </PrivateRoute>
-            }
-          />
-          <Route path="/add-problem" element={<AddProblemPage />} />
-          <Route path="/edit-problem" element={<EditProblemPage />}>
-            <Route path=":problemId" element={<EditProblemPage />} />
-          </Route>
-        </Routes>
-      </Layout>
+      <Routes>
+        <Route path="/" element={<Layout><HomePage /></Layout>} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/favorites" element={<Layout><FavoriteProblemsPage/></Layout>}/>
+        <Route path="/problem-details" element={<Layout><ProblemDetailsPage/></Layout>}>
+          <Route path=":problemId" element={<Layout><ProblemDetailsPage/></Layout>} />
+        </Route>
+        <Route path="/create-account" element={<CreateAccountPage />}/>
+        <Route path="/profile" element={<PrivateRoute><Layout> <ProfilePage /> </Layout></PrivateRoute>} />
+        <Route path="/add-problem" element={<StaffRoute><Layout><AddProblemPage /></Layout></StaffRoute>} />
+        <Route path="/edit-problem" element={<EditProblemPage />}>
+          <Route path=":problemId" element={<EditProblemPage />} />
+        </Route>
+        <Route path='*' element={<Layout><ErrorPage/></Layout>} />
+      </Routes>
     </AuthProvider>
   );
 }

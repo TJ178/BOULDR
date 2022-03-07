@@ -8,8 +8,8 @@ import {
   searchProblems,
 } from "../FirebaseSupport.js";
 import { useCollectionOnce } from "react-firebase-hooks/firestore";
-import { Form, Alert } from "react-bootstrap";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { Form, Alert, Button } from "react-bootstrap";
+import { useNavigate, useSearchParams, Link } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext.js";
 
 function HomePage() {
@@ -59,7 +59,8 @@ function HomePage() {
           onChange={handleChange}
         />
       </Form>
-      {currentUser && userData.isStaff && <Alert variant="info">Signed in as Staff: Only showing editable problems</Alert>}
+      {currentUser && !userData.isStaff && <Link to="/favorites"><Button>Favorites</Button></Link>}
+      {currentUser && userData.isStaff && <Alert variant="info">Signed in as Staff: Only showing problems from {userData.homeGym}</Alert>}
       {error && (
         <p>
           <strong>Error Loading Problems: {JSON.stringify(error)}</strong>

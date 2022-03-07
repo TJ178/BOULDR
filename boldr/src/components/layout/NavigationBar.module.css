@@ -37,9 +37,10 @@
 }
 
 .profile {
-  align-content: right;
+  align-content: center;
   width: 4rem;
-  height: auto;
+  height: 4rem;
+  object-fit: cover;
 
   /* background-image: url(https://commons.wikimedia.org/wiki/File:Photo_of_%22Gangster_Jimmy%22_taken_for_his_YouTube_profile_picture.jpg); */
   border: 2px solid #000000;

@@ -4,12 +4,15 @@ import { Rating } from "react-simple-star-rating";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import Button from 'react-bootstrap/Button';
-import { useParams } from 'react-router-dom';
+import Alert from 'react-bootstrap/Alert';
+
+import { useParams, Link } from 'react-router-dom';
 import { useDownloadURL } from 'react-firebase-hooks/storage';
 import { ref } from 'firebase/storage';
 import {storage, db} from '../../firebase-config.js';
 import loadingImg from '../../assets/loading.png'
 import { doc, updateDoc, increment} from 'firebase/firestore';
+import { useAuth } from '../../contexts/AuthContext.js';
 
 
 const dropdownOptions = [
@@ -37,6 +40,8 @@ function ProblemDetails(props) {
   const [disableSubmit, setDisableSubmit] = useState(false);
   const [disableDropdown, setDisableDropdown] = useState(false);
 
+  const { signup, currentUser } = useAuth()
+
   let params = useParams();
   const problemId = params.problemId;
   const problemDoc = doc(db, "problems", problemId);
@@ -52,6 +57,7 @@ function ProblemDetails(props) {
       default: break;
     }
     setDisableSubmit(true);
+
   };
 
   const updateVRating = async (e) => {
@@ -81,6 +87,8 @@ function ProblemDetails(props) {
   return (
     <>
       <div>
+        {disableSubmit ? <Alert variant='success'>Successfully submitted star rating</Alert> : ""}
+        {disableDropdown ? <Alert variant='success'>Successfully submitted V rating</Alert> : ""}
         {loading && <img className={classes.image} src={loadingImg} alt={props.prob.title} />}
         {image && <img className={classes.image} src={image} alt={props.prob.title} />}
       </div>
@@ -91,14 +99,19 @@ function ProblemDetails(props) {
             <h3> {props.prob.gym} </h3>
           </div>
           <div className={classes.star}>
-            <Rating
+            {currentUser ? <Rating
               onClick={handleStarClick}
               ratingValue={starVal}
               initialValue={starVal}
               size={30}
               transition={false}
-            />
-            <Button disabled = {disableSubmit} onClick={() => updateStarRating(starVal)}>Submit</Button>
+            /> : <Rating
+            initialValue={props.prob.rating}
+            size={40}
+            transistion={true}
+            readonly={true}
+            />}
+            {currentUser ? <Button disabled = {disableSubmit} onClick={() => updateStarRating(starVal)}>Submit</Button> : null}
           </div>
         </div>
         <div className={classes.tags}>
@@ -112,7 +125,7 @@ function ProblemDetails(props) {
               >{initialDifficulty}
             </Button>
           </div>
-          <div className={classes.userDifficulty}>
+          {currentUser ? <div className={classes.userDifficulty}>
             <h2>Your rating:   </h2>
             <DropdownButton
               // alignRight
@@ -133,13 +146,16 @@ function ProblemDetails(props) {
                 </Dropdown.Item>
               ))}
             </DropdownButton>
-          </div>
+          </div> : null}
         </div>
         <div className={classes.description}>
           {props.prob.description}
         </div>
+       {!currentUser ? <div class = {classes.login}>
+        <Link to = '/login'> Login </Link>
+        <p> &nbsp; to rate this problem </p>
+       </div> : null}
       </section>
-      
     </>
   );
 }
