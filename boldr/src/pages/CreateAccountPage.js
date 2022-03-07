@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import ClimbingBackground from "../components/background/ClimbingBackground";
+import logo from "../assets/BOULDR_Logo_Lg.png";
 import { Form, FloatingLabel, Button, Alert } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import classes from "./CreateAccountPage.module.css";
@@ -96,7 +97,12 @@ export default function CreateAccountPage() {
       {currentUser ? <Navigate to="/" /> : null}
       <ClimbingBackground>
         <div className={classes.contents}>
-          <h1 className={classes.signup_header}> New Account </h1>
+          <img
+            src={logo}
+            alt="BOULDR"
+            style={{paddingRight: "2%" }}
+          />
+          <h4> Join a community of climbers! </h4>
           {imageUploaded && !loadingImage && (
             <img className={classes.profile} src={image} alt="" />
           )}
@@ -113,13 +119,32 @@ export default function CreateAccountPage() {
               <Form.Control placeholder="Name" ref={nameRef} required />
             </FloatingLabel>
             <FloatingLabel label="Email" id="email" className="mb-2">
-              <Form.Control placeholder = "Email" type="email" ref={emailRef} required />
+              <Form.Control
+                placeholder="Email"
+                type="email"
+                ref={emailRef}
+                required
+              />
             </FloatingLabel>
             <FloatingLabel label="Password" id="password" className="mb-2">
-              <Form.Control placeholder="Password" type="password" ref={passwordRef} required />
+              <Form.Control
+                placeholder="Password"
+                type="password"
+                ref={passwordRef}
+                required
+              />
             </FloatingLabel>
-            <FloatingLabel label="Confirm Password" id="password-confirm" className="mb-2">
-              <Form.Control placeholder="Confirm Password" type="password" ref={passwordConfirmRef} required />
+            <FloatingLabel
+              label="Confirm Password"
+              id="password-confirm"
+              className="mb-2"
+            >
+              <Form.Control
+                placeholder="Confirm Password"
+                type="password"
+                ref={passwordConfirmRef}
+                required
+              />
             </FloatingLabel>
             <Form.Group id="home-gym" className="mb-3">
               <Form.Control
@@ -141,22 +166,26 @@ export default function CreateAccountPage() {
                 type="checkbox"
                 name="staff"
                 id="staff"
-				label="Check this box if you're a gym staff member"
+                label="Check this box if you're a gym staff member"
                 onChange={updateStaff}
                 value={staff}
-				style={{textAlign: "left"}}
+                style={{ textAlign: "left" }}
               />
             </Form.Group>
             <Button
               disabled={loading}
               type="submit"
-              style={{ justfiySelf: "center", marginTop: "10px", width: "100%"}}
+              style={{
+                justfiySelf: "center",
+                marginTop: "10px",
+                width: "100%",
+              }}
             >
               Sign Up
             </Button>
           </Form>
 
-          <div className="w-100 text-center mt-2">
+          <div className="fs-5 mt-2">
             Already have an account? <Link to="../login">Log In</Link>
           </div>
         </div>
