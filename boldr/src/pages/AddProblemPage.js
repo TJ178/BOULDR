@@ -2,11 +2,13 @@ import { useState } from "react";
 import Card from "../components/ui/Card";
 import classes from "./AddProblemPage.module.css";
 import Form from "react-bootstrap/Form";
+import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Button from "react-bootstrap/Button";
 import { db, storage } from "../firebase-config.js";
 import { ref, uploadBytes } from "firebase/storage";
 import { useDownloadURL } from "react-firebase-hooks/storage";
 import { collection, addDoc } from "firebase/firestore";
+import placeholder from "../assets/placeholder_image.png";
 
 // Should create a globals file for this
 const dropdownOptions = [
@@ -34,7 +36,7 @@ function AddProblemPage(props) {
 
   const changeAvailable = () => {
     setAvailable(!isAvailable);
-  }
+  };
   const onFileChange = async (e) => {
     const file = e.target.files[0];
     const storageRef = ref(storage, "media/" + file.name);
@@ -55,57 +57,84 @@ function AddProblemPage(props) {
       vrating: parseInt(e.target.formProblemDifficulty.value.substring(1)),
       description: e.target.formProblemDescription.value,
     };
-    console.log(submitObj)
     // Add a new document with a generated id.
     await addDoc(collection(db, "problems"), submitObj);
   };
 
   return (
     <Card>
-      <section className={classes.image}>
+      <div className={classes.image}>
         <Form onSubmit={handleSubmit}>
           {imageUploaded && !loading && (
-            <img className={classes.image} src={image} alt="Gym Problem" />
+            <img
+              className={classes.image}
+              src={image}
+              alt="Gym Problem Picture"
+            />
           )}
-
+          {!imageUploaded && (
+            <img
+              className={classes.image}
+              src={placeholder}
+              alt="Gym Problem Picture"
+            />
+          )}
           <Form.Group controlId="formFile" className="mb-3">
             <Form.Control type="file" size="sm" onChange={onFileChange} />
           </Form.Group>
-
-          <Form.Group controlId="formProblemName">
-            <Form.Control type="text" placeholder="Problem Name" />
-          </Form.Group>
-
-          <Form.Group controlId="formProblemGym">
-            <Form.Control type="text" placeholder="Gym" />
-          </Form.Group>
-
-          <Form.Group controlId="formProblemAvailable">
-            <Form.Check type="checkbox" onChange={changeAvailable} label="Available" />
-          </Form.Group>
-
-          <Form.Group controlId="formProblemDifficulty">
-            <Form.Select defaultValue={"V0"}>
-              {dropdownOptions.map((item) => (
-                <option key={item}>{item}</option>
-              ))}
-            </Form.Select>
-          </Form.Group>
-
-          <Form.Group className="mb-3" controlId="formProblemDescription">
-            <Form.Label>Problem Description</Form.Label>
-            <Form.Control as="textarea" rows={3} />
-          </Form.Group>
-
-          <Button
-            className="justify-content-center"
-            variant="primary"
-            type="submit"
-          >
-            Submit
-          </Button>
         </Form>
-      </section>
+      </div>
+      <div className={classes.card}>
+        <Form onSubmit={handleSubmit}>
+          <section className={classes.flexbox}>
+            <div className={classes.otherbox}>
+
+              <Form.Group controlId="formProblemName">
+                <Form.Control type="text" placeholder="Problem Name" />
+              </Form.Group>
+
+              <Form.Group controlId="formProblemGym">
+                <Form.Control type="text" placeholder="Gym Name" />
+              </Form.Group>
+              <div className={classes.flexbox}>
+                <Form.Group controlId="formProblemDifficulty">
+                  <Form.Select defaultValue={"V0"}>
+                    {dropdownOptions.map((item) => (
+                      <option key={item}>{item}</option>
+                    ))}
+                  </Form.Select>
+                </Form.Group>  
+
+                <Form.Group controlId="formProblemAvailable">
+                  <Form.Check
+                    type="checkbox"
+                    onChange={changeAvailable}
+                    label="Available"
+                  />
+                </Form.Group>
+              </div>
+
+            </div>
+
+            <div className={classes.descbox}>
+              <FloatingLabel className="mb-3" label="Problem Description" controlId="formProblemDescription">
+                <Form.Control as="textarea" style={{height: "8em",resize: "none"}} />
+              </FloatingLabel>
+            </div>
+
+          </section>
+
+          <div className={classes.flexbox}>
+            <Button
+              className="justify-content-center"
+              variant="primary"
+              type="submit"
+            >
+              Submit
+            </Button>
+          </div>
+        </Form>
+      </div>
     </Card>
   );
 }

@@ -14,7 +14,7 @@ function ProblemDetailsPage(props){
     <>
       {error && <p><strong>Error Loading Problems: {JSON.stringify(error)}</strong></p>}
       {loading && <p><span>Loading...</span></p>}
-      {data && <ProblemDetails prob={convertDocumentToProblem(data)} />}
+      {data && <ProblemDetails prob={convertDocumentToProblem(data)}/>}
       {/* Add the section below if we choose to implement comments
         Still needs CSS styling*/}
       {/* <section className={classes.section}>
