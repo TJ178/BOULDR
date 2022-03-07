@@ -35,7 +35,7 @@ function NavigationBar(props) {
         </Link>
       </div>
       <nav>
-        <ul>
+        <ul style={{marginBottom: "0px"}}>
           {currentUser && userData.isStaff && (
             <li>
             <Link to="/add-problem">
