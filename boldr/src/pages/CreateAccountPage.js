@@ -130,28 +130,27 @@ export default function CreateAccountPage() {
                   setGym(e.target.value);
                 }}
               >
-                <option>Choose from the following gyms to be your home gym:</option>
+                <option>Choose your home gym:</option>
                 <option value="Gym 1">Gym 1</option>
                 <option value="Gym 2">Gym 2</option>
                 <option value="Gym 3">Gym 3</option>
               </Form.Control>
             </Form.Group>
             <Form.Group id="staff">
-              <Form.Label>
-                Check this box if you're a gym staff member:{" "}
-              </Form.Label>
               <Form.Check
                 type="checkbox"
                 name="staff"
                 id="staff"
+				label="Check this box if you're a gym staff member"
                 onChange={updateStaff}
                 value={staff}
+				style={{textAlign: "left"}}
               />
             </Form.Group>
             <Button
               disabled={loading}
               type="submit"
-              style={{ justfiySelf: "center", marginTop: "10px" }}
+              style={{ justfiySelf: "center", marginTop: "10px", width: "100%"}}
             >
               Sign Up
             </Button>
