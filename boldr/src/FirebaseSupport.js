@@ -47,11 +47,13 @@ export function convertDocumentToProblem(querySnapshot){
 
   const tempStars = doc1['allstars'];
   let allstars = [];
-  for (let i = 0; i < 5; i++){
-    if (tempStars[i+1] != null){
-      allstars[i] = tempStars[i+1];
-    } else {
-      allstars[i] = 0;
+  if(tempStars){
+    for (let i = 0; i < 5; i++){
+      if (tempStars[i+1] != null){
+        allstars[i] = tempStars[i+1];
+      } else {
+        allstars[i] = 0;
+      }
     }
   }
   
@@ -76,7 +78,7 @@ export function convertDocumentToProblem(querySnapshot){
   temp['isFavorite'] = false;
   temp['gym'] = doc1['gymname'];
   temp['description'] = doc1['description'];
-  temp['rating'] = averageRating(allstars, 5);
+  temp['rating'] = tempStars ? averageRating(allstars, 5) : 0;
   temp['vrating'] = vratingExists ? Number(averageRating(allvratings, 11).toPrecision(1)) : doc1['vrating'];
   temp['available'] = doc1['available'];
 
