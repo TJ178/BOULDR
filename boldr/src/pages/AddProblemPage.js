@@ -9,6 +9,7 @@ import { ref, uploadBytes } from "firebase/storage";
 import { useDownloadURL } from "react-firebase-hooks/storage";
 import { collection, addDoc } from "firebase/firestore";
 import placeholder from "../assets/placeholder_image.png";
+import BackButton from "../components/ui/BackButton";
 
 // Should create a globals file for this
 const dropdownOptions = [
@@ -63,6 +64,7 @@ function AddProblemPage(props) {
 
   return (
     <Card>
+      <BackButton />
       <div className={classes.image}>
         <Form onSubmit={handleSubmit}>
           {imageUploaded && !loading && (

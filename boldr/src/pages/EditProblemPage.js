@@ -12,8 +12,8 @@ import placeholder from "../assets/placeholder_image.png";
 import { convertDocumentToProblem } from "../FirebaseSupport.js";
 import { useDocumentOnce } from "react-firebase-hooks/firestore";
 import { useAuth } from "../contexts/AuthContext.js";
-import { useParams } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
+import BackButton from "../components/ui/BackButton";
 
 // Should create a globals file for this
 const dropdownOptions = [
@@ -94,6 +94,7 @@ function EditProblemPage(props) {
 
   return (
     <Card>
+      <BackButton/>
       <div className={classes.image}>
         <Form onSubmit={handleSubmit}>
           {!loading && (
