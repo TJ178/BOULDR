@@ -1,0 +1,21 @@
+
+import { useNavigate } from "react-router-dom";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import Button from 'react-bootstrap/Button';
+
+
+function BackButton(props) {
+    const navigate = useNavigate();
+
+    const goBack = () => {
+        navigate(-1);
+    }
+
+    return (
+        <Button onClick={goBack}><FontAwesomeIcon icon={faArrowLeft}/></Button>
+    )
+}
+
+export default BackButton;
