@@ -11,7 +11,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## Installing and Running BOULDR Locally
 
 Clone the repository using git:
-### `git clone https://github.com/TJ178/BOLDR.git`
+### `git clone https://github.com/TJ178/BOULDR.git`
 
 Install all dependencies:
 ### `npm install`
