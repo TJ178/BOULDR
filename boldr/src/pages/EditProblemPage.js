@@ -77,7 +77,7 @@ function EditProblemPage(props) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const img = imageChanged ? fileRef.toString() : convertDocumentToProblem(data).img
+    const img = imageChanged ? fileRef.toString() : convertDocumentToProblem(data).image
     const submitObj = {
       name: e.target.formProblemName.value,
       gymname: e.target.formProblemGym.value,
