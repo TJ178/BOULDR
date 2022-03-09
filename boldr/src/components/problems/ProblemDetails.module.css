@@ -108,3 +108,28 @@
 .description {
   padding: 1.5em 2em; 
 }
+
+.imgwrapper {
+  position: relative;
+}
+
+.imgoverlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 89%;
+  text-align: center;
+}
+
+.imgoverlay:before {
+  content: ' ';
+  display: block;
+  height: 2.5%;
+}
+
+.imgoverlay:after {
+  content: ' ';
+  display: block;
+  height: 95%;
+}

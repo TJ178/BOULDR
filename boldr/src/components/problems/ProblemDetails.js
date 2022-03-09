@@ -136,18 +136,30 @@ function ProblemDetails(props) {
         )}
         {loading && (
           <>
-            <BackButton />
+          <div className={classes.imgwrapper}>
+            <div className={classes.imgoverlay}>
+              <BackButton />
+            </div>
             <img
               className={classes.image}
               src={loadingImg}
               alt={props.prob.title}
             />
-          </>
+          </div>
+        </>
         )}
         {image && (
           <>
-            <BackButton />
-            <img className={classes.image} src={image} alt={props.prob.title} />
+            <div className={classes.imgwrapper}>
+              <div className={classes.imgoverlay}>
+                <BackButton />
+              </div>
+              <img
+                className={classes.image}
+                src={image}
+                alt={props.prob.title}
+              />
+            </div>
           </>
         )}
       </div>
