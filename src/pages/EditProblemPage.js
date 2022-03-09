@@ -99,9 +99,9 @@ function EditProblemPage(props) {
 
   return (
     <>
-    <BackButton/>
     <Card>
         <div className={classes.image}>
+        <BackButton style={{position: "absolute",inset: "2%", textAlign: "center", zIndex: "2"}} />
         <Form onSubmit={handleSubmit}>
           {!loading && (
             <img
