@@ -6,7 +6,7 @@ export function convertCollectionToProblems(querySnapshot){
   querySnapshot.forEach((doc) => {
     let temp = {};
     
-    const tempStars = doc['allstars'];
+    const tempStars = doc.get('allstars');
     let allstars = [];
     if(tempStars){
       for (let i = 0; i < 5; i++){
