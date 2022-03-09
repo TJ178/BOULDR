@@ -7,6 +7,7 @@ import { ref } from "firebase/storage";
 import { db, storage } from "../firebase-config.js";
 import { doc, collection } from "firebase/firestore";
 import classes from "./ProfilePage.module.css";
+import BackButton from "../components/ui/BackButton.js";
 
 export default function ProfilePage() {
   const [error, setError] = useState("");
@@ -39,6 +40,7 @@ export default function ProfilePage() {
 
   return (
     <>
+      <BackButton />
       <Card className={classes.card}>
         <Card.Body className={classes.cardbody}>
           <Row>
