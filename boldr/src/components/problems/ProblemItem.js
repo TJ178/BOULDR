@@ -70,9 +70,16 @@ function ProblemItem(props) {
                 </div>
                 <div className={classes.difficulty}>
                   <h3>V-Rating:</h3>
-                  <Button variant='secondary' disabled>
+                  {(props.vrating < 4) && <Button variant='success' disabled>
                     V{props.vrating}
-                  </Button>
+                  </Button>}
+                  {(props.vrating >= 4 && props.vrating <=7) && <Button variant='info' disabled>
+                    V{props.vrating}
+                  </Button>}
+                  {(props.vrating > 7) && <Button variant='danger' disabled>
+                    V{props.vrating}
+                  </Button>}
+
                 </div>
               </div>
             </Col>
