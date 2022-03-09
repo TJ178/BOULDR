@@ -235,7 +235,7 @@ function ProblemDetails(props) {
         <div className={classes.description}>{props.prob.description}</div>
         {!currentUser ? (
           <div class={classes.login}>
-            <Link to="/login"> Login </Link>
+            <Link style={{color: "blue"}} to="/login"> Login </Link>
             <p> &nbsp; to rate this problem </p>
           </div>
         ) : null}
