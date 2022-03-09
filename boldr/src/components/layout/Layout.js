@@ -6,7 +6,7 @@ function Layout(props) {
   return (
     <div className={ classes.root }>
       <NavigationBar />
-      <div >
+      <div style={{paddingBottom: "5em"}}>
         <main className={classes.main}>{props.children}</main>
       </div>
       <Footer />

@@ -5,5 +5,7 @@
 }
 
 .root {
-  background-color: #E2BA86;
+  background-color: #B79979;
+  min-height: 100%;
+  position: relative;
 }

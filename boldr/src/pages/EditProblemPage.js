@@ -1,13 +1,11 @@
 import { useState, useEffect } from "react";
 import Card from "../components/ui/Card";
 import classes from "./AddProblemPage.module.css";
-import Form from "react-bootstrap/Form";
-import FloatingLabel from "react-bootstrap/FloatingLabel";
-import Button from "react-bootstrap/Button";
+import { Form, FloatingLabel, Button } from "react-bootstrap";
 import { db, storage } from "../firebase-config.js";
 import { ref, uploadBytes } from "firebase/storage";
 import { useDownloadURL } from "react-firebase-hooks/storage";
-import { collection, doc, updateDoc } from "firebase/firestore";
+import { collection, doc, updateDoc, deleteDoc } from "firebase/firestore";
 import placeholder from "../assets/placeholder_image.png";
 import { convertDocumentToProblem } from "../FirebaseSupport.js";
 import { useDocumentOnce } from "react-firebase-hooks/firestore";
@@ -77,7 +75,7 @@ function EditProblemPage(props) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const img = imageChanged ? fileRef.toString() : convertDocumentToProblem(data).img
+    const img = imageChanged ? fileRef.toString() : convertDocumentToProblem(data).image
     const submitObj = {
       name: e.target.formProblemName.value,
       gymname: e.target.formProblemGym.value,
@@ -91,6 +89,15 @@ function EditProblemPage(props) {
     await updateDoc(doc(db, "problems", params.problemId), submitObj);
     navigate("/")
   };
+
+  const handleDelete = async (e) => {
+    e.preventDefault();
+    const answer = window.confirm("Are you sure you want to delete this problem?");
+    if(answer){
+      await deleteDoc(doc(db, "problems", params.problemId));
+      navigate("/")
+    }
+  }
 
   return (
     <>
@@ -170,7 +177,14 @@ function EditProblemPage(props) {
             </div>
           </section>
 
-          <div className={classes.flexbox}>
+          <div className={classes.flexbox} style={{marginTop: "2em"}}>
+            <Button
+            variant="danger"
+            onClick={handleDelete}
+            >
+              Delete Problem
+            </Button>
+
             <Button
               className="justify-content-center"
               variant="primary"

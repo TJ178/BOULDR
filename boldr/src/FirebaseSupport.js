@@ -6,25 +6,30 @@ export function convertCollectionToProblems(querySnapshot){
   querySnapshot.forEach((doc) => {
     let temp = {};
     
+    const tempStars = doc['allstars'];
     let allstars = [];
-    for (let i = 0; i < 5; i++){
-      let field = 'allstars.' + String(i+1);
-      let tempvalue = doc.get(field);
-      if (tempvalue != null){
-        allstars[i] = tempvalue;
-      } else {
-        allstars[i] = 0;
+    if(tempStars){
+      for (let i = 0; i < 5; i++){
+        let field = 'allstars.' + String(i+1);
+        let tempvalue = doc.get(field);
+        if (tempvalue != null){
+          allstars[i] = tempvalue;
+        } else {
+          allstars[i] = 0;
+        }
       }
     }
     
     let allvratings = [];
-    for (let i = 0; i < 11; i++){
-      let field = 'allvratings.V' + String(i);
-      let tempvalue = doc.get(field);
-      if (tempvalue != null){
-        allvratings[i] = tempvalue;
-      } else {
-        allvratings[i] = 0;
+    if(allvratings){
+      for (let i = 0; i < 11; i++){
+        let field = 'allvratings.V' + String(i);
+        let tempvalue = doc.get(field);
+        if (tempvalue != null){
+          allvratings[i] = tempvalue;
+        } else {
+          allvratings[i] = 0;
+        }
       }
     }
     temp['id'] = doc.id;
@@ -34,7 +39,7 @@ export function convertCollectionToProblems(querySnapshot){
     temp['gym'] = doc.get('gymname');
     temp['description'] = doc.get('description');
     temp['rating'] = averageRating(allstars, 5);
-    temp['vrating'] = averageRating(allvratings, 11) ? averageRating(allvratings, 11).toPrecision(1) : doc.get('vrating');
+    temp['vrating'] = averageRating(allvratings, 11) ? Math.round(averageRating(allvratings, 11)) : doc.get('vrating');
     tempData = tempData.concat(temp);
   });
   
@@ -47,11 +52,13 @@ export function convertDocumentToProblem(querySnapshot){
 
   const tempStars = doc1['allstars'];
   let allstars = [];
-  for (let i = 0; i < 5; i++){
-    if (tempStars[i+1] != null){
-      allstars[i] = tempStars[i+1];
-    } else {
-      allstars[i] = 0;
+  if(tempStars){
+    for (let i = 0; i < 5; i++){
+      if (tempStars[i+1] != null){
+        allstars[i] = tempStars[i+1];
+      } else {
+        allstars[i] = 0;
+      }
     }
   }
   
@@ -76,8 +83,8 @@ export function convertDocumentToProblem(querySnapshot){
   temp['isFavorite'] = false;
   temp['gym'] = doc1['gymname'];
   temp['description'] = doc1['description'];
-  temp['rating'] = averageRating(allstars, 5);
-  temp['vrating'] = vratingExists ? Number(averageRating(allvratings, 11).toPrecision(1)) : doc1['vrating'];
+  temp['rating'] = tempStars ? averageRating(allstars, 5) : 0;
+  temp['vrating'] = vratingExists ? Math.round(averageRating(allvratings, 11)) : doc1['vrating'];
   temp['available'] = doc1['available'];
 
   return temp;

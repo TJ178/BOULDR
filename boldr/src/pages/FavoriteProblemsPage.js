@@ -1,6 +1,6 @@
 import { db } from "../firebase-config.js";
 import { collection, doc } from "firebase/firestore";
-import { Link,Navigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import {
   useCollectionOnce,
   useDocumentDataOnce,
@@ -9,6 +9,7 @@ import { convertCollectionToProblems } from "../FirebaseSupport.js";
 import { useAuth } from "../contexts/AuthContext.js";
 import ProblemList from "../components/problems/ProblemList";
 import BackButton from "../components/ui/BackButton";
+import { Alert, Button } from "react-bootstrap";
 
 function FavoriteProblemsPage(props) {
   const { currentUser } = useAuth();
@@ -58,10 +59,8 @@ function FavoriteProblemsPage(props) {
         )}
         {usr && usr["favorites"].length == 0 && (
           <>
-            <h1>There are no favorites</h1>
-            <h3>
-              Add some in the <Link to="/">HomePage</Link>
-            </h3>
+            <Alert>You haven't favorited anything.</Alert>
+            <Link to="/"><Button>Go add some!</Button></Link>
           </>
         )}
       </section>

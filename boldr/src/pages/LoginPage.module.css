@@ -1,6 +1,7 @@
 .flexbox{
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .logincontents{
@@ -14,6 +15,9 @@
 .logo{
 	padding-right: 2%;
   padding-bottom: 10%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 .logo_link:hover {
 	opacity: 0.75;

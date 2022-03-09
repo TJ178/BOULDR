@@ -1,15 +1,14 @@
 import { useState } from "react";
 import Card from "../components/ui/Card";
 import classes from "./AddProblemPage.module.css";
-import Form from "react-bootstrap/Form";
-import FloatingLabel from 'react-bootstrap/FloatingLabel';
-import Button from "react-bootstrap/Button";
+import { Form, FloatingLabel, Button, Alert } from "react-bootstrap";
 import { db, storage } from "../firebase-config.js";
 import { ref, uploadBytes } from "firebase/storage";
 import { useDownloadURL } from "react-firebase-hooks/storage";
 import { collection, addDoc } from "firebase/firestore";
 import placeholder from "../assets/placeholder_image.png";
 import BackButton from "../components/ui/BackButton";
+import { useNavigate } from "react-router-dom";
 
 // Should create a globals file for this
 const dropdownOptions = [
@@ -34,6 +33,8 @@ function AddProblemPage(props) {
   );
   const [imageUploaded, setImageUploaded] = useState(false);
   const [isAvailable, setAvailable] = useState(false);
+  const [alert, setAlert] = useState(false);
+  const navigate = useNavigate();
 
   const changeAvailable = () => {
     setAvailable(!isAvailable);
@@ -50,16 +51,22 @@ function AddProblemPage(props) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const submitObj = {
-      name: e.target.formProblemName.value,
-      gymname: e.target.formProblemGym.value,
-      img: fileRef.toString(),
-      available: isAvailable,
-      vrating: parseInt(e.target.formProblemDifficulty.value.substring(1)),
-      description: e.target.formProblemDescription.value,
-    };
-    // Add a new document with a generated id.
-    await addDoc(collection(db, "problems"), submitObj);
+
+    if(imageUploaded){
+      const submitObj = {
+        name: e.target.formProblemName.value,
+        gymname: e.target.formProblemGym.value,
+        img: fileRef.toString(),
+        available: isAvailable,
+        vrating: parseInt(e.target.formProblemDifficulty.value.substring(1)),
+        description: e.target.formProblemDescription.value,
+      };
+      // Add a new document with a generated id.
+      await addDoc(collection(db, "problems"), submitObj);
+      navigate("/");
+    }else{
+      setAlert(true);
+    }
   };
 
   return (
@@ -91,54 +98,55 @@ function AddProblemPage(props) {
         <Form onSubmit={handleSubmit}>
           <section className={classes.flexbox}>
             <div className={classes.otherbox}>
-
-              <Form.Group controlId="formProblemName">
-                <Form.Control type="text" placeholder="Problem Name" />
-              </Form.Group>
-
-              <Form.Group controlId="formProblemGym">
-                <Form.Control type="text" placeholder="Gym Name" />
-              </Form.Group>
-              <div className={classes.flexbox}>
-                <Form.Group controlId="formProblemDifficulty">
-                  <Form.Select defaultValue={"V0"}>
-                    {dropdownOptions.map((item) => (
-                      <option key={item}>{item}</option>
-                    ))}
-                  </Form.Select>
-                </Form.Group>  
-
-                <Form.Group controlId="formProblemAvailable">
-                  <Form.Check
-                    type="checkbox"
-                    onChange={changeAvailable}
-                    label="Available"
-                  />
+                <Form.Group controlId="formProblemName">
+                  <Form.Control type="text" placeholder="Problem Name" required/>
                 </Form.Group>
+
+                <Form.Group controlId="formProblemGym">
+                  <Form.Control type="text" placeholder="Gym Name" required/>
+                </Form.Group>
+                <div className={classes.flexbox}>
+                  <Form.Group controlId="formProblemDifficulty">
+                    <Form.Select defaultValue={"V0"}>
+                      {dropdownOptions.map((item) => (
+                        <option key={item}>{item}</option>
+                      ))}
+                    </Form.Select>
+                  </Form.Group>  
+
+                  <Form.Group controlId="formProblemAvailable">
+                    <Form.Check
+                      type="checkbox"
+                      onChange={changeAvailable}
+                      label="Available"
+                    />
+                  </Form.Group>
+                </div>
+
               </div>
 
+              <div className={classes.descbox}>
+                <FloatingLabel className="mb-3" label="Problem Description" controlId="formProblemDescription">
+                  <Form.Control as="textarea" style={{height: "8em",resize: "none"}} />
+                </FloatingLabel>
+              </div>
+            </section>
+
+            <div className={classes.flexbox}>
+              <Button
+                className="justify-content-center"
+                variant="primary"
+                type="submit"
+              >
+                Submit
+              </Button>
             </div>
-
-            <div className={classes.descbox}>
-              <FloatingLabel className="mb-3" label="Problem Description" controlId="formProblemDescription">
-                <Form.Control as="textarea" style={{height: "8em",resize: "none"}} />
-              </FloatingLabel>
-            </div>
-
-          </section>
-
-          <div className={classes.flexbox}>
-            <Button
-              className="justify-content-center"
-              variant="primary"
-              type="submit"
-            >
-              Submit
-            </Button>
-          </div>
-        </Form>
-      </div>
-    </Card>
+          </Form>
+        </div>
+      </Card>
+      {alert && (
+        <Alert variant="danger">An image is required!</Alert>
+      )}
     </>
   );
 }
