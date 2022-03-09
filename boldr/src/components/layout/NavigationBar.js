@@ -51,7 +51,7 @@ function NavigationBar(props) {
             </li>
           ) : (
             <li>
-              <Link to="/login"><Button vaiant="primary">Log In</Button></Link>
+              <Link to="/login"><Button variant="primary">Log In</Button></Link>
             </li>
           )}
         </ul>

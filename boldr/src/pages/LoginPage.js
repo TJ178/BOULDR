@@ -33,13 +33,13 @@ export default function CreateAccountPage() {
       {currentUser ? <Navigate to="/" /> : null}
       <ClimbingBackground>
         <div className={classes.logincontents}>
-		<Link to="/" className={classes.logo_link}>
-		  <img
-            src={logo}
-            alt="BOULDR"
-			className={classes.logo}
-          />
-		</Link>
+          <Link to="/" className={classes.logo_link}>
+            <img
+                  src={logo}
+                  alt="BOULDR"
+            className={classes.logo}
+                />
+          </Link>
           <h4 style={{ paddingBottom: "1.25%" }}>Ready to climb?</h4>
           {currentUser && currentUser.email}
           {error && <Alert variant="danger"> {error} </Alert>}
