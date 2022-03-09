@@ -38,12 +38,12 @@ export default function ProfilePage() {
 
   return (
     <>
-      <BackButton />
       <Card className={classes.card}>
-        <Card.Body className={classes.cardbody}>
+        <Card.Body className={classes.cardbody} style={{padding: "10%", paddingBottom: "5%", position: "relative"}}>
+        <BackButton style={{position: "absolute",inset: "2%", top: "3.5%", textAlign: "center", zIndex: "2"}} />
           <Row>
             <Col xs={3}>
-              <img className={classes.profile} src={image} alt="Profile"/>
+              <img className={classes.profile} src={image} alt="Profile Picture"/>
             </Col>
             <Col>
               <br/>
@@ -65,11 +65,11 @@ export default function ProfilePage() {
               </div>
             </Col>
           </Row>
+          <div className="w-100 text-center mt-2">
+            <Button onClick={handleLogout} className={classes.logout}>Log Out</Button>
+          </div>
         </Card.Body>
       </Card>
-      <div className="w-100 text-center mt-2">
-        <Button onClick={handleLogout}>Log Out</Button>
-      </div>
     </>
   );
 }
