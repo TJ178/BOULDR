@@ -1,5 +1,3 @@
-import { doc } from "firebase/firestore";
-
 //convert snapshot of problems collection to problems
 export function convertCollectionToProblems(querySnapshot){
   let tempData = [];
@@ -95,7 +93,7 @@ function averageRating(allratings, len){
   let count = 0;
   for (let i = 0; i < len; i++){
     let k = i;
-    if (len == 5)
+    if (len === 5)
       k = i + 1;
     sum = sum + k*allratings[i];
     count = count + allratings[i];

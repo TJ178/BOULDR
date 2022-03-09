@@ -79,14 +79,14 @@ function AddProblemPage(props) {
             <img
               className={classes.image}
               src={image}
-              alt="Gym Problem Picture"
+              alt="Gym Problem"
             />
           )}
           {!imageUploaded && (
             <img
               className={classes.image}
               src={placeholder}
-              alt="Gym Problem Picture"
+              alt="Gym Problem"
             />
           )}
           <Form.Group controlId="formFile" className="mb-3">

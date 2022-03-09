@@ -5,11 +5,9 @@ import { Form, FloatingLabel, Button } from "react-bootstrap";
 import { db, storage } from "../firebase-config.js";
 import { ref, uploadBytes } from "firebase/storage";
 import { useDownloadURL } from "react-firebase-hooks/storage";
-import { collection, doc, updateDoc, deleteDoc } from "firebase/firestore";
-import placeholder from "../assets/placeholder_image.png";
+import { doc, updateDoc, deleteDoc } from "firebase/firestore";
 import { convertDocumentToProblem } from "../FirebaseSupport.js";
 import { useDocumentOnce } from "react-firebase-hooks/firestore";
-import { useAuth } from "../contexts/AuthContext.js";
 import { useParams, useNavigate } from "react-router-dom";
 import BackButton from "../components/ui/BackButton";
 
@@ -109,7 +107,7 @@ function EditProblemPage(props) {
             <img
               className={classes.image}
               src={image}
-              alt="Gym Problem Picture"
+              alt="Gym Problem"
             />
           )}
           <Form.Group controlId="formFile" className="mb-3">

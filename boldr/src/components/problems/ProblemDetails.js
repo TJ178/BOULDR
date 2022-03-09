@@ -42,7 +42,7 @@ function ProblemDetails(props) {
   const [disableSubmit, setDisableSubmit] = useState(false);
   const [disableDropdown, setDisableDropdown] = useState(false);
 
-  const { signup, currentUser } = useAuth();
+  const { currentUser } = useAuth();
 
   let params = useParams();
   const problemId = params.problemId;

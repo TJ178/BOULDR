@@ -57,7 +57,7 @@ function FavoriteProblemsPage(props) {
             />
           </>
         )}
-        {usr && usr["favorites"].length == 0 && (
+        {usr && usr["favorites"].length === 0 && (
           <>
             <Alert>You haven't favorited anything.</Alert>
             <Link to="/"><Button>Go add some!</Button></Link>
