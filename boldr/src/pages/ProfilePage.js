@@ -4,8 +4,7 @@ import { useAuth } from "../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { useDownloadURL } from "react-firebase-hooks/storage";
 import { ref } from "firebase/storage";
-import { db, storage } from "../firebase-config.js";
-import { doc, collection } from "firebase/firestore";
+import { storage } from "../firebase-config.js";
 import classes from "./ProfilePage.module.css";
 import BackButton from "../components/ui/BackButton.js";
 
@@ -13,7 +12,6 @@ export default function ProfilePage() {
   const [error, setError] = useState("");
   const { currentUser, userData, logout } = useAuth();
   const navigate = useNavigate();
-  const usersCollectionRef = doc(collection(db, "users"), currentUser.uid);
 
   let photoRef;
   if (currentUser) {
@@ -45,7 +43,7 @@ export default function ProfilePage() {
         <Card.Body className={classes.cardbody}>
           <Row>
             <Col xs={3}>
-              <img className={classes.profile} src={image} />
+              <img className={classes.profile} src={image} alt="Profile"/>
             </Col>
             <Col>
               <br/>
