@@ -6,4 +6,6 @@
 
 .root {
   background-color: #B79979;
+  min-height: 100%;
+  position: relative;
 }
