@@ -6,6 +6,7 @@ import { useDownloadURL } from "react-firebase-hooks/storage";
 import { ref } from "firebase/storage";
 import { storage } from "../firebase-config.js";
 import classes from "./ProfilePage.module.css";
+import loadingImg from "../assets/loading.png";
 import BackButton from "../components/ui/BackButton.js";
 
 export default function ProfilePage() {
@@ -38,12 +39,13 @@ export default function ProfilePage() {
 
   return (
     <>
-      <BackButton />
       <Card className={classes.card}>
-        <Card.Body className={classes.cardbody}>
+        <Card.Body className={classes.cardbody} style={{padding: "10%", paddingBottom: "5%", position: "relative"}}>
+        <BackButton style={{position: "absolute",inset: "2%", top: "3.5%", textAlign: "center", zIndex: "2"}} />
           <Row>
             <Col xs={3}>
-              <img className={classes.profile} src={image} alt="Profile"/>
+              {loading && (<img className={classes.profile} src={loadingImg} alt="Profile Picture"/>)}
+              {image && (<img className={classes.profile} src={image} alt="Profile Picture"/>)}
             </Col>
             <Col>
               <br/>
@@ -65,11 +67,11 @@ export default function ProfilePage() {
               </div>
             </Col>
           </Row>
+          <div className="w-100 text-center mt-2">
+            <Button onClick={handleLogout} className={classes.logout}>Log Out</Button>
+          </div>
         </Card.Body>
       </Card>
-      <div className="w-100 text-center mt-2">
-        <Button onClick={handleLogout}>Log Out</Button>
-      </div>
     </>
   );
 }
