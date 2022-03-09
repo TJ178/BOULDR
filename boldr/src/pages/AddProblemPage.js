@@ -7,6 +7,7 @@ import { ref, uploadBytes } from "firebase/storage";
 import { useDownloadURL } from "react-firebase-hooks/storage";
 import { collection, addDoc } from "firebase/firestore";
 import placeholder from "../assets/placeholder_image.png";
+import BackButton from "../components/ui/BackButton";
 import { useNavigate } from "react-router-dom";
 
 // Should create a globals file for this
@@ -70,33 +71,33 @@ function AddProblemPage(props) {
 
   return (
     <>
-      <Card>
-        <div className={classes.image}>
-          <Form onSubmit={handleSubmit}>
-            {imageUploaded && !loading && (
-              <img
-                className={classes.image}
-                src={image}
-                alt="Gym Problem Picture"
-              />
-            )}
-            {!imageUploaded && (
-              <img
-                className={classes.image}
-                src={placeholder}
-                alt="Gym Problem Picture"
-              />
-            )}
-            <Form.Group controlId="formFile" className="mb-3">
-              <Form.Control type="file" size="sm" onChange={onFileChange} required />
-            </Form.Group>
-          </Form>
-        </div>
-        <div className={classes.card}>
-          <Form onSubmit={handleSubmit}>
-            <section className={classes.flexbox}>
-              <div className={classes.otherbox}>
-
+    <BackButton />
+    <Card>
+      <div className={classes.image}>
+        <Form onSubmit={handleSubmit}>
+          {imageUploaded && !loading && (
+            <img
+              className={classes.image}
+              src={image}
+              alt="Gym Problem Picture"
+            />
+          )}
+          {!imageUploaded && (
+            <img
+              className={classes.image}
+              src={placeholder}
+              alt="Gym Problem Picture"
+            />
+          )}
+          <Form.Group controlId="formFile" className="mb-3">
+            <Form.Control type="file" size="sm" onChange={onFileChange} />
+          </Form.Group>
+        </Form>
+      </div>
+      <div className={classes.card}>
+        <Form onSubmit={handleSubmit}>
+          <section className={classes.flexbox}>
+            <div className={classes.otherbox}>
                 <Form.Group controlId="formProblemName">
                   <Form.Control type="text" placeholder="Problem Name" required/>
                 </Form.Group>
@@ -129,7 +130,6 @@ function AddProblemPage(props) {
                   <Form.Control as="textarea" style={{height: "8em",resize: "none"}} />
                 </FloatingLabel>
               </div>
-
             </section>
 
             <div className={classes.flexbox}>

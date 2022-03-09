@@ -3,12 +3,12 @@ import { collection, doc } from "firebase/firestore";
 import { Link, Navigate } from "react-router-dom";
 import {
   useCollectionOnce,
-  useDocumentOnce,
   useDocumentDataOnce,
 } from "react-firebase-hooks/firestore";
 import { convertCollectionToProblems } from "../FirebaseSupport.js";
 import { useAuth } from "../contexts/AuthContext.js";
 import ProblemList from "../components/problems/ProblemList";
+import BackButton from "../components/ui/BackButton";
 import { Alert, Button } from "react-bootstrap";
 
 function FavoriteProblemsPage(props) {
@@ -46,7 +46,10 @@ function FavoriteProblemsPage(props) {
         )}
         {problems && usr && (
           <>
-            <h1>Favorites:</h1>
+            <div>
+              <BackButton />
+              <h1>Favorites:</h1>
+            </div>
             <ProblemList
               problems={convertCollectionToProblems(problems).filter((prob) => {
                 return usr["favorites"].indexOf(prob.id) !== -1;

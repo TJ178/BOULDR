@@ -1,0 +1,13 @@
+.backbutton {
+    height: 3rem;
+    width: 4rem;
+    background-color: auto;
+    border-color: auto;
+}
+
+.icon{
+    position: relative;
+    height: 2rem;
+    width: 2rem;
+    top: 5%;
+}
