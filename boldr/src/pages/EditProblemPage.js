@@ -93,9 +93,10 @@ function EditProblemPage(props) {
   };
 
   return (
+    <>
+    <BackButton/>
     <Card>
-      <BackButton/>
-      <div className={classes.image}>
+        <div className={classes.image}>
         <Form onSubmit={handleSubmit}>
           {!loading && (
             <img
@@ -181,6 +182,7 @@ function EditProblemPage(props) {
         </Form>
       </div>
     </Card>
+    </>
   );
 }
 

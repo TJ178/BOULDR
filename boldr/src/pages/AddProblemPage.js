@@ -63,8 +63,9 @@ function AddProblemPage(props) {
   };
 
   return (
+    <>
+    <BackButton />
     <Card>
-      <BackButton />
       <div className={classes.image}>
         <Form onSubmit={handleSubmit}>
           {imageUploaded && !loading && (
@@ -138,6 +139,7 @@ function AddProblemPage(props) {
         </Form>
       </div>
     </Card>
+    </>
   );
 }
 
