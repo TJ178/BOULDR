@@ -13,7 +13,7 @@ function BackButton(props) {
   };
 
   return (
-    <Button className={classes.backbutton} onClick={goBack}>
+    <Button className={classes.backbutton} style={props.style} onClick={goBack}>
         <FontAwesomeIcon className={classes.icon} icon={faArrowLeft} />
     </Button>
   );
