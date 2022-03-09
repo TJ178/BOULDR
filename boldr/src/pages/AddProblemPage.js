@@ -9,6 +9,7 @@ import { ref, uploadBytes } from "firebase/storage";
 import { useDownloadURL } from "react-firebase-hooks/storage";
 import { collection, addDoc } from "firebase/firestore";
 import placeholder from "../assets/placeholder_image.png";
+import { useNavigate } from "react-router-dom";
 
 // Should create a globals file for this
 const dropdownOptions = [
@@ -33,6 +34,7 @@ function AddProblemPage(props) {
   );
   const [imageUploaded, setImageUploaded] = useState(false);
   const [isAvailable, setAvailable] = useState(false);
+  const navigate = useNavigate();
 
   const changeAvailable = () => {
     setAvailable(!isAvailable);
@@ -59,6 +61,7 @@ function AddProblemPage(props) {
     };
     // Add a new document with a generated id.
     await addDoc(collection(db, "problems"), submitObj);
+    navigate("/");
   };
 
   return (
